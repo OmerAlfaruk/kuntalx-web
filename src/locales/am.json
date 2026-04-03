@@ -1,0 +1,526 @@
+{
+    "common": {
+        "save": "አስቀምጥ",
+        "saving": "በማስቀመጥ ላይ...",
+        "cancel": "ሰርዝ",
+        "discard": "ተው",
+        "delete": "አጥፋ",
+        "edit": "አስተካክል",
+        "confirm": "አረጋግጥ",
+        "loading": "በመጫን ላይ...",
+        "signOut": "ውጣ",
+        "wait": "ቆይ",
+        "details": "ዝርዝሮች",
+        "actions": "ድርጊቶች",
+        "status": "ሁኔታ",
+        "search": "ፍለጋ",
+        "filter": "ማጣሪያ",
+        "reset": "ዳግም አስጀምር",
+        "submit": "አስገባ",
+        "back": "ተመለስ",
+        "next": "ቀጣይ",
+        "close": "ዝጋ",
+        "noData": "መዝገቦች አልተገኙም",
+        "error": "ስህተት ተከስቷል",
+        "retry": "እንደገና ሞክር",
+        "viewDetails": "ዝርዝሮችን ይመልከቱ",
+        "all": "ሁሉም",
+        "pending": "በመጠባበቅ ላይ",
+        "accepted": "ተቀባይነት አግኝቷል",
+        "delivered": "ተደርሷል",
+        "cancelled": "ተሰርዟል",
+        "inTransit": "በጉዞ ላይ",
+        "fulfilled": "ተፈጻሚ ሆኗል",
+        "syncing": "በማመሳሰል ላይ"
+    },
+    "nav": {
+        "dashboard": "ዳሽቦርድ",
+        "aggregations": "ስብስቦች",
+        "marketplace": "ገበያ",
+        "myAggregations": "የእኔ ስብስቦች",
+        "myOrders": "የእኔ ትዕዛዞች",
+        "procurement": "ግዢ",
+        "myDeliveries": "የእኔ አቅርቦቶች",
+        "farmerManagement": "የአርሶ አደር አስተዳደር",
+        "qualityControl": "የጥራት ቁጥጥር",
+        "createAggregation": "ስብስብ ፍጠር",
+        "shipments": "ጭነቶች",
+        "payouts": "ክፍያዎች",
+        "associations": "ማህበራት",
+        "requests": "ጥያቄዎች",
+        "userManagement": "የተጠቃሚ አስተዳደር",
+        "platformAnalytics": "የመድረክ ትንታኔዎች",
+        "systemSettings": "የስርዓት ቅንብሮች",
+        "cropTypes": "የሰብል አይነቶች",
+        "auditLogs": "የኦዲት ምዝግብ ማስታወሻዎች",
+        "signIn": "ግባ",
+        "getStarted": "ጀምር"
+    },
+    "settings": {
+        "title": "የስርዓት ቅንብሮች",
+        "description": "የእርስዎን መገለጫ፣ ምርጫዎች እና የመድረክ ደህንነት ያስተዳድሩ።",
+        "profileInfo": "የመገለጫ መረጃ",
+        "fullName": "ሙሉ ስም",
+        "email": "የኢሜል አድራሻ",
+        "phone": "የስልክ ቁጥር",
+        "language": "ተመራጭ ቋንቋ",
+        "security": "ደህንነት እና ግላዊነት",
+        "fa2": "ባለ ሁለት ደረጃ ማረጋገጫ",
+        "fa2Desc": "ለአካውንትዎ ተጨማሪ የደህንነት ንብርብር ያክሉ።",
+        "notifications": "የኢሜል ማሳወቂያዎች",
+        "notificationsDesc": "ስለ ትዕዛዞችዎ እና ስለ ገበያ አዝማሚያዎች ወቅታዊ መረጃዎችን ያግኙ።",
+        "saveChanges": "ለውጦችን አስቀምጥ",
+        "discardChanges": "ለውጦችን ተው",
+        "support": "ድጋፍ ይፈልጋሉ?",
+        "supportDesc": "የእኛ ቁርጠኛ ቡድን ለማንኛውም የመድረክ ችግሮች ወይም የግብርና ጥያቄዎች እርስዎን ለመርዳት እዚህ አለ።",
+        "contactSupport": "የእገዛ ጠረጴዛን ያግኙ"
+    },
+    "auth": {
+        "logoutConfirm": "ክፍለ-ጊዜዎን ማቆም ይፈልጋሉ?",
+        "logoutDesc": "ወደ ኩንታልኤክስ አውታረ መረብ እንደገና ለመግባት የእርስዎን ፒን እንደገና ማረጋገጥ ይኖርብዎታል።",
+        "yesSignOut": "አዎ፣ ውጣ"
+    },
+    "orders": {
+        "pageTitle": "የግዢ መዝገቦች",
+        "pageDescBuyer": "ንቁ ግዢዎችዎን እና የፋይናንስ ማጽደቅ ሁኔታን ይከታተሉ።",
+        "pageDescAdmin": "ሀገራዊ የምርት ፍሰቶችን እና የፋይናንስ ወቅታዊ ሁኔታን አጠቃልሎ ይቆጣጠሩ።",
+        "orderReference": "የትዕዛዝ ማጣቀሻ",
+        "produceAndSupplier": "ምርትና አቅራቢ",
+        "buyer": "ገዥ",
+        "volume": " መጠን",
+        "valuation": "ግምት",
+        "unknownProduce": "ያልታወቀ ምርት",
+        "regionalRegistry": "የቀጠና ምዝገባ",
+        "verifiedPartner": "የተረጋገጠ አጋር",
+        "certifiedAccount": "የተረጋገጠ አካውንት",
+        "cancelOrder": "ሰርዝ",
+        "cancelConfirm": "ይህን ትዕዛዝ መሰረዝ ይፈልጋሉ?",
+        "totalOrders": "ጠቅላላ ትዕዛዞች",
+        "totalOrdersDesc": "ጠቅላላ የተመዘገቡ መዝገቦች።",
+        "pendingReview": "በግምገማ ላይ",
+        "pendingReviewDesc": "የቀጣይ እርምጃ ይጠባበቃሉ።",
+        "inTransit": "በጉዞ ላይ",
+        "inTransitDesc": "ምርት በማስተላለፍ ላይ።",
+        "totalValue": "ጠቅላላ ዋጋ",
+        "totalValueDesc": "አጠቃላይ ግምት።",
+        "rangeEntryDate": "የጊዜ ክልል መነሻ ቀን",
+        "rangeTerminationDate": "የጊዜ ክልል ማብቂያ ቀን",
+        "resetTemporalFilter": "የጊዜ ማጣሪያ ዳግም አስጀምር",
+        "activeRegistry": "ንቁ መዝገብ",
+        "verifiedProcurementFlow": "የተረጋገጠ የግዢ ፍሰት",
+        "noRecordsFound": "መዝገቦች አልተገኙም",
+        "noRecordsDesc": "ምንም የግዢ ግቤቶች ከአሁኑ ማጣሪያ ጋር አይዛመዱም።"
+    },
+    "aggregations": {
+        "volumeSecured": "የተረጋገጠ መጠን",
+        "defaultDescription": "ለግዢ ዝግጁ የሆነ ከፍተኛ ጥራት ያለው የግብርና ስብስብ።",
+        "viewDetails": "ዝርዝሮችን ይመልከቱ",
+        "grade": "ደረጃ",
+        "directFarmer": "ቀጥተኛ አርሶ አደር",
+        "collecting": "በመሰብሰብ ላይ",
+        "ready": "ዝግጁ",
+        "sold": "ተሸጧል",
+        "pageTitle": "የስብስብ ገበያ",
+        "noAggregations": "ስብስቦች አለዎትም",
+        "listingDesc": "ንቁ የምርት ስብስቦችን ያስሱ",
+        "hubTitle": "የስብስብ ማዕከል",
+        "hubSubtitle": "የማህበር ትዕዛዝ ማዕከል",
+        "operationalHub": "ሥራ ላይ ያለ ማዕከል",
+        "hubDesc": "ንቁ ባጅ ፕሮቶኮሎችን ይቆጣጠሩ፣ ወደሚገቡ ጅረቶች ፈቃድ ይስጡ እና ተቋማዊ ግዢን ይቆጣጠሩ።",
+        "initiateProtocol": "አዲስ ፕሮቶኮል ጀምር",
+        "activeBatchProtocols": "ንቁ ባጅ ፕሮቶኮሎች",
+        "activeBatchDesc": "የአሁኑ ሰብሰባ ደረጃ",
+        "marketSealedUnits": "ለገበያ የታሸጉ ክፍሎች",
+        "marketSealedDesc": "ለግዢ ዝግጁ",
+        "networkUtilization": "የአውታረ መረብ አጠቃቀም",
+        "networkUtilizationDesc": "የናድ ቅንብር ፍጥነት",
+        "protocolBatch": "ፕሮቶኮል / ባጅ",
+        "commodity": "ሸቀጥ",
+        "progress": "ሂደት",
+        "openProtocol": "ፕሮቶኮል ክፈት"
+    },
+    "associations": {
+        "notFound": "ማህበሩ አልተገኘም",
+        "notFoundDesc": "እየፈለጉት ያለው ድርጅት ወይም አልተገኘም ወይም ለማየት ፈቃድ የለዎትም።",
+        "returnToDirectory": "ወደ ማውጫ ይመለሱ",
+        "operational": "ሥራ ላይ",
+        "jurisdictionalZone": "የዳኝነት ቀጠና",
+        "nodeRegistry": "የናድ ምዝገባ",
+        "complianceReview": "የተጣጣሚነት ግምገማ",
+        "systemNotice": "የስርዓት ማሳወቂያ",
+        "manageProfile": "መገለጫ አስተዳድር",
+        "initiateBatch": "ባጅ ጀምር",
+        "activeProducers": "ንቁ አምራቾች",
+        "federatedMembers": "የተዋሃዱ አባላት",
+        "liveBatches": "ንቁ ባጆች",
+        "inFlightCycles": "በሂደት ላይ ያሉ ዙሮች",
+        "aggregateVolume": "ጠቅላላ መጠን",
+        "totalCommodityFlow": "ጠቅላላ የሸቀጥ ፍሰት",
+        "entityValue": "የድርጅት ዋጋ",
+        "grossTradeVolume": "ጠቅላላ የንግድ መጠን",
+        "activeAggregationProtocols": "ንቁ የማስሰብሰቢያ ፕሮቶኮሎች",
+        "historicalArchive": "ታሪካዊ ማህደር",
+        "protocolId": "የፕሮቶኮል መለያ",
+        "commodity": "ሸቀጥ",
+        "progress": "ሂደት (%)",
+        "noActiveTraces": "ንቁ ዱካዎች የሉም",
+        "noActiveTracesDesc": "ይህ ድርጅት በአሁኑ ጊዜ በሂደት ላይ ምንም የተቀናጀ የሰብሰባ ፕሮቶኮሎች የሉትም።",
+        "authorizeNewProtocol": "አዲስ ፕሮቶኮል ፍቀድ",
+        "secureRegistryProtocol": "ደህንነቱ የተጠበቀ የምዝገባ ፕሮቶኮል",
+        "secureRegistryDesc": "ግለሰባዊ አምራች አስተዋፅኦ መለኪያዎች እና ማንነቶች በምስጢር ቁልፍ ታሽገዋል። የናድ ደረጃ ምዝገባ ዱካዎች ዲክሪፕሽን ፍቃድ ያለው የተሾመው ማህበር አስተዳዳሪ ብቻ ነው።",
+        "operationalCommand": "ሥራ አስኪያጅ",
+        "communications": "ግንኙነቶች",
+        "establishConnection": "ግንኙነት ፍጠር",
+        "systemRegistryMeta": "የስርዓት ምዝገባ ዝርዝር",
+        "spatialCoordinates": "ቦታዊ መጋጠሚያዎች",
+        "commencement": "መጀመሪያ",
+        "cryptographicHash": "ምስጢራዊ ሃሽ"
+    },
+    "dashboard": {
+        "welcome": "እንኳን ደህና ተመለሱ",
+        "overview": "የመድረክ አጠቃላይ ሁኔታ",
+        "procurementHub": "የግዢ ማዕከል",
+        "procurementHubDesc": "ጅምላ ግዢዎችን ያስተዳድሩ እና የአቅርቦት ሰንሰለቶችን ይቆጣጠሩ።",
+        "marketTerminal": "የገበያ ተርሚናል",
+        "acquiredVolume": "የተገዛ መጠን",
+        "acquiredVolumeDesc": "ጠቅላላ ያቀረቡት ምርት",
+        "activeOrders": "ንቁ ትዕዛዞች",
+        "activeOrdersDesc": "ቀጣይ የግዢ ዙሮች",
+        "availableItems": "ዝግጁ ምርቶች",
+        "availableItemsDesc": "በገበያ ውስጥ",
+        "totalSpent": "ጠቅላላ ወጪ",
+        "totalSpentDesc": "የተረጋገጡ ክፍያዎች",
+        "regionalHubs": "የክልል ማዕከሎች",
+        "regionalHubsDesc": "ንቁ ማህበራት",
+        "totalFarmers": "ጠቅላላ አርሶ አደሮች",
+        "totalFarmersDesc": "የተረጋገጡ አምራቾች",
+        "activeAggregations": "ንቁ ስብስቦች",
+        "activeAggregationsDesc": "በስርዓቱ ውስጥ ያለ መጠን",
+        "totalRevenue": "ጠቅላላ ገቢ",
+        "totalRevenueDesc": "የንግድ ዋጋ (ETB)",
+        "members": "አባላት",
+        "membersDesc": "የተመዘገቡ አርሶ አደሮች",
+        "monthlyVolume": "ወርሃዊ መጠን",
+        "monthlyVolumeDesc": "የዚህ ወር ውጤት",
+        "salesRevenue": "የሽያጭ ገቢ",
+        "salesRevenueDesc": "የተከፈሉ ወቅታዊ ሁኔታዎች",
+        "regionalActivity": "የክልል እንቅስቃሴ",
+        "regionalActivityDesc": "የዋና የንግድ ማዕከሎች ቀጥታ ሁኔታ",
+        "exportReport": "ሪፖርት ላክ",
+        "associationName": "የማህበር ስም",
+        "region": "ክልል",
+        "volume": "መጠን (Qt)",
+        "noActivity": "የክልል እንቅስቃሴ አልተገኘም።",
+        "loadingMarket": "የገበያ ውሂብ በመጫን ላይ...",
+        "authRequired": "ማረጋገጥ ያስፈልጋል",
+        "proceedLogin": "ወደ ግባ ይሂዱ",
+        "generateAuditReport": "የኦዲት ሪፖርት ፍጠር"
+    },
+    "marketplace": {
+        "title": "ገበያ",
+        "description": "የግብርና ምርቶችን ያስሱ እና ይግዙ።"
+    },
+    "quality": {
+        "title": "የጥራት ቁጥጥር",
+        "inspections": "ምርመራዎች"
+    },
+    "farmers": {
+        "title": "የአርሶ አደር አስተዳደር",
+        "totalFarmers": "ጠቅላላ አርሶ አደሮች",
+        "humanResources": "የሰው ኃይል",
+        "producerRegistry": "የአምራች ምዝገባ",
+        "farmerNetwork": "የአርሶ አደር አውታረ መረብ",
+        "registerNode": "ናድ ምዝግብ",
+        "totalNodes": "ጠቅላላ ናዶች",
+        "totalNodesDesc": "የተዋሃዱ አምራቾች",
+        "activeTrace": "ንቁ ዱካ",
+        "activeTraceDesc": "የተረጋገጠ ሁኔታ",
+        "netCapacity": "የተጣራ አቅም",
+        "netCapacityDesc": "ጠቅላላ የምርት አቅም",
+        "pendingVerification": "ዕውቅና ይጠባበቃሉ",
+        "pendingVerificationDesc": "ማረጋገጫ ይጠባበቃሉ",
+        "searchRegistry": "ምዝገባ ፈልግ...",
+        "profile": "መገለጫ",
+        "farmerIntelligence": "የአርሶ አደር መረጃ",
+        "jurisdiction": "ዳኝነት",
+        "yieldMetrics": "የምርት መለኪያዎች",
+        "inspectNode": "ናድ ምርምር",
+        "zeroMatchesFound": "ምንም ተዛማጅ አልተገኘም",
+        "zeroMatchesDesc": "የአሁኑ የፍለጋ መለኪያዎች ምንም ውጤቶችን አያሳድርም።",
+        "farmerIdentityTitle": "ፕሮቶኮል: የአርሶ አደር ማንነት",
+        "dismiss": "አሰናብት",
+        "verifyCredentials": "ምስክር ወረቀቶችን አረጋግጥ",
+        "universalEdit": "ሁለንተናዊ ማረም",
+        "identityDetails": "የማንነት ዝርዝሮች",
+        "secureLine": "ደህንነቱ የተጠበቀ መስመር",
+        "registrationDate": "የምዝገባ ቀን",
+        "geospatialOrigin": "ጂኦ-ቦታዊ መነሻ",
+        "capacityMatrix": "የአቅም ማትሪክስ",
+        "totalLandMass": "ጠቅላላ የመሬት ሰፊነት",
+        "yieldPotential": "የምርት አቅም",
+        "complianceSentinel": "ተጣጣሚነት ሐረቅ",
+        "complianceDesc": "ይህ አምራች ለክልላዊ የንግድ ፕሮቶኮሎች ሙሉ ማረጋገጫ ተሰጥቷቸዋል።"
+    },
+    "payouts": {
+        "title": "ክፍያዎች",
+        "description": "የአርሶ አደር ክፍያዎችን እና የፋይናንስ ወቅታዊ ሁኔታን ያስተዳድሩ።"
+    },
+    "shipments": {
+        "title": "ጭነቶች",
+        "description": "ጭነቶችን ይከታተሉ እና ያስተዳድሩ።",
+        "deliveryManagement": "የአቅርቦት አስተዳደር",
+        "shipmentTracking": "የጭነት ክትትል",
+        "deliveryManagementDesc": "የተሽከርካሪ ሎጂስቲክስ ያስተናግዱ፣ ሹፌሮችን ይመድቡ እና ምርቶችን ይቆጣጠሩ።",
+        "shipmentTrackingDesc": "ንቁ ጭነቶችዎን እና የሚጠበቀው ደረሻ ጊዜ ይከታተሉ።",
+        "scheduleDelivery": "አዲስ አቅርቦት ያርትቡ",
+        "activeDeliveries": "ንቁ አቅርቦቶች",
+        "activeDeliveriesDesc": "አሁን እየተቆጣጠሩ ወይም ጉዞ ላይ ያሉ ጭነቶች።",
+        "inTransit": "በጉዞ ላይ",
+        "inTransitDesc": "ምርት ከምንጭ ወደ መድረሻ እየተዘዋወረ ነው።",
+        "completed": "የተጠናቀቁ ጭነቶች",
+        "completedDesc": "በተሳካ ሁኔታ የተደረሱ እና የተረጋገጡ ጭነቶች።",
+        "avgTransitTime": "አማካይ ጉዞ ጊዜ",
+        "avgTransitTimeDesc": "ቀጥታ መረጃ ላይ ተመስርቶ ይሰላል።",
+        "liveDeliveries": "ቀጥታ አቅርቦቶች",
+        "deliveryHistory": "የአቅርቦት ታሪክ",
+        "estimatedArrival": "የሚጠበቀው ደረሻ ጊዜ",
+        "awaitingInfo": "መረጃ ይጠባበቃሉ",
+        "viewDetails": "ዝርዝሮችን ይመልከቱ",
+        "carrier": "ተሸካሚ",
+        "vehicle": "ተሽከርካሪ",
+        "unassigned": "ያልተመደበ",
+        "downloadManifest": "የአቅርቦት ዝርዝር አውርድ",
+        "noShipmentsFound": "ጭነቶች አልተገኙም",
+        "noShipmentsDesc": "በአሁኑ ጊዜ ምንም ጭነቶች ከተመረጡ መለኪያዎች ጋር አይዛሙም።",
+        "scheduleModalTitle": "የምርት አቅርቦት ቀጠሮ",
+        "newDeliveryAssignment": "አዲስ የአቅርቦት ምደባ",
+        "newDeliveryDesc": "ከክልላዊ ሀብ ወደ ገዥ ተርሚናል ትራንስፖርትን ለማስተባበር የሎጂስቲክስ ዝርዝሮችን ያስገቡ።",
+        "linkedOrderId": "የተያያዘ ትዕዛዝ መለያ",
+        "vehicles": "ተሽከርካሪዎች",
+        "addVehicle": "+ ተሽከርካሪ አክል",
+        "plateNumber": "የሰሌዳ ቁጥር",
+        "driverName": "የሹፌር ስም",
+        "driverPhone": "የሹፌር ስልክ",
+        "estimatedDeliveryDate": "የሚጠበቀው ደረሳ ቀን",
+        "confirmDeploy": "አረጋግጥ እና አቅርቦት ጀምር",
+        "cancelShipment": "ሰርዝ"
+    },
+    "marketing": {
+        "nav": {
+            "features": "ባህሪያት",
+            "impact": "ተፅዕኖ",
+            "howItWorks": "እንዴት ይሰራል",
+            "about": "ስለ እኛ",
+            "contact": "ግንኙነት"
+        },
+        "hero": {
+            "title": "የኢትዮጵያን ንግድ ማብቃት።",
+            "subtitle": "ኩንታልኤክስ የአርሶ አደር ማህበራትን ከገዢዎች ጋር በተረጋገጠ ዲጂታል ስብስብ ያገናኛል — ግልጽ፣ ፍትሃዊ እና ሙሉ ሊለካ የሚችል።",
+            "ctaPrimary": "አሁኑኑ ንግድ ይጀምሩ",
+            "ctaSecondary": "ባህሪያትን ያስሱ"
+        },
+        "partners": {
+            "title": "ይፋዊ አጋሮች እና የተረጋገጡ ተቋማት",
+            "items": {
+                "item1": "የግብርና ባለስልጣን",
+                "item2": "የንግድ ገዢዎች አውታረ መረብ",
+                "item3": "የብሄራዊ ባንክ ንግድ",
+                "item4": "የኦሮሚያ አርሶ አደሮች ህብረት",
+                "item5": "የአርሶ አደሮች ማህበር"
+            }
+        },
+        "about": {
+            "badge": "ኩንታልኤክስ ምንድን ነው?",
+            "title": "ለኢትዮጵያ ግብርና የተሰራ መድረክ።",
+            "body": "ኩንታልኤክስ በአርሶ አደር ማህበራት እና ገዢዎች መካከል ያለውን ክፍተት የሚዘጋ ዲጂታል ገበያ ነው። ማህበራት የስብስብ ዘመቻዎችን ይከፍታሉ፣ ከአባል አርሶ አደሮቻቸው ምርት ይሰበስባሉ። እያንዳንዱ አስተዋጽኦ ዲጂታሉ ይሰዳሉ፣ ይመዘናሉ እና ደረጃ ይሰጣቸዋል። ኩሬ ዝግጁ ሲሆን ለተረጋገጡ ገዢዎች ይታያቸዋል — ዝርዝሮቹን ይገመግማሉ፣ ትዕዛዝ ያስቀምጣሉ። ሽያጭ ሲጠናቀቅ፣ ለእያንዳንዱ አርሶ አደር በድርሻቸው መሰረት ክፍያ ይፈስሳሉ። ኩንታልኤክስ ደላላዎችን ያስወግዳሉ፣ ምክንያቱም ኩንታልኤክስ ዒላማ ፍፁም የፋይናንስ ግልጽነት ነው — ከእርሻ ደጅ እስከ ገዢ።"
+        },
+        "solutions": {
+            "badge": "ዲጂታል አውራ ጎዳና",
+            "title": "የስኬት መሣሪያዎች",
+            "cards": {
+                "directMarket": {
+                    "title": "ቀጥተኛ የገበያ ተደራሽነት",
+                    "desc": "ገዢዎች ደረጃ የተሰጣቸውን ምርቶች ከተረጋገጡ ማህበራት ቀጥተኛ ይገዛሉ — ምንም ደላላ የሉም።"
+                },
+                "digitalAggregation": {
+                    "title": "ዲጂታል ስብስብ",
+                    "desc": "ማህበራት የፑሊንግ ዘመቻዎችን ይፈጥራሉ። አርሶ አደሮች ምርታቸውን ያቀርባሉ፣ ለገዢ ዝግጁ ሎቶችን ይገነባሉ።"
+                },
+                "liveInventory": {
+                    "title": "ቀጥታ የክምችት ክትትል",
+                    "desc": "ሁሉም ንቁ ስብስብ ኩሬዎች ላይ ያለውን ዝግጁ ምርት በቁጠቃ ደረጃ ዝርዝር ጋር ይከታተሉ።"
+                },
+                "verifiedSettlements": {
+                    "title": "የተረጋገጡ ክፍያዎች",
+                    "desc": "ገዢ ሲገዛ፣ አርሶ አደሮች ድርሻቸውን አውቶማቲክ ይቀበላሉ — ግልጽ እና የተረጋገጠ።"
+                },
+                "logisticsTransparency": {
+                    "title": "ሙሉ ተከታታይነት",
+                    "desc": "እያንዳንዱ አስተዋጽኦ ይሰዳሉ፦ የትኛው አርሶ አደር፣ ምን ክብደት፣ ምን ደረጃ፣ ሁሉም ወደ ገዢ።"
+                },
+                "flexibleTrading": {
+                    "title": "ሁለት-ጎን ገበያ",
+                    "desc": "ለአርሶ አደር ማህበራት ምርት ለሚያቀርቡ እና ለገዢዎች በሰፊ ደረጃ ለሚያቀርቡ ተብሎ የተሰራ።"
+                }
+            }
+        },
+        "streams": {
+            "badge": "ቀጥታ ዕድሎች",
+            "title": "ንቁ ጅረቶች።",
+            "progress": "የስብስብ ሂደት",
+            "viewProtocol": "ፕሮቶኮል ይመልከቱ",
+            "coffee": "የአረቢካ ቡና ማዕከል",
+            "teff": "የነጭ ጤፍ ማዕከል",
+            "yield": "የሚጠበቀው ምርት",
+            "quality": "የጥራት ደረጃ"
+        },
+        "impact": {
+            "badge": "መሠረተ ልማት",
+            "title": "ሀገር አቀፍ አውታረ መረቦች።",
+            "subtitle": "ሁሉንም የኢትዮጵያ ክልሎች በተረጋገጡ የግብርና ማዕከላት በኩል ማገናኘት።",
+            "hub1": "የኦሮሚያ ክልላዊ ማዕከል",
+            "hub2": "የአማራ ስብስብ መስቀለኛ መንገድ",
+            "hub3": "የደቡብ ሎጅስቲክስ ማዕከል",
+            "activeCollectors": "ንቁ ሰብሳቢዎች",
+            "realtimeGrade": "የእውነተኛ ጊዜ ደረጃ"
+        },
+        "stats": {
+            "badge": "የእኛ ተደራሽነት",
+            "farmers": "የተዋሃዱ አርሶ አደሮች",
+            "farmersDesc": "በቀጥታ ከዲጂታል አከርካሪ አጥንት ጋር የተገናኙ።",
+            "associations": "የተረጋገጡ ማህበራት",
+            "associationsDesc": "የአካባቢ ማዕከላትን የሚያስተዳድሩ ተቋማዊ አጋሮች።",
+            "hubs": "ሥራ ላይ ያሉ ማዕከላት",
+            "hubsDesc": "ቀጥታ የምርት መቀበያ እና ደረጃ መመደቢያ ተርሚናሎች።"
+        },
+        "howItWorks": {
+            "badge": "ሂደቱ",
+            "title": "ከእርሻ ወደ ገዢ።",
+            "steps": {
+                "onboarding": { "title": "ማህበሩ ይመዘገባል", "desc": "ማህበራት እና አርሶ አደሮች ወደ መድረኩ ተረጋግጠው ያስገባሉ።" },
+                "registration": { "title": "ኩሬ ይፈጠራል", "desc": "ማህበራት ለተወሰነ የሰብል አይነት የስብስብ ዘመቻ ይከፍታሉ።" },
+                "pooling": { "title": "አርሶ አደሮች ያበረክታሉ", "desc": "አርሶ አደሮች ምርታቸውን ለኩሬ ያቀርባሉ፤ እያንዳንዱ አስተዋጽኦ ተሰፍሮ ይሰዳሉ።" },
+                "matching": { "title": "የጥራት ደረጃ ምደባ", "desc": "የተሰበሰበው ምርት ደረጃ ይሰጠዋል እና ኩሬው ለገዢዎች ይታያል።" },
+                "logistics": { "title": "ገዢ ይገዛል", "desc": "የተረጋገጡ ገዢዎች ዝግጁ ሎቶችን ያስሱ እና ትዕዛዞችን ያስቀምጣሉ።" },
+                "payouts": { "title": "ደህንነቱ የተጠበቀ ክፍያ", "desc": "ከተሸጠ በኋላ፣ አስተዋጽኦ ያደረገ እያንዳንዱ አርሶ አደር ክፍያውን ያገኛል።" }
+            }
+        },
+        "testimonials": {
+            "badge": "ምስክርነቶች",
+            "title": "የመስክ ድምጾች።",
+            "items": {
+                "item1": { "name": "አበባው ታደሰ", "role": "የአርሶ አደሮች ማህበር መሪ", "quote": "ኩንታልኤክስ ቡናችንን የምንሰበስብበትን መንገድ ቀይሮታል። ለመጀመሪያ ጊዜ አባላቶቻችን ከመሸጣቸው በፊት ትክክለኛውን የገበያ ዋጋ ያያሉ።" },
+                "item2": { "name": "ዶ/ር ሰላማዊት ኪ.", "role": "የኢንዱስትሪ ግዢ", "quote": "የዲጂታል ጥራት ደረጃ ምደባ ለማቀነባበሪያ ፋብሪካችን ትልቅ ለውጥ አምጥቷል። አሁን የምርት ዑደታችንን በተረጋገጠ የአቅርቦት መረጃ ማቀድ እንችላለን።" }
+            }
+        },
+        "whyKuntalX": {
+            "badge": "ለምን ኩንታል ኤክስ?",
+            "title": "ለአርሶ አደሮች የተገነባ፣ በገዢዎች የተወደደ።",
+            "items": {
+                "item1": { "title": "ያልተማከለ እድገት", "desc": "የአካባቢ ህብረት ስራ ማህበራትን ማብቃት።" },
+                "item2": { "title": "የፋይናንስ ግልጽነት", "desc": "ምንም የተደበቁ ክፍያዎች ወይም ኮሚሽኖች የሉም።" },
+                "item3": { "title": "የኢንዱስትሪ ትክክለኛነት", "desc": "ደረጃውን የጠበቀ የጥራት ምደባ።" },
+                "item4": { "title": "የቀጥታ ተደራሽነት", "desc": "የ24/7 የገበያ እይታ።" }
+            }
+        },
+        "faq": {
+            "badge": "ጉጉት",
+            "title": "የተለመዱ ጥያቄዎች።",
+            "q1": "ኩንታል ኤክስ እንዴት ትክክለኛ ዋጋን ያረጋግጣል?",
+            "a1": "የመካከለኛ ዋጋ ማስተካከያንን በማስቀረት እና ማህበራት አሁን ባለው የክልል መለኪያ እንዲገበያዩ በማድረግ የእውነተኛ ጊዜ የገበያ መረጃን በቀጥታ ለአርሶ አደሮች እናቀርባለን።",
+            "q2": "የትኞቹ የግብርና ምርቶች ይደገፋሉ?",
+            "a2": "በዋነኛነት ጥራጥሬዎች፣ የቅባት እህሎች እና ቡና። የእኛ ስርዓት የተማከለ ደረጃ ምደባ እና ስብስብ ለሚያስፈልገው ለማንኛውም ሰብል የተነደፈ ነው።",
+            "q3": "የዲጂታል ክፍያ ስርዓቱ ምን ያህል ደህንነቱ የተጠበቀ ነው?",
+            "a3": "እያንዳንዱ ክፍያ በቀጥታ ከተረጋገጠ የዲጂታል ደረሰኝ ጋር የተገናኘ ነው፣ ይህም በማዕከል ስራ አስኪያጁ እና በገዢው መካከል ባለ ብዙ ደረጃ ማረጋገጫን ይጠቀማል።"
+        },
+        "contact": {
+            "badge": "ይገናኙን",
+            "title": "ለመገበያየት ዝግጁ ነዎት?",
+            "form": {
+                "name": "ሙሉ ስም",
+                "email": "የኢሜል አድራሻ",
+                "message": "መልእክትዎ",
+                "placeholderName": "ዮሐንስ Doe",
+                "placeholderEmail": "john@example.com",
+                "placeholderMessage": "ስለ ንግድ ፍላጎቶችዎ ይንገሩን...",
+                "submit": "መልእክት ላክ"
+            },
+            "info": {
+                "connectivity": "ዓለም አቀፍ ግንኙነት",
+                "connectivityDetail": "support@kuntalx.com",
+                "reach": "ቀጥተኛ ተደራሽነት",
+                "reachDetail": "+251 912 345 678",
+                "hub": "ዋና ማዕከል",
+                "hubDetail": "አዲስ አበባ፣ ኢትዮጵያ"
+            }
+        },
+        "newsletter": {
+            "title": "በገበያ ዑደት ውስጥ ይቆዩ።",
+            "desc": "ስለ ክልላዊ የሸቀጦች ዋጋ እና ስለ ማዕከላት ሁኔታ ሳምንታዊ መረጃዎችን በቀጥታ ያግኙ።",
+            "placeholder": "ኢሜልዎን ያስገቡ",
+            "cta": "ይመዝገቡ"
+        },
+        "transparency": {
+            "badge": "ሙሉ ተከታታይነት",
+            "title": "ከእርሻ እስከ ገዢ ግልጽነት።",
+            "steps": {
+                "step1": { "title": "ማህበሩ ኩሬ ይከፍታል", "desc": "ማህበሩ የስብስብ ዘመቻ ይፈጥራል፣ የሰብሉን አይነት፣ የዒላማ መጠን እና የስብስብ ጊዜ ይወስናል።" },
+                "step2": { "title": "አርሶ አደሮች ያበረክታሉ", "desc": "አባል አርሶ አደሮች ምርታቸውን ያቀርባሉ። እያንዳንዱ አስተዋጽኦ ዲጂታሉ ይሰዳሉ — አርሶ አደሩ፣ ክብደት እና ቀን።" },
+                "step3": { "title": "የጥራት ደረጃ ምደባ", "desc": "የተሰበሰበው ምርት ተፈትሾ ደረጃ ይሰጠዋል። ዝግጅቱ ከተረጋገጠ ደረጃ መረጃ ጋር ሕያው ይሆናሉ།" },
+                "step4": { "title": "ገዢ ይገዛል", "desc": "ገዢዎች ገበያውን ያስሱ፣ ሎቱን ይምረጡ ትዕዛዝ ያስቀምጣሉ። ክፍያዎቹ ለአርሶ አደሮቹ ይፈስሳሉ።" }
+            }
+        },
+        "marketplace": {
+            "badge": "ገበያው",
+            "title": "ይፈልጉ፣ ይግዙ፣ ተጠናቅቀዋል።",
+            "subtitle": "ገዢዎች የተረጋገጡ እና ደረጃ ያላቸው ሎቶችን ዝርዝራቸውን ያዩዋቸዋል። እያንዳንዱ ሎት ማህበሩን፣ ሰብሉን፣ ብዛቱን እና ደረጃውን ያሳያል።",
+            "stats": {
+                "lots": "ንቁ ሎቶች",
+                "associations": "የተረጋገጡ ማህበራት",
+                "farmers": "ያበረከቱ አርሶ አደሮች"
+            }
+        },
+        "advantage": {
+            "badge": "ልዩነቱ",
+            "title": "አሮጌው ከዲጂታሉ ጋር።",
+            "labels": { "traditional": "ባህላዊ ንግድ", "kuntalx": "የኩንታልኤክስ አውታረ መረብ" },
+            "rows": {
+                "pricing": { "label": "የዋጋ አወጣጥ", "traditional": "ግልጽ ያልሆነ / ደላላ", "kuntalx": "ግልጽ የገበያ ዋጋ" },
+                "settlement": { "label": "ለአርሶ አደር ክፍያ", "traditional": "ሳምንታት ወይም ፈጽሞ", "kuntalx": "የተረጋገጠ ዲጂታል ክፍያ" },
+                "traceability": { "label": "ክትትል", "traditional": "የማይታወቅ", "kuntalx": "ከእርሻ እስከ ገዢ (E2E)" },
+                "loss": { "label": "ከምርት በኋላ የሚከሰት ብክነት", "traditional": "እስከ 35%", "kuntalx": "< 2% ቁጥጥር የተደረገበት" }
+            }
+        },
+        "footer": {
+            "desc": "የኢትዮጵያን የግብርና መስፋፋት የዲጂታል አውራ ጎዳና። ግልጽ፣ ደህንነቱ የተጠበቀ እና የኢንዱስትሪ ደረጃ ያለው የምርት ስብስብ መሠረተ ልማት እየገነባን ነው።",
+            "copyright": "© 2026 ኩንታልኤክስ። የላቀ የግብርና አከርካሪ አጥንት።",
+            "operational": "ሁሉም ስርዓቶች በመስራት ላይ ናቸው",
+            "categories": {
+                "solutions": "መፍትሄዎች",
+                "company": "ኩባንያ",
+                "support": "ድጋፍ",
+                "legal": "ህጋዊ"
+            },
+            "links": {
+                "directSourcing": "ቀጥታ ግብይት",
+                "hubOperations": "የሀብ ስራዎች",
+                "marketStats": "የገበያ ስታቲስቲክስ",
+                "digitalLedger": "ዲጂታል መዝገብ",
+                "aboutUs": "ስለ እኛ",
+                "ourMission": "ተልዕኳችን",
+                "journal": "መጽሔት",
+                "contact": "መገናኛ",
+                "helpCenter": "የእርዳታ ማዕከል",
+                "faq": "የተለመዱ ጥያቄዎች",
+                "documentation": "ሰነዶች",
+                "security": "ደህንነት",
+                "privacyPolicy": "የግላዊነት ፖሊሲ",
+                "termsOfUse": "የአጠቃቀም ውል",
+                "compliance": "ተገዢነት"
+            }
+        },
+        "logo": {
+            "tagline": "ከአርሶ አደሮች ወደ ገበያ፣ በጋራ።"
+        }
+    }
+}

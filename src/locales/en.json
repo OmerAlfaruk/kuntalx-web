@@ -1,0 +1,533 @@
+{
+    "common": {
+        "save": "Save",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "discard": "Discard",
+        "delete": "Delete",
+        "edit": "Edit",
+        "confirm": "Confirm",
+        "loading": "Loading...",
+        "signOut": "Sign Out",
+        "wait": "Wait",
+        "details": "Details",
+        "actions": "Actions",
+        "status": "Status",
+        "search": "Search",
+        "filter": "Filter",
+        "reset": "Reset",
+        "submit": "Submit",
+        "back": "Back",
+        "next": "Next",
+        "close": "Close",
+        "noData": "No records found",
+        "error": "An error occurred",
+        "retry": "Retry",
+        "viewDetails": "View Details",
+        "all": "All",
+        "pending": "Pending",
+        "accepted": "Accepted",
+        "delivered": "Delivered",
+        "cancelled": "Cancelled",
+        "inTransit": "In Transit",
+        "fulfilled": "Fulfilled",
+        "syncing": "Syncing",
+        "quality": "Quality Grade",
+        "regionalHub": "Regional Hub"
+    },
+    "nav": {
+        "dashboard": "Dashboard",
+        "aggregations": "Aggregations",
+        "marketplace": "Marketplace",
+        "myAggregations": "My Aggregations",
+        "myOrders": "My Orders",
+        "procurement": "Procurement",
+        "myDeliveries": "My Deliveries",
+        "farmerManagement": "Farmer Management",
+        "qualityControl": "Quality Control",
+        "createAggregation": "Create Aggregation",
+        "shipments": "Shipments",
+        "payouts": "Payouts",
+        "associations": "Associations",
+        "requests": "Requests",
+        "userManagement": "User Management",
+        "platformAnalytics": "Platform Analytics",
+        "systemSettings": "System Settings",
+        "cropTypes": "Crop Types",
+        "auditLogs": "Audit Logs",
+        "signIn": "Sign In",
+        "getStarted": "Get Started"
+    },
+    "settings": {
+        "title": "System Settings",
+        "description": "Manage your profile, preferences, and platform security.",
+        "profileInfo": "Profile Information",
+        "fullName": "Full Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "language": "Preferred Language",
+        "security": "Security & Privacy",
+        "fa2": "Two-Factor Authentication",
+        "fa2Desc": "Add an extra layer of security to your account.",
+        "notifications": "Email Notifications",
+        "notificationsDesc": "Receive updates about your orders and market trends.",
+        "saveChanges": "Save Changes",
+        "discardChanges": "Discard Changes",
+        "support": "Need Support?",
+        "supportDesc": "Our dedicated team is here to help you with any platform issues or agricultural queries.",
+        "contactSupport": "Contact Help Desk"
+    },
+    "auth": {
+        "logoutConfirm": "Ending your session?",
+        "logoutDesc": "You will need to re-verify your PIN to regain access to the KuntalX network.",
+        "yesSignOut": "Yes, Sign Out"
+    },
+    "orders": {
+        "pageTitle": "Procurement Records",
+        "pageDescBuyer": "Track your active acquisitions and financial clearance status.",
+        "pageDescAdmin": "Comprehensive oversight of national produce flows and financial settlement status.",
+        "orderReference": "Order Reference",
+        "produceAndSupplier": "Produce & Supplier",
+        "buyer": "Buyer",
+        "volume": "Volume",
+        "valuation": "Valuation",
+        "unknownProduce": "Unknown Produce",
+        "regionalRegistry": "Regional Registry",
+        "verifiedPartner": "Verified Partner",
+        "certifiedAccount": "Certified Account",
+        "cancelOrder": "Cancel",
+        "cancelConfirm": "Are you sure you want to cancel this order?",
+        "totalOrders": "Total Orders",
+        "totalOrdersDesc": "Total registered records.",
+        "pendingReview": "Pending Review",
+        "pendingReviewDesc": "Awaiting next action.",
+        "inTransit": "In Transit",
+        "inTransitDesc": "Produce in delivery.",
+        "totalValue": "Total Value",
+        "totalValueDesc": "Aggregate valuation.",
+        "rangeEntryDate": "Range Entry Date",
+        "rangeTerminationDate": "Range Termination Date",
+        "resetTemporalFilter": "Reset Temporal Filter",
+        "activeRegistry": "Active Registry",
+        "verifiedProcurementFlow": "Verified Procurement Flow",
+        "noRecordsFound": "No Records Found",
+        "noRecordsDesc": "No procurement entries match the current filter."
+    },
+    "aggregations": {
+        "volumeSecured": "Volume Secured",
+        "defaultDescription": "Premium agricultural aggregation pool ready for procurement.",
+        "viewDetails": "View Details",
+        "grade": "Grade",
+        "directFarmer": "Direct Farmer",
+        "collecting": "Collecting",
+        "ready": "Ready",
+        "sold": "Sold",
+        "pageTitle": "Aggregation Marketplace",
+        "noAggregations": "No aggregations available",
+        "listingDesc": "Browse active produce aggregations",
+        "hubTitle": "Aggregation Hub",
+        "hubSubtitle": "Association Command Center",
+        "operationalHub": "Operational Hub",
+        "hubDesc": "Monitor active batch protocols, authorize incoming streams, and oversee institutional procurement.",
+        "initiateProtocol": "Initiate New Protocol",
+        "activeBatchProtocols": "Active Batch Protocols",
+        "activeBatchDesc": "Current collection phase",
+        "marketSealedUnits": "Market Sealed Units",
+        "marketSealedDesc": "Validated for procurement",
+        "networkUtilization": "Network Utilization",
+        "networkUtilizationDesc": "Node synchronization rate",
+        "protocolBatch": "Protocol / Batch",
+        "commodity": "Commodity",
+        "progress": "Progress",
+        "openProtocol": "Open Protocol",
+        "noProtocols": "No active market protocols found.",
+        "target": "Volumetric Goal",
+        "verifiedStock": "Verified Stock",
+        "estTransfer": "Est. Transfer",
+        "initiateBid": "Initiate Bid"
+    },
+    "associations": {
+        "notFound": "Association Not Found",
+        "notFoundDesc": "The organization you're looking for doesn't exist or you lack viewing permissions.",
+        "returnToDirectory": "Return to Directory",
+        "operational": "Operational",
+        "jurisdictionalZone": "Jurisdictional Zone",
+        "nodeRegistry": "Node Registry",
+        "complianceReview": "Compliance Review",
+        "systemNotice": "System Notice",
+        "manageProfile": "Manage Profile",
+        "initiateBatch": "Initiate Batch",
+        "activeProducers": "Active Producers",
+        "federatedMembers": "Federated Members",
+        "liveBatches": "Live Batches",
+        "inFlightCycles": "In-flight Cycles",
+        "aggregateVolume": "Aggregate Volume",
+        "totalCommodityFlow": "Total commodity flow",
+        "entityValue": "Entity Value",
+        "grossTradeVolume": "Gross trade volume",
+        "activeAggregationProtocols": "Active Aggregation Protocols",
+        "historicalArchive": "Historical Archive",
+        "protocolId": "Protocol ID",
+        "commodity": "Commodity",
+        "progress": "Progress (%)",
+        "noActiveTraces": "No Active Traces",
+        "noActiveTracesDesc": "This organization currently has no synchronized collection protocols in progress.",
+        "authorizeNewProtocol": "Authorize New Protocol",
+        "secureRegistryProtocol": "Secure Registry Protocol",
+        "secureRegistryDesc": "Individual producer contribution metrics and identities are cryptographically sealed. Only the designated Association Admin holds the decryption clearance for node-level ledger traces.",
+        "operationalCommand": "Operational Command",
+        "communications": "Communications",
+        "establishConnection": "Establish Connection",
+        "systemRegistryMeta": "System Registry Meta",
+        "spatialCoordinates": "Spatial Coordinates",
+        "commencement": "Commencement",
+        "cryptographicHash": "Cryptographic Hash"
+    },
+    "dashboard": {
+        "welcome": "Welcome back",
+        "overview": "Platform Overview",
+        "procurementHub": "Procurement Hub",
+        "procurementHubDesc": "Manage bulk acquisitions and monitor supply chains.",
+        "marketTerminal": "Market Terminal",
+        "acquiredVolume": "Acquired Volume",
+        "acquiredVolumeDesc": "Total yield delivered",
+        "activeOrders": "Active Orders",
+        "activeOrdersDesc": "Ongoing procurement cycles",
+        "availableItems": "Available Items",
+        "availableItemsDesc": "In marketplace",
+        "totalSpent": "Total Spent",
+        "totalSpentDesc": "Confirmed settlements",
+        "regionalHubs": "Regional Hubs",
+        "regionalHubsDesc": "Active associations",
+        "totalFarmers": "Total Farmers",
+        "totalFarmersDesc": "Verified producers",
+        "activeAggregations": "Active Aggregations",
+        "activeAggregationsDesc": "Volume in system",
+        "totalRevenue": "Total Revenue",
+        "totalRevenueDesc": "Trade value (ETB)",
+        "members": "Members",
+        "membersDesc": "Farmers enrolled",
+        "monthlyVolume": "Monthly Volume",
+        "monthlyVolumeDesc": "This month's intake",
+        "salesRevenue": "Sales Revenue",
+        "salesRevenueDesc": "Paid settlements",
+        "regionalActivity": "Regional Activity",
+        "regionalActivityDesc": "Real-time status of major trading hubs",
+        "exportReport": "Export Report",
+        "associationName": "Association Name",
+        "region": "Region",
+        "volume": "Volume (Qt)",
+        "noActivity": "No regional activity found.",
+        "loadingMarket": "Loading market data...",
+        "authRequired": "Authentication Required",
+        "proceedLogin": "Proceed to Login",
+        "generateAuditReport": "Generate Audit Report"
+    },
+    "marketplace": {
+        "title": "Marketplace",
+        "description": "Browse and procure agricultural commodities."
+    },
+    "quality": {
+        "title": "Quality Control",
+        "inspections": "Inspections"
+    },
+    "farmers": {
+        "title": "Farmer Management",
+        "totalFarmers": "Total Farmers",
+        "humanResources": "Human Resources",
+        "producerRegistry": "Producer Registry",
+        "farmerNetwork": "Farmer Network",
+        "registerNode": "Register Node",
+        "totalNodes": "Total Nodes",
+        "totalNodesDesc": "Federated producers",
+        "activeTrace": "Active Trace",
+        "activeTraceDesc": "Verified status",
+        "netCapacity": "Net Capacity",
+        "netCapacityDesc": "Aggregate yield potential",
+        "pendingVerification": "Pending Verification",
+        "pendingVerificationDesc": "Awaiting authentication",
+        "searchRegistry": "Search Registry...",
+        "profile": "Profile",
+        "farmerIntelligence": "Farmer Intelligence",
+        "jurisdiction": "Jurisdiction",
+        "yieldMetrics": "Yield Metrics",
+        "inspectNode": "Inspect Node",
+        "zeroMatchesFound": "Zero Matches Found",
+        "zeroMatchesDesc": "The current search parameters yield no results in the producer registry.",
+        "farmerIdentityTitle": "Protocol: Farmer Identity",
+        "dismiss": "Dismiss",
+        "verifyCredentials": "Verify Credentials",
+        "universalEdit": "Universal Edit",
+        "identityDetails": "Identity Details",
+        "secureLine": "Secure Line",
+        "registrationDate": "Registration Date",
+        "geospatialOrigin": "Geospatial Origin",
+        "capacityMatrix": "Capacity Matrix",
+        "totalLandMass": "Total Land Mass",
+        "yieldPotential": "Yield Potential",
+        "complianceSentinel": "Compliance Sentinel",
+        "complianceDesc": "This producer is fully authenticated for regional trade protocols."
+    },
+    "payouts": {
+        "title": "Payouts",
+        "description": "Manage farmer payouts and financial settlements."
+    },
+    "shipments": {
+        "title": "Shipments",
+        "description": "Track and manage produce shipments.",
+        "deliveryManagement": "Delivery Management",
+        "shipmentTracking": "Shipment Tracking",
+        "deliveryManagementDesc": "Coordinate vehicle logistics, assign drivers, and monitor produce deliveries across the region.",
+        "shipmentTrackingDesc": "Track your active deliveries and estimated arrival times for incoming produce.",
+        "scheduleDelivery": "Schedule New Delivery",
+        "activeDeliveries": "Active Deliveries",
+        "activeDeliveriesDesc": "Shipments currently being coordinated or in transit.",
+        "inTransit": "In Transit",
+        "inTransitDesc": "Produce currently moving between origins and destinations.",
+        "completed": "Completed Shipments",
+        "completedDesc": "Successfully delivered and verified produce shipments.",
+        "avgTransitTime": "Avg Transit Time",
+        "avgTransitTimeDesc": "Calculated based on real-time fleet telemetry.",
+        "liveDeliveries": "Live Deliveries",
+        "deliveryHistory": "Delivery History",
+        "estimatedArrival": "Estimated Arrival",
+        "awaitingInfo": "Awaiting Info",
+        "viewDetails": "View Details",
+        "carrier": "Carrier",
+        "vehicle": "Vehicle",
+        "unassigned": "Unassigned",
+        "downloadManifest": "Download Delivery Manifest",
+        "noShipmentsFound": "No Shipments Found",
+        "noShipmentsDesc": "There are currently no deliveries matching your selected criteria.",
+        "scheduleModalTitle": "Schedule Produce Delivery",
+        "newDeliveryAssignment": "New Delivery Assignment",
+        "newDeliveryDesc": "Enter the logistics details to coordinate transport from the regional hub to the buyer terminal.",
+        "linkedOrderId": "Linked Order ID",
+        "vehicles": "Vehicles",
+        "addVehicle": "+ Add Vehicle",
+        "plateNumber": "Plate Number",
+        "driverName": "Driver Name",
+        "driverPhone": "Driver Phone",
+        "estimatedDeliveryDate": "Estimated Delivery Date",
+        "confirmDeploy": "Confirm & Deploy Delivery",
+        "cancelShipment": "Cancel"
+    },
+    "marketing": {
+        "nav": {
+            "features": "Features",
+            "impact": "Impact",
+            "howItWorks": "How It Works",
+            "about": "About",
+            "contact": "Contact"
+        },
+        "hero": {
+            "title": "Empowering Ethiopian Trade.",
+            "subtitle": "KuntalX connects farmer associations with buyers through verified digital aggregation — transparent, fair, and fully traceable.",
+            "ctaPrimary": "Start Trading Now",
+            "ctaSecondary": "Explore Features"
+        },
+        "partners": {
+            "title": "Official Partners & Verified Institutions",
+            "items": {
+                "item1": "Agricultural Authority",
+                "item2": "Commercial Buyers Network",
+                "item3": "NBE Trade",
+                "item4": "Oromia Farmers Cooperative",
+                "item5": "Farmers Union"
+            }
+        },
+        "about": {
+            "badge": "What is KuntalX?",
+            "title": "A Platform Built for Ethiopian Agriculture.",
+            "body": "KuntalX is a digital marketplace that bridges the gap between farmer associations and buyers across Ethiopia. Associations create aggregation campaigns, collecting produce contributions from their member farmers. Each contribution is digitally recorded, weighed, and quality graded at collection hubs. Once a pool is ready, it becomes visible to verified buyers on the marketplace — who can browse available lots, review quality grades, and place orders directly. When a sale is completed, payouts flow automatically and transparently to every contributing farmer based on their share. KuntalX removes the middleman, eliminates information asymmetry, and brings financial clarity to Ethiopia's agricultural trade — from the farm gate to the buyer's door."
+        },
+        "solutions": {
+            "badge": "Digital Highway",
+            "title": "Tools for Success",
+            "cards": {
+                "directMarket": {
+                    "title": "Direct Market Access",
+                    "desc": "Buyers discover and purchase graded produce directly from verified farmer associations — no intermediaries."
+                },
+                "digitalAggregation": {
+                    "title": "Digital Aggregation",
+                    "desc": "Associations create pooling campaigns. Farmers contribute their harvest, building buyer-ready lots."
+                },
+                "liveInventory": {
+                    "title": "Live Inventory Tracking",
+                    "desc": "See real-time availability across all active aggregation pools with contribution-level detail."
+                },
+                "verifiedSettlements": {
+                    "title": "Verified Payouts",
+                    "desc": "When a buyer purchases, farmers automatically receive their share — transparent and verified."
+                },
+                "logisticsTransparency": {
+                    "title": "Full Traceability",
+                    "desc": "Every contribution is logged: which farmer, which weight, which grade, all the way to the buyer."
+                },
+                "flexibleTrading": {
+                    "title": "Two-Sided Marketplace",
+                    "desc": "Purpose-built for farmer associations supplying produce and buyers procuring at scale."
+                }
+            }
+        },
+        "streams": {
+            "badge": "Live Opportunities",
+            "title": "Active Streams.",
+            "progress": "Aggregation Progress",
+            "viewProtocol": "View Protocol Details",
+            "coffee": "Arabica Village Hub",
+            "teff": "White Teff Central",
+            "yield": "Expected Yield",
+            "quality": "Quality Grade"
+        },
+        "impact": {
+            "badge": "Infrastructure",
+            "title": "Nationwide Networks.",
+            "subtitle": "Connecting every region of Ethiopia through a decentralized grid of verified agricultural nodes.",
+            "hub1": "Oromia Regional Hub",
+            "hub2": "Amhara Collection Node",
+            "hub3": "SNNP Logistics Center",
+            "activeCollectors": "Active Collectors",
+            "realtimeGrade": "Real-time Grade"
+        },
+        "stats": {
+            "badge": "Our Reach",
+            "farmers": "Federated Farmers",
+            "farmersDesc": "Directly connected to the digital backbone.",
+            "associations": "Verified Associations",
+            "associationsDesc": "Institutional partners managing local hubs.",
+            "hubs": "Operational Hub Nodes",
+            "hubsDesc": "Real-time intake and grading terminals."
+        },
+        "howItWorks": {
+            "badge": "The Process",
+            "title": "From Farm to Buyer.",
+            "steps": {
+                "onboarding": { "title": "Association Registers", "desc": "Associations and farmers are verified and onboarded to the platform." },
+                "registration": { "title": "Pool is Created", "desc": "Associations open an aggregation campaign for a specific crop type." },
+                "pooling": { "title": "Farmers Contribute", "desc": "Farmers add their harvest to the pool; each contribution is weighed and recorded." },
+                "matching": { "title": "Quality Grading", "desc": "Collected produce is graded and the pool becomes visible to buyers on the marketplace." },
+                "logistics": { "title": "Buyer Purchases", "desc": "Verified buyers browse available lots and place orders on graded produce." },
+                "payouts": { "title": "Secure Payouts", "desc": "Once sold, each contributing farmer automatically receives their verified payout." }
+            }
+        },
+        "testimonials": {
+            "badge": "Testimonials",
+            "title": "Voices of the Field.",
+            "items": {
+                "item1": { "name": "Abebe Tadesse", "role": "Farmer Association Leader", "quote": "KuntalX has revolutionized how we aggregate our coffee. For the first time, our members see the real market price before the sale." },
+                "item2": { "name": "Dr. Selamawit K.", "role": "Industrial Procurement", "quote": "The digital quality grading is a game changer for our processing factory. We can now plan our production cycles with verified supply data." }
+            }
+        },
+        "whyKuntalX": {
+            "badge": "Why KuntalX?",
+            "title": "Built for Farmers, Loved by Buyers.",
+            "items": {
+                "item1": { "title": "Decentralized Growth", "desc": "Empowering local cooperatives." },
+                "item2": { "title": "Financial Clarity", "desc": "Zero hidden fees or commissions." },
+                "item3": { "title": "Industrial Precision", "desc": "Standardized quality grading." },
+                "item4": { "title": "Real-time Access", "desc": "24/7 market visibility." }
+            }
+        },
+        "faq": {
+            "badge": "Curiosity",
+            "title": "Common Questions.",
+            "q1": "How does KuntalX ensure fair pricing?",
+            "a1": "We provide real-time market indices directly to the farm gate, bypassing intermediary price-fixing and ensuring associations trade at current regional benchmarks.",
+            "q2": "What agricultural commodities are supported?",
+            "a2": "Primarily high-bulk cereals, oilseeds, and coffee. Our system is designed for any crop that requires centralized grading and aggregation.",
+            "q3": "How secure is the digital payment system?",
+            "a3": "Every payment is tied directly to a verified digital delivery receipt, using a multi-sig verification process between the hub manager and the buyer."
+        },
+        "contact": {
+            "badge": "Get in Touch",
+            "title": "Ready to Trade?",
+            "form": {
+                "name": "Full Name",
+                "email": "Email Address",
+                "message": "Your Message",
+                "placeholderName": "John Doe",
+                "placeholderEmail": "john@example.com",
+                "placeholderMessage": "Tell us about your trading needs...",
+                "submit": "Send Message"
+            },
+            "info": {
+                "connectivity": "Global Connectivity",
+                "connectivityDetail": "support@kuntalx.com",
+                "reach": "Direct Reach",
+                "reachDetail": "+251 912 345 678",
+                "hub": "Main Hub",
+                "hubDetail": "Addis Ababa, Ethiopia"
+            }
+        },
+        "newsletter": {
+            "title": "Stay In the Market Cycle.",
+            "desc": "Get weekly insights on regional commodity prices and operational hub status directly to your terminal.",
+            "placeholder": "Enter your email",
+            "cta": "Subscribe"
+        },
+        "transparency": {
+            "badge": "Full Traceability",
+            "title": "Farm to Buyer Transparency.",
+            "steps": {
+                "step1": { "title": "Association Opens Pool", "desc": "An association creates an aggregation campaign, defining the crop type, target volume, and collection period." },
+                "step2": { "title": "Farmers Contribute", "desc": "Member farmers submit their harvested produce. Each contribution is digitally logged — farmer, weight, and date." },
+                "step3": { "title": "Quality Grading", "desc": "Collected produce is inspected and graded. Verified grade data is attached to the pool before it goes live." },
+                "step4": { "title": "Buyer Purchases", "desc": "Buyers browse the marketplace, select a graded lot, and place their order. Payouts flow automatically to contributing farmers." }
+            }
+        },
+        "marketplace": {
+            "badge": "The Marketplace",
+            "title": "Browse, Buy, Done.",
+            "subtitle": "Buyers see verified, graded lots in real time. Every lot shows the association, crop type, quantity, and quality grade — before you commit.",
+            "stats": {
+                "lots": "Active Lots",
+                "associations": "Verified Associations",
+                "farmers": "Contributing Farmers"
+            }
+        },
+        "advantage": {
+            "badge": "The Difference",
+            "title": "Old vs. New.",
+            "labels": { "traditional": "Traditional Trade", "kuntalx": "KuntalX Network" },
+            "rows": {
+                "pricing": { "label": "Pricing", "traditional": "Opaque / Middlemen", "kuntalx": "Transparent Market Price" },
+                "settlement": { "label": "Farmer Payout", "traditional": "Weeks or Never", "kuntalx": "Verified Digital Payout" },
+                "traceability": { "label": "Traceability", "traditional": "Non-existent", "kuntalx": "Farm to Buyer (E2E)" },
+                "loss": { "label": "Post-Harvest Loss", "traditional": "Up to 35%", "kuntalx": "< 2% Controlled" }
+            }
+        },
+        "footer": {
+            "desc": "The digital highway for Ethiopia's agricultural expansion. We are building the infrastructure for transparent, secure, and industrial-scale commodity aggregation.",
+            "copyright": "© 2026 KuntalX. Advanced Agricultural Backbone.",
+            "operational": "All systems operational",
+            "categories": {
+                "solutions": "Solutions",
+                "company": "Company",
+                "support": "Support",
+                "legal": "Legal"
+            },
+            "links": {
+                "directSourcing": "Direct Sourcing",
+                "hubOperations": "Hub Operations",
+                "marketStats": "Market Stats",
+                "digitalLedger": "Digital Ledger",
+                "aboutUs": "About Us",
+                "ourMission": "Our Mission",
+                "journal": "Journal",
+                "contact": "Contact",
+                "helpCenter": "Help Center",
+                "faq": "FAQ",
+                "documentation": "Documentation",
+                "security": "Security",
+                "privacyPolicy": "Privacy Policy",
+                "termsOfUse": "Terms of Use",
+                "compliance": "Compliance"
+            }
+        },
+        "logo": {
+            "tagline": "Agriculture Made Simple. Transparent. Digital."
+        }
+    }
+}

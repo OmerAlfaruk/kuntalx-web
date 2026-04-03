@@ -1,0 +1,457 @@
+{
+    "common": {
+        "save": "Oolchi",
+        "saving": "Oolchaa jira...",
+        "cancel": "Haquu",
+        "discard": "Dhiisuu",
+        "delete": "Haquu",
+        "edit": "Gulaaluu",
+        "confirm": "Mirkaneessi",
+        "loading": "Fe'amaa jira...",
+        "signOut": "Ba'uun",
+        "wait": "Egi",
+        "details": "Bal'inaan",
+        "actions": "Tarkaanfiiwwan",
+        "status": "Haala",
+        "search": "Barbaadi",
+        "filter": "Calleessi",
+        "reset": "Deebi'i",
+        "submit": "Ergi",
+        "back": "Deebi'i",
+        "next": "Itti Aanuu",
+        "close": "Cufii",
+        "noData": "Galmeewwan hin argamne",
+        "error": "Dogoggorri uumame",
+        "retry": "Irra deebi'i yaalii",
+        "viewDetails": "Bal'inaan ilaali",
+        "all": "Hundaa",
+        "pending": "Eegamaa",
+        "accepted": "Fuudhamee",
+        "delivered": "Geesifamee",
+        "cancelled": "Haqamee",
+        "inTransit": "Deemaa jira",
+        "fulfilled": "Guutamee",
+        "syncing": "Walta'aa jira"
+    },
+    "nav": {
+        "dashboard": "Daashboordii",
+        "aggregations": "Walitti-qabiinsa",
+        "marketplace": "Gabaa",
+        "myAggregations": "Walitti-qabiinsa Koo",
+        "myOrders": "Ajajawwan koo",
+        "procurement": "Bittaa",
+        "myDeliveries": "Geessitoota koo",
+        "farmerManagement": "Bulchiinsa Qonnaan Bulaa",
+        "qualityControl": "Too'annoo Qulqullinaa",
+        "createAggregation": "Walitti-qabiinsa Uumi",
+        "shipments": "Fe'umsa",
+        "payouts": "Kaffaltii",
+        "associations": "Waldaalee",
+        "requests": "Gaaffiiwwan",
+        "userManagement": "Bulchiinsa Fayyadamaa",
+        "platformAnalytics": "Xiinxala Sirnaa",
+        "systemSettings": "Sajata Sirnaa",
+        "cropTypes": "Gosa Midhaanii",
+        "auditLogs": "Galmeewwan Audit",
+        "signIn": "Seenaa",
+        "getStarted": "Jalqabaa"
+    },
+    "settings": {
+        "title": "Sajata Sirnaa",
+        "description": "Proofayila keessan, filannoo keessanii fi nageenya sirnaa bulchaa.",
+        "profileInfo": "Oodeeffannoo Proofayilaa",
+        "fullName": "Maqaa Guutuu",
+        "email": "Teessoo Imeelii",
+        "phone": "Lakkoofsa Bilbilaa",
+        "language": "Afaan Filatamaa",
+        "security": "Nageenya fi Dhuunfaa",
+        "fa2": "Mirkaneessa Sadarkaa Lammaffaa",
+        "fa2Desc": "Akaawuntii keessaniif dabalataan nageenya dabalaa.",
+        "notifications": "Beeksisa Imeelii",
+        "notificationsDesc": "Waa'ee ajajawwan keessanii fi haala gabaa irratti oodeeffannoo argadhaa.",
+        "saveChanges": "Jijjiirama Oolchi",
+        "discardChanges": "Jijjiirama Dhiisi",
+        "support": "Gargaarsa Barbaadduu?",
+        "supportDesc": "Gareen keenya rakkina sirnaa kamiyyuu ykn gaaffiiwwan qonnaa irratti isin gargaaruuf as jiru.",
+        "contactSupport": "Gargaarsa Argachuuf Nu Quunnamaa"
+    },
+    "auth": {
+        "logoutConfirm": "Tajaajila keessan addaan kutuu barbaadduu?",
+        "logoutDesc": "Sirna KuntalX deebitanii seenuuf lakkoofsa iccitii (PIN) keessan deebistanii mirkaneessuu qabdu.",
+        "yesSignOut": "Eeyyee, Ba'i"
+    },
+    "orders": {
+        "pageTitle": "Galmeewwan Bittaa",
+        "pageDescBuyer": "Bittaa keessan fi haala mirkaneessa maallaqaa hordofaa.",
+        "pageDescAdmin": "Dhangala'a midhaanii biyyoolessaa fi haala qubsuma maallaqaa guutummaatti to'adhaa.",
+        "orderReference": "Waabii Ajajaa",
+        "produceAndSupplier": "Midhaan fi Dhiyeessaa",
+        "buyer": "Bitaa",
+        "volume": "Baay'ina",
+        "valuation": "Tilmaam",
+        "unknownProduce": "Midhaan Hin Beekkamne",
+        "regionalRegistry": "Galmee Naannoo",
+        "verifiedPartner": "Hiriyaa Mirkanaa'e",
+        "certifiedAccount": "Akaawuntii Ragaalee Qabu",
+        "cancelOrder": "Haqi",
+        "cancelConfirm": "Dhugumaan ajaja kana haquu barbaadduu?",
+        "totalOrders": "Ajajawwan Hundinuu",
+        "totalOrdersDesc": "Galmeewwan galmaa'an hundinuu.",
+        "pendingReview": "Ilaalcha Eegaa",
+        "pendingReviewDesc": "Tarkaanfii itti aanuu eegaa.",
+        "inTransit": "Deemaa Jira",
+        "inTransitDesc": "Midhaan geessisaa jira.",
+        "totalValue": "Gatii Waliigalaa",
+        "totalValueDesc": "Tilmaam waliigalaa.",
+        "rangeEntryDate": "Guyyaa Seensa Yeroo Daangaa",
+        "rangeTerminationDate": "Guyyaa Fixannaa Yeroo Daangaa",
+        "resetTemporalFilter": "Calleessa Yeroo Deebisuun Hoji Jalqabi",
+        "activeRegistry": "Galmee Hojjachaa",
+        "verifiedProcurementFlow": "Dhangala'a Bittaa Mirkanaa'e",
+        "noRecordsFound": "Galmeewwan Hin Argamne",
+        "noRecordsDesc": "Galmeewwan bittaa calleessa ammaa waliin wal hin simu."
+    },
+    "aggregations": {
+        "volumeSecured": "Baay'ina Mirkanaa'e",
+        "defaultDescription": "Kuusaa qonnaa qulqullina olaanaa qabu bittaaf qophaa'e.",
+        "viewDetails": "Bal'inaan Ilaali",
+        "grade": "Sadarkaa",
+        "directFarmer": "Qonnaan Bulaa Kallattii",
+        "collecting": "Sassaabaa Jira",
+        "ready": "Qophaa'e",
+        "sold": "Gurguramee",
+        "pageTitle": "Gabaa Walitti-qabiinsaa",
+        "noAggregations": "Walitti-qabiinsi hin jiru",
+        "listingDesc": "Walitti-qabiinsa midhaanii hojjataa jiran ilaalaa",
+        "hubTitle": "Giddu-galeessa Walitti-qabiinsaa",
+        "hubSubtitle": "Giddu-galeessa Ajaja Waldaa",
+        "operationalHub": "Giddu-galeessa Hojiirra",
+        "hubDesc": "Pirootokoolota baachaa hojjatan hordofaa, dhangala'uu seenaa hayyamaa fi bittaa dhaabbilee to'adhaa.",
+        "initiateProtocol": "Pirootookoolii Haaraa Jalqabi",
+        "activeBatchProtocols": "Pirootokoolota Baachaa Hojjatan",
+        "activeBatchDesc": "Sadarkaa sassaabbii ammaa",
+        "marketSealedUnits": "Meeshaalee Gabaa Cuufame",
+        "marketSealedDesc": "Bittaaf mirkanaa'e",
+        "networkUtilization": "Fayyadama Tarree",
+        "networkUtilizationDesc": "Hir'ina walta'iinsa noodii",
+        "protocolBatch": "Pirootokoolii / Baachaa",
+        "commodity": "Maa'ii",
+        "progress": "Adeemsa",
+        "openProtocol": "Pirootokoolii Bani"
+    },
+    "associations": {
+        "notFound": "Waldaan Hin Argamne",
+        "notFoundDesc": "Dhaabbata barbaaddaa jirtan hin jiru ykn hayyama ilaaluu hin qabdan.",
+        "returnToDirectory": "Gara Diirektooriitti Deebi'i",
+        "operational": "Hojiirra",
+        "jurisdictionalZone": "Naannoo Aangoo",
+        "nodeRegistry": "Galmee Noodii",
+        "complianceReview": "Ilaalchi Walta'iinsa",
+        "systemNotice": "Beeksisa Sirnaa",
+        "manageProfile": "Proofayila Bulchi",
+        "initiateBatch": "Baacha Jalqabi",
+        "activeProducers": "Omishtoota Hojjatan",
+        "federatedMembers": "Miseensota Walmadaalee",
+        "liveBatches": "Baachamwan Hojjatan",
+        "inFlightCycles": "Gidiraalee adeemaa jiran",
+        "aggregateVolume": "Baay'ina Waliigalaa",
+        "totalCommodityFlow": "Dhangala'a maa'ii waliigalaa",
+        "entityValue": "Gatii Dhaabbataa",
+        "grossTradeVolume": "Guddina konkolaataa waliigalaa",
+        "activeAggregationProtocols": "Pirootokoolota Sassaabbii Hojjataa",
+        "historicalArchive": "Akaawuntii Seenaa →",
+        "protocolId": "Eenyummaa Pirootokoolaa",
+        "commodity": "Maa'ii",
+        "progress": "Adeemsa (%)",
+        "noActiveTraces": "Hordoffii Hojjataa Hin Jiru",
+        "noActiveTracesDesc": "Dhaabbatni kun yeroo ammaa pirootokoolota sassaabbii walta'an adeemaa jiran hin qabu.",
+        "authorizeNewProtocol": "Pirootokoolii Haaraa Hayyami",
+        "secureRegistryProtocol": "Pirootokoolii Galmee Nageenya Qabu",
+        "secureRegistryDesc": "Madaalliin hirmaannaa omishtoota dhuunfaa fi eenyummaan isaanii sagalee iccitiidhaan cuqfameera. Eeyyama hiikuu galmeewwan sadarkaa noodii kan qabu dura taa'aa waldaa itti muudame qofa.",
+        "operationalCommand": "Ajaja Hojii",
+        "communications": "Quunnamtii",
+        "establishConnection": "Quunnamtii Uumi",
+        "systemRegistryMeta": "Maddoota Galmee Sirnaa",
+        "spatialCoordinates": "Qindaa'inoota Bakka",
+        "commencement": "Jalqabbii",
+        "cryptographicHash": "Haasiiwwan Iccitii"
+    },
+    "dashboard": {
+        "welcome": "Baga nagaan deebitani",
+        "overview": "Haala Waliigalaa Sirnaa",
+        "procurementHub": "Giddu-galeessa Bittaa",
+        "procurementHubDesc": "Bittaa gurguddaa bulchaa fi sarara dhiyeessii hordofaa.",
+        "marketTerminal": "Terminalii Gabaa",
+        "acquiredVolume": "Baay'ina Bitamee",
+        "acquiredVolumeDesc": "Waliigala midhaan geessifame",
+        "activeOrders": "Ajajawwan Hojjatan",
+        "activeOrdersDesc": "Gidiraalee bittaa deemaa jiran",
+        "availableItems": "Meeshaalee Argaman",
+        "availableItemsDesc": "Gabaarra jiru",
+        "totalSpent": "Waliigala Baasii",
+        "totalSpentDesc": "Quubsama mirkanaa'e",
+        "regionalHubs": "Giddu-galeessota Naannoo",
+        "regionalHubsDesc": "Waldaalee hojjatan",
+        "totalFarmers": "Qonnaan Bultota Waliigalaa",
+        "totalFarmersDesc": "Omishtoota mirkanaa'an",
+        "activeAggregations": "Walitti-qabiinsa Hojjatan",
+        "activeAggregationsDesc": "Baay'ina sirna keessa jiru",
+        "totalRevenue": "Galii Waliigalaa",
+        "totalRevenueDesc": "Gatii daldalaa (ETB)",
+        "members": "Miseensota",
+        "membersDesc": "Qonnaan bultoota galmaa'an",
+        "monthlyVolume": "Baay'ina Ji'aa",
+        "monthlyVolumeDesc": "Galii ji'a kanaa",
+        "salesRevenue": "Galii Gurgurtaa",
+        "salesRevenueDesc": "Quubsamoota kaffaltame",
+        "regionalActivity": "Hojii Naannoo",
+        "regionalActivityDesc": "Haala yeroo ammaa giddu-galeessota daldalaa gurguddaa",
+        "exportReport": "Gabaasa Ergi",
+        "associationName": "Maqaa Waldaa",
+        "region": "Naannoo",
+        "volume": "Baay'ina (Qt)",
+        "noActivity": "Hojii naannoo hin argamne.",
+        "loadingMarket": "Oodeeffannoo gabaa fe'amaa jira...",
+        "authRequired": "Mirkaneessuu Barbaachisaa",
+        "proceedLogin": "Gara Seensaatti Deemi",
+        "generateAuditReport": "Gabaasa Sakatta'iinsa Uumi"
+    },
+    "marketplace": {
+        "title": "Gabaa",
+        "description": "Qonnaa bittachuu fi ilaalaa."
+    },
+    "quality": {
+        "title": "Too'annoo Qulqullinaa",
+        "inspections": "Sakatta'iinsa"
+    },
+    "farmers": {
+        "title": "Bulchiinsa Qonnaan Bulaa",
+        "totalFarmers": "Qonnaan Bultota Waliigalaa"
+    },
+    "payouts": {
+        "title": "Kaffaltii",
+        "description": "Kaffaltii qonnaan bulaa fi walta'iinsa maallaqaa bulchaa."
+    },
+    "shipments": {
+        "title": "Fe'umsa",
+        "description": "Fe'umsaa hordofaa fi bulchaa."
+    },
+    "marketing": {
+        "nav": {
+            "features": "Amaloota",
+            "impact": "Dhiibbaa",
+            "howItWorks": "Akkaataa Hojii",
+            "about": "Waa'ee Keenya",
+            "contact": "Quunnama"
+        },
+        "hero": {
+            "title": "Daldala Itoophiyaa Humna Beeksisuu.",
+            "subtitle": "KuntalX lafee dugdaa dijitaalaa qonna Itoophiyaa gara fuulduraati—qonnaan bultoota naannoo gabaa addunyaa waliin walitti hidha.",
+            "ctaPrimary": "Amma Daldala Jalqabaa",
+            "ctaSecondary": "Amaloota Sakatta'i"
+        },
+        "partners": {
+            "title": "Michoota Ofisii fi Dhaabbilee Mirkanaa'an",
+            "items": {
+                "item1": "Abbaa Taayitaa Qonnaa",
+                "item2": "Loojistiiksii Itoophiyaa",
+                "item3": "Daldala Baankii Biyyaalessaa",
+                "item4": "Baankii Sanyii Naannoo",
+                "item5": "Waldaa Qonnaan Bultootaa"
+            }
+        },
+        "about": {
+            "badge": "KuntalX Maalii?",
+            "title": "Sirna Qonnaa Itoophiyaaf Ijaarame.",
+            "body": "KuntalX gabaa dijitaalaa waldaalee qonnaan bultootaa fi bittootaa gidduu hanqina cufuudha. Waldaaleen adeemsa walitti-qabiinsaa banu, gumaata omishaa miseensota qonnaan bultootaanirraa sassaabu. Gumaachi hundi dijitaalaan galmaa'a, madaalama, fi sadarkaa argata. Kuusaan qophaa'ee erga tahe, bittootaaf ni mul'ata — lootoota ilaaluuf, sadarkaa qulqullinaa ilaaluuf, fi ajaja galchuuf. Gurgurtaan xumuramee booda, kaffaltiin qonnaan bultota gumaachan hundaaf haaluma dhageettii isaaniin kallattiin ni ergama. KuntalX daldaltoota giddu-galeessa hambisa, odeeffannoo walqixxe dhiyeessa, fi iftoomina maallaqaa qonnaa Itoophiyaatti fida — qonnaa irraa hanga bittaatti."
+        },
+        "solutions": {
+            "badge": "Daandii Dijitaalaa",
+            "title": "Meeshaalee Milkaa'inaa",
+            "cards": {
+                "directMarket": {
+                    "title": "Gabaa Kallattii Argachuu",
+                    "desc": "Giddu-galtoota hambisaa. Bittoota dhaabbilee mirkanaa'an guutuu Gaanfa Afrikaa waliin kallattiin wal qunnamaa."
+                },
+                "digitalAggregation": {
+                    "title": "Walitti-qabiinsa Dijitaalaa",
+                    "desc": "Sirni keenya inni qaroon omisha xixinnoo gara baay'ina indaastiriitti walitti qaba, qonnaan bulaa hundaaf gatii guddisa."
+                },
+                "liveInventory": {
+                    "title": "Hordoffii Inventory Kallattii",
+                    "desc": "Meeshaalee jiran hunda giddu-galeessota naannoo hunda keessatti bal'inaan hordofaa."
+                },
+                "verifiedSettlements": {
+                    "title": "Kaffaltii Mirkanaa'e",
+                    "desc": "Mirkaneessa dijitaalaa nageenya qabuun fe'umsi hundi iftoomina maallaqaa guutuun deeggaramuu isaa mirkaneessa."
+                },
+                "logisticsTransparency": {
+                    "title": "Iftoomnina Loॉजिस्टिक्स",
+                    "desc": "Fe'umsa keessan karra qonnaan bulaa irraa hanga terminalii adeemsaa (processing) tti hordofaa."
+                },
+                "flexibleTrading": {
+                    "title": "Daldala Jiru",
+                    "desc": "Meeshaalee waldaalee qonnaan bultoota dhuunfaa fi dhaabbilee bittaa biyyaalessaa hundaaf qophaa'an."
+                }
+            }
+        },
+        "streams": {
+            "badge": "Carraawwan Kallattii",
+            "title": "Dhangala'a Hojjataa.",
+            "progress": "Adeemsa Sassaabbii",
+            "viewProtocol": "Bal'ina Prootookoolii Ilaali",
+            "coffee": "Giddu-galeessa Buna Arabica",
+            "teff": "Giddu-galeessa Xaafii Furdaa",
+            "yield": "Omisha Eegamu",
+            "quality": "Sadarkaa Qulqullinaa"
+        },
+        "impact": {
+            "badge": "Madii",
+            "title": "Tarree Biyyaalessaa.",
+            "subtitle": "Naannoolee Itoophiyaa hunda noodiiwwan qonnaa mirkanaa'an giddu-galeessa godhachuun walitti hidha.",
+            "hub1": "Giddu-galeessa Naannoo Oromiyaa",
+            "hub2": "Noodii Sassaabbii Amaaraa",
+            "hub3": "Giddu-galeessa Loojistiiksii SNNP",
+            "activeCollectors": "Sassaabdota Hirmaatan",
+            "realtimeGrade": "Sadarkaa Yeroo Qabatamaa"
+        },
+        "stats": {
+            "badge": "Gahumsa Keenya",
+            "farmers": "Qonnaan Bultota Walta'an",
+            "farmersDesc": "Kallattiin lafee dugdaa dijitaalaa waliin kan wal qabatan.",
+            "associations": "Waldaalee Mirkanaa'an",
+            "associationsDesc": "Michoota dhaabbataa giddu-galeessota naannoo bulchan.",
+            "hubs": "Giddu-galeessota Hojjataa",
+            "hubsDesc": "Terminaliiwwan fe'umsaa fi sadarkaa qulqullinaa kallattii."
+        },
+        "howItWorks": {
+            "badge": "Adeemsicha",
+            "title": "Qonnaa irraa gara Bittaatti.",
+            "steps": {
+                "onboarding": { "title": "Waldaan Galmaa'a", "desc": "Waldaaleen fi qonnaan bultoonni seeninsa mirkanaawaa ta'e sirnichatti galanii fudhatu." },
+                "registration": { "title": "Kuusaa Bulli'a", "desc": "Waldaaleen kuusaa walitti-qabiinsaa gocha midhaan murtaaweef banu." },
+                "pooling": { "title": "Qonnaan Bultoonni Gumaachanu", "desc": "Qonnaan bultoonni omisha isaaniitiif kuusaatti galchan; gumaachi hundi madaalame galmaa'a." },
+                "matching": { "title": "Sadarkaa Qulqullina", "desc": "Omishni walitti qabame sadarkaa argata fi kuusaan bittootaaf gabaa irratti mul'ata." },
+                "logistics": { "title": "Bittaan Bita", "desc": "Bittoonni mirkanaa'an lootoota qophaa'an ilaaluu fi ajajaa'uu isaaniiti galchan." },
+                "payouts": { "title": "Kaffaltii Nageenya Qabu", "desc": "Erga gurguramo booda, qonnaan bultoonni gumaachan hundi kaffaltiisaanii automatically argatu." }
+            }
+        },
+        "testimonials": {
+            "badge": "Ragaalee",
+            "title": "Sagalee Dirree.",
+            "items": {
+                "item1": { "name": "Abebe Tadesse", "role": "Dura Taa'aa Waldaa", "quote": "KuntalX haala buna keenya walitti qabnu jijjiireera. Miseensonni keenya gatii gabaa sirrii ta'e gurgurtaa dura ni argu." },
+                "item2": { "name": "Dr. Selamawit K.", "role": "Bittaa Indaastirii", "quote": "Sadarkaan qulqullinaa dijitaalaa faabrikaa keenyaaf jijjiirama guddaadha. Omisha keenya ragaa mirkanaa'een karoorsuu dandenya." }
+            }
+        },
+        "whyKuntalX": {
+            "badge": "Maaliif KuntalX?",
+            "title": "Qonnaan Bulaaf Ijaarame, Bittotaan Jaallatame.",
+            "items": {
+                "item1": { "title": "Guddina Jirus", "desc": "Waldaalee naannoo humna beeksisuu." },
+                "item2": { "title": "Iftoomina Maallaqaa", "desc": "Kaffaltii ykn komishiniin dhokate hin jiru." },
+                "item3": { "title": "Qulqullina Indaastirii", "desc": "Sadarkaa qulqullinaa mirkanaa'e." },
+                "item4": { "title": "Argama Yeroo Hundaa", "desc": "Gabaa 24/7 mul'atu." }
+            }
+        },
+        "faq": {
+            "badge": "Beekumsa",
+            "title": "Gaaffiiwwan Baramaa.",
+            "q1": "KuntalX akkamitti gatii sirrii mirkaneessa?",
+            "a1": "Giddu-galeessa kaffaltii hambisuun fi waldaaleen safartuu naannoo amma jiruun akka daldalan taasisuun, odeeffannoo gabaa kallattiin qonnaan bultootaaf ni dhiyeessina.",
+            "q2": "Midhaan qonnaa akkamii deeggarama?",
+            "a2": "Hanga guddaatti midhaan, callaa fi buna. Sirni keenya midhaan sadarkaa fi walitti-qabiinsa barbaadu hundaaf qophaa'e.",
+            "q3": "Sirni kaffaltii dijitaalaa hammam amansiisaadha?",
+            "a3": "Kaffaltiin hundi kallattiin ragaa geessisaa mirkanaa'e waliin wal qabata, ogeessa giddu-galeessa fi bitaa gidduutti mirkanaa'a."
+        },
+        "contact": {
+            "badge": "Nu Quunnamaa",
+            "title": "Daldalaaf Qophiidhaa?",
+            "form": {
+                "name": "Maqaa Guutuu",
+                "email": "Teessoo Imeelii",
+                "message": "Ergaa Keessan",
+                "placeholderName": "John Doe",
+                "placeholderEmail": "john@example.com",
+                "placeholderMessage": "Waa'ee daldala keessanii nuatti himaa...",
+                "submit": "Ergaa Ergi"
+            },
+            "info": {
+                "connectivity": "Walitti-hidhiinsa Addunyaa",
+                "connectivityDetail": "support@kuntalx.com",
+                "reach": "Gahumsa Kallattii",
+                "reachDetail": "+251 912 345 678",
+                "hub": "Giddu-galeessa Guddaa",
+                "hubDetail": "Finfinnee, Itoophiyaa"
+            }
+        },
+        "newsletter": {
+            "title": "Haala Gabaa Hordofaa.",
+            "desc": "Gatii midhaanii fi haala giddu-galeessota naannoo torban hunda kallattiin argadhaa.",
+            "placeholder": "Imeelii keessan galchaa",
+            "cta": "Galmaa'u"
+        },
+        "transparency": {
+            "badge": "Hordoffii Guutuu",
+            "title": "Iftoomina Qonnaa irraa gara Bittaatti.",
+            "steps": {
+                "step1": { "title": "Waldaan Kuusaa Bana", "desc": "Waldaan adeemsa walitti-qabiinsaa bana: gocha midhaan, baay'ina karoorfame, fi yeroo sassaabbii murtessa." },
+                "step2": { "title": "Qonnaan Bultoonni Gumaachanu", "desc": "Miseensonni qonnaan bultaa omisha sassaababee galchan. Gumaachi hundi dijitaalaan galmaa'a — eenyu, madaala, fi guyyaa." },
+                "step3": { "title": "Sadarkaa Qulqullina", "desc": "Omishni walitti qabame qoratamee sadarkaa argata. Ragaan mirkanaa'e kuusaatti dabalama." },
+                "step4": { "title": "Bittaan Bita", "desc": "Bittoonni gabaa ilaaluu, loota filatanii ajaja galchan. Kaffaltiin qonnaan bultootaa automatically ta'a." }
+            }
+        },
+        "marketplace": {
+            "badge": "Gabaa",
+            "title": "Barbaadi, Bit, Xumurame.",
+            "subtitle": "Bittoonni lootota mirkanaa'an fi sadarkaa qaban kallattiin ni argatu. Looti hundi waldaa, gosa midhaan, baay'ina fi sadarkaa agarsiisa.",
+            "stats": {
+                "lots": "Lootota Hojjatan",
+                "associations": "Waldaalee Mirkanaa'an",
+                "farmers": "Qonnaan Bultota Gumaachaan"
+            }
+        },
+        "advantage": {
+            "badge": "Garaagarummaa",
+            "title": "Kan Durii fi Kan Ammayyaa.",
+            "labels": { "traditional": "Daldala Baramaa", "kuntalx": "Tarree KuntalX" },
+            "rows": {
+                "pricing": { "label": "Gatii", "traditional": "Iftoomina Kan Hin Qabne", "kuntalx": "Gatii Gabaa Iftoomina Qabu" },
+                "settlement": { "label": "Kaffaltii Qonnaan Bulaaf", "traditional": "Torbanoottan ykn Gonkumaa", "kuntalx": "Kaffaltii Dijitaalaa Mirkanaa'e" },
+                "traceability": { "label": "Hordoffii", "traditional": "Hin Jiru", "kuntalx": "Qonnaa irraa gara Bittaatti (E2E)" },
+                "loss": { "label": "Balfa Omishaan Bodaa", "traditional": "Hanga 35%", "kuntalx": "< 2% Kan To'atame" }
+            }
+        },
+        "footer": {
+            "desc": "Daandii dijitaalaa babal'ina qonna Itoophiyaatiif. Bu'uura sassaabbii midhaanii iftoomina qabu, nageenya qabu fi sadarkaa indaastirii ijaaraa jirra.",
+            "copyright": "© 2026 KuntalX. Bu'uura Qonnaa Ol'aanaa.",
+            "operational": "Sirnoonni hundi hojjataa jiru",
+            "categories": {
+                "solutions": "Furmaata",
+                "company": "Kumpaaniyaa",
+                "support": "Deeggarsa",
+                "legal": "Seeraa"
+            },
+            "links": {
+                "directSourcing": "Gabaa Kallattii",
+                "hubOperations": "Hojiiwwan Giddu-galeessaa",
+                "marketStats": "Istatistiiksii Gabaa",
+                "digitalLedger": "Meeshaa Galmee Dijitaalaa",
+                "aboutUs": "Waa'ee Keenya",
+                "ourMission": "Ergaa Keenya",
+                "journal": "Joornaalii",
+                "contact": "Quunnama",
+                "helpCenter": "Giddu-galeessa Deeggarsaa",
+                "faq": "Gaaffiiwwan Baramaa",
+                "documentation": "Sannadoota",
+                "security": "Nageenya",
+                "privacyPolicy": "Imaammata Dhuunfaa",
+                "termsOfUse": "Waliigaltee Fayyadamaa",
+                "compliance": "Seera Hordofuu"
+            }
+        },
+        "logo": {
+            "tagline": "Qonnaan Bulaa irraa gara Gabaatti, waliin."
+        }
+    }
+}

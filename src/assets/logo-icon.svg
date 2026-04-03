@@ -1,0 +1,23 @@
+<svg width="80" height="110" viewBox="0 0 80 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hex-stroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+  <!-- Hexagonal Polygon Container -->
+  <path d="M40 5L72 23V59L40 77L8 59V23L40 5Z" fill="#04170D" stroke="url(#hex-stroke)" stroke-width="2.5"/>
+  <!-- Vertical Stroke: Primary (Deep Green) -->
+  <path d="M22 20V60" stroke="#186131" stroke-width="8" stroke-linecap="round"/>
+  <!-- Diagonal Strokes: Secondary (Gold/Amber) -->
+  <path d="M50 20L24 40L50 60" stroke="#D4AF37" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Wheat grain -->
+  <ellipse cx="60" cy="31" rx="2" ry="4" transform="rotate(-10 60 31)" fill="#F5DEB3"/>
+  <!-- Coffee bean -->
+  <g transform="translate(62, 40) rotate(5)">
+    <ellipse cx="0" cy="0" rx="2.5" ry="4" fill="#4B2C20"/>
+    <path d="M-0.5 -3.5C-0.5 -3.5 1.5 -1 0 0C-1.5 1 0.5 3.5 0.5 3.5" stroke="#2D1A12" stroke-width="0.6" fill="none"/>
+  </g>
+  <!-- Green leaf -->
+  <path d="M57 50C57 50 57 47 60 47C63 47 63 50 63 50C63 50 63 53 60 53C57 53 57 50 57 50Z" transform="rotate(10 60 50)" fill="#186131"/>
+</svg>
