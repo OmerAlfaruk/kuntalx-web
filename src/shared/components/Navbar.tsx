@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../lib/auth-context';
-import { useI18n } from '../../lib/i18n-context';
 import { useTheme } from '../../lib/theme-context';
 
 import { QuickActionsMenu } from './QuickActionsMenu';
@@ -10,7 +9,6 @@ import { NotificationBell } from '../../features/notifications';
 
 export function Navbar() {
   const { logout } = useAuth();
-  const { t } = useI18n();
   const { theme, toggleTheme } = useTheme();
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
