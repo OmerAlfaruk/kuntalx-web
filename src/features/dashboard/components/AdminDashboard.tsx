@@ -27,24 +27,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     return (
         <div className="space-y-6 sm:space-y-10 animate-in fade-in duration-500">
             <PageHeader
-                title={userRole === 'association_admin' ? `${stats?.associationName || 'Association'}` : 'Platform Overview'}
-                description="Trade ecosystem management and performance monitoring."
+                title={userRole === 'association_admin' ? `${stats?.associationName || 'Association'}` : 'Platform Command'}
+                description="Trade ecosystem state management and real-time telemetry monitoring."
                 actions={
-                    <div className="flex flex-wrap gap-2 sm:gap-3 w-full sm:w-auto">
+                    <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                         {userRole === 'association_admin' ? (
                             <>
                                 <ActionButton
                                     variant={daysFilter === 30 ? 'primary' : 'outline'}
                                     onClick={() => setDaysFilter(daysFilter === 30 ? undefined : 30)}
+                                    className="rounded-xl border-white/10 bg-background/40 font-display text-[10px] uppercase tracking-widest"
                                 >
-                                    {daysFilter === 30 ? 'All Time ▾' : '30D ▾'}
+                                    {daysFilter === 30 ? 'Locked: 30D' : 'Time: Universal'}
                                 </ActionButton>
                                 <ActionButton
                                     onClick={() => navigate({ to: '/my-aggregations' })}
-                                    icon={<span>➕</span>}
+                                    icon={<span className="text-sm">⌬</span>}
+                                    className="rounded-xl font-display text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20"
                                 >
                                     <span className="hidden sm:inline">{t('nav.createAggregation')}</span>
-                                    <span className="sm:hidden">New</span>
+                                    <span className="sm:hidden">Initialize</span>
                                 </ActionButton>
                             </>
                         ) : (
@@ -52,14 +54,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                 <ActionButton
                                     variant={daysFilter === 30 ? 'primary' : 'outline'}
                                     onClick={() => setDaysFilter(daysFilter === 30 ? undefined : 30)}
+                                    className="rounded-xl border-white/10 bg-background/40 font-display text-[10px] uppercase tracking-widest"
                                 >
-                                    {daysFilter === 30 ? 'All Time ▾' : 'Last 30D ▾'}
+                                    {daysFilter === 30 ? 'Lock: 30D' : 'Window: 30D'}
                                 </ActionButton>
                                 <ActionButton
                                     onClick={handleExport}
+                                    className="rounded-xl font-display text-[10px] uppercase tracking-widest shadow-lg shadow-primary/20"
+                                    icon={<span className="text-sm">⊞</span>}
                                 >
                                     <span className="hidden sm:inline">{t('dashboard.generateAuditReport')}</span>
-                                    <span className="sm:hidden">Export</span>
+                                    <span className="sm:hidden">EXFIL</span>
                                 </ActionButton>
                             </>
                         )}

@@ -30,18 +30,21 @@ export const AggregationDetailOps: React.FC<AggregationDetailOpsProps> = ({ aggr
     };
 
     return (
-        <div className="space-y-12">
+        <div className="space-y-16">
             {/* Actions */}
-            <section className="space-y-6">
-                <div className="flex items-center gap-4 mb-4">
-                    <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Actions</h3>
-                    <div className="h-px bg-border/40 flex-1" />
+            <section className="space-y-10">
+                <div className="flex items-center justify-between border-b border-border/50 pb-8">
+                    <div className="space-y-1">
+                        <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Terminal Actions</h3>
+                        <p className="font-bold text-lg text-foreground tracking-tight">Pool Operations</p>
+                    </div>
                 </div>
-                <div className="space-y-4">
+
+                <div className="space-y-6">
                     {aggregation.status === 'collecting' && isFarmer && (
                         <button
                             onClick={() => navigate({ to: '/contribute/$poolId', params: { poolId: aggregation.id } } as any)}
-                            className="w-full h-16 rounded-xl bg-primary text-white text-[10px] font-bold uppercase tracking-widest shadow-minimal hover:bg-primary/90 transition-all flex items-center justify-center gap-4 group"
+                            className="w-full h-16 rounded-2xl bg-primary text-white text-[10px] font-bold uppercase tracking-[0.2em] shadow-minimal hover:bg-primary/90 transition-all flex items-center justify-center gap-5 group active:scale-95"
                         >
                             <span className="text-xl group-hover:scale-110 transition-transform">🌾</span>
                             <span>Add Yours</span>
@@ -50,7 +53,7 @@ export const AggregationDetailOps: React.FC<AggregationDetailOpsProps> = ({ aggr
                     {(aggregation.status === 'collecting' || aggregation.status === 'ready_for_sale') && isBuyer && (
                         <button
                             onClick={() => navigate({ to: '/place-order/$poolId', params: { poolId: aggregation.id } } as any)}
-                            className="w-full h-16 rounded-xl bg-foreground text-background text-[10px] font-bold uppercase tracking-widest shadow-minimal hover:opacity-90 transition-all flex items-center justify-center gap-4 group"
+                            className="w-full h-16 rounded-2xl bg-foreground text-background text-[10px] font-bold uppercase tracking-[0.2em] shadow-minimal hover:opacity-90 transition-all flex items-center justify-center gap-5 group active:scale-95"
                         >
                             <span className="text-xl group-hover:scale-110 transition-transform">🛒</span>
                             <span>Order Now</span>
@@ -59,7 +62,7 @@ export const AggregationDetailOps: React.FC<AggregationDetailOpsProps> = ({ aggr
                     {aggregation.contactPhone && (
                         <a
                             href={`tel:${aggregation.contactPhone}`}
-                            className="w-full h-14 rounded-xl border border-border bg-card text-foreground text-[10px] font-bold uppercase tracking-widest hover:bg-background-soft transition-all flex items-center justify-center gap-4 group"
+                            className="w-full h-16 rounded-2xl border border-border bg-background-soft text-foreground text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-background shadow-minimal transition-all flex items-center justify-center gap-5 group active:scale-95"
                         >
                             <span className="text-xl group-hover:scale-110 transition-transform">📞</span>
                             <span>Contact Admin</span>
@@ -69,39 +72,42 @@ export const AggregationDetailOps: React.FC<AggregationDetailOpsProps> = ({ aggr
                         <button
                             onClick={handleDelete}
                             disabled={deleteMutation.isPending}
-                            className="w-full h-14 rounded-xl border border-red-500/30 bg-red-500/5 text-red-500 text-[10px] font-bold uppercase tracking-widest hover:bg-red-500/10 transition-all flex items-center justify-center gap-4 group disabled:opacity-50"
+                            className="w-full h-16 rounded-2xl border border-red-500/20 bg-red-500/5 text-red-500 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-red-500/10 transition-all flex items-center justify-center gap-5 group disabled:opacity-50 active:scale-95"
                         >
                             <span className="text-xl group-hover:scale-110 transition-transform">🗑️</span>
-                            <span>{deleteMutation.isPending ? 'Deleting...' : 'Delete Pool'}</span>
+                            <span>{deleteMutation.isPending ? 'Deleting...' : 'Terminate Pool'}</span>
                         </button>
                     )}
                 </div>
             </section>
 
             {/* System Info */}
-            <section className="space-y-6">
-                <div className="flex items-center gap-4 mb-4">
-                    <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">System Info</h3>
-                    <div className="h-px bg-border/40 flex-1" />
+            <section className="space-y-10">
+                <div className="flex items-center justify-between border-b border-border/50 pb-8">
+                    <div className="space-y-1">
+                        <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Metadata Registry</h3>
+                        <p className="font-bold text-lg text-foreground tracking-tight">System Identity</p>
+                    </div>
                 </div>
-                <div className="card-minimal p-8 space-y-8 relative overflow-hidden group">
-                    <div className="space-y-3 relative z-10">
-                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-50">Date Created</p>
-                        <p className="text-lg font-bold text-foreground uppercase tracking-tight">
+
+                <div className="card-minimal p-10 space-y-10 relative overflow-hidden group">
+                    <div className="space-y-4">
+                        <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Registration Timestamp</p>
+                        <p className="text-xl font-bold text-foreground uppercase tracking-tight">
                             <AdaptiveDate date={aggregation.createdAt} />
                         </p>
                     </div>
 
-                    <div className="space-y-3 relative z-10">
-                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-50">System ID</p>
-                        <div className="p-4 bg-background-soft rounded-lg border border-border/50">
-                            <p className="text-[10px] font-mono text-primary font-bold break-all leading-relaxed uppercase tracking-widest">{aggregation.id}</p>
+                    <div className="space-y-4">
+                        <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Security Hash ID</p>
+                        <div className="p-5 bg-background-soft rounded-xl border border-border/50 shadow-inner group-hover:border-primary/20 transition-colors">
+                            <p className="text-[10px] font-mono text-primary font-bold break-all leading-relaxed tracking-widest uppercase">{aggregation.id}</p>
                         </div>
                     </div>
 
-                    <div className="pt-4 flex items-center gap-3 relative z-10">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                        <span className="text-[9px] font-bold text-emerald-600/60 uppercase tracking-widest">Verified by KuntalX</span>
+                    <div className="pt-6 flex items-center gap-4">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
+                        <span className="text-[10px] font-bold text-emerald-600/60 uppercase tracking-widest leading-none">Cryptographic Verification Active</span>
                     </div>
                 </div>
             </section>

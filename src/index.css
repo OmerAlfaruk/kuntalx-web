@@ -2,34 +2,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: hwb(102 93% 4%);
-  --background-soft: #d6f7e3;
-  --foreground: #111827;
-  --card: #FFFFFF;
-  --card-foreground: #111827;
-  --primary: #186131;
-  --primary-soft: #14b41f92;
-  --secondary: #B45309;
-  --secondary-soft: #D97706;
-  --gold: #D4AF37;
-  --border: #E5E7EB;
-  --muted: #6B7280;
-  --muted-foreground: #9CA3AF;
+  --background: #fdfdfd;
+  --background-soft: #f0fdf4;
+  --foreground: #022c22;
+  --card: rgba(255, 255, 255, 0.8);
+  --card-foreground: #022c22;
+  --primary: #10b981;
+  --primary-soft: #d1fae5;
+  --secondary: #f59e0b;
+  --secondary-soft: #fef3c7;
+  --gold: #d4af37;
+  --border: #e2e8f0;
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
+  --accent: #8b5cf6;
+  --ring: rgba(16, 185, 129, 0.5);
 }
 
 .dark {
-  --background: #04170d;
-  --background-soft: #0f2a20;
-  --foreground: #F9FAFC;
-  --card: #0F172A;
-  --card-foreground: #F9FAFC;
-  --primary: #0c6544d8;
-  --primary-soft: #18a06e;
-  --secondary: #F59E0B;
-  --secondary-soft: #FBBF24;
-  --border: #1E293B;
-  --muted: #94A3B8;
-  --muted-foreground: #64748B;
+  --background: #020617; /* Deep Navy/Black */
+  --background-soft: #04170d; /* Deep Forest Tint */
+  --foreground: #f0fdf4;
+  --card: rgba(15, 23, 42, 0.7); /* Deep Slate Glass */
+  --card-foreground: #f0fdf4;
+  --primary: #10b981;
+  --primary-soft: #064e3b;
+  --secondary: #f59e0b;
+  --secondary-soft: #78350f;
+  --border: #1e293b;
+  --muted: #94a3b8;
+  --muted-foreground: #64748b;
+  --accent: #8b5cf6;
+  --ring: rgba(16, 185, 129, 0.4);
 }
 
 @theme {
@@ -49,11 +53,16 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-header: 'Plus Jakarta Sans', sans-serif;
+  --color-accent: var(--accent);
+  --color-ring: var(--ring);
 
-  --shadow-minimal: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.04);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-header: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  --shadow-minimal: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+  --shadow-premium: 0 20px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 @layer base {
@@ -85,60 +94,80 @@
   animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* Glassmorphism Logic */
+@utility glass-effect {
+  @apply backdrop-blur-md border border-white/10;
+}
+
+@utility glass-card {
+  @apply bg-card glass-effect shadow-card rounded-2xl transition-all duration-300;
+}
+
+@utility glass-nav {
+  @apply bg-background/60 glass-effect sticky top-0 z-50;
+}
+
 /* Minimal Card Style - Animated Frame */
-@utility card-minimal {
-  @apply bg-card rounded-xl shadow-minimal transition-all duration-500 animate-slide-up relative;
-  /* Use a transparent border so the pseudo-element shows through */
+@utility card-command {
+  @apply glass-card relative overflow-hidden;
   border: 1px solid transparent;
 
   &::before {
     content: "";
     position: absolute;
-    inset: -1.5px;
-    padding: 1.5px;
+    inset: -1px;
+    padding: 1px;
     border-radius: inherit;
     background: conic-gradient(from var(--border-angle),
-        var(--border) 0%,
-        var(--border) 40%,
-        var(--primary) 60%,
-        var(--primary-soft) 80%,
-        var(--secondary-soft) 95%,
-        var(--border) 100%);
+        transparent 0%,
+        transparent 40%,
+        var(--primary) 50%,
+        var(--primary-soft) 70%,
+        transparent 80%,
+        transparent 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
-    animation: spin-border 6s linear infinite;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-      background: var(--border);
-    }
+    animation: spin-border 8s linear infinite;
+    opacity: 0.4;
+    transition: opacity 0.5s ease;
+    z-index: 1;
   }
-}
-
-@utility card-minimal-hover {
-  @apply hover:shadow-primary/20 hover:-translate-y-2;
-  /* Even stronger shadow */
 
   &:hover::before {
     opacity: 1;
-    background: conic-gradient(from var(--border-angle),
-        var(--border) 0%,
-        var(--border) 10%,
-        var(--primary) 30%,
-        var(--primary-soft) 50%,
-        var(--secondary) 80%,
-        var(--primary-soft) 100%);
-    animation-duration: 2s;
-    /* Even faster spin on hover */
+    animation-duration: 3s;
   }
 }
 
+@utility card-minimal {
+  @apply bg-card rounded-xl shadow-minimal transition-all duration-500 animate-slide-up relative;
+  border: 1px solid var(--border);
+}
+
+@utility card-minimal-hover {
+  @apply hover:shadow-card hover:-translate-y-1;
+}
+
+/* Night Map Filter for Leaflet */
+@utility filter-night-map {
+  @apply transition-all duration-1000;
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+[data-theme='dark'] .filter-night-map,
+.dark .filter-night-map {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
 /* Typography Enhancements */
+@layer base {
+  h1, h2, h3, h4 {
+    @apply font-header;
+  }
+}
+
 @utility text-display {
   @apply font-bold tracking-tight leading-none;
 }
@@ -180,6 +209,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -196,13 +226,11 @@
 }
 
 .mask-marquee {
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 15%,
-    black 85%,
-    transparent
-  );
+  mask-image: linear-gradient(to right,
+      transparent,
+      black 15%,
+      black 85%,
+      transparent);
 }
 
 @keyframes fadeIn {

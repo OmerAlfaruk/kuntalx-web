@@ -122,12 +122,12 @@ export const AssociationsPage = () => {
         <div className="space-y-12 animate-in fade-in duration-500 pb-12">
             <PageHeader
                 title="Associations"
-                description="Manage regional unions and agricultural associations across the national procurement network."
+                description="Manage regional unions and agricultural associations across the procurement network."
                 actions={
                     user?.role === 'platform_admin' && (
                         <button
                             onClick={() => setIsCreateModalOpen(true)}
-                            className="h-10 px-6 bg-primary text-white text-[10px] font-bold uppercase tracking-wider rounded-lg shadow-minimal hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
+                            className="h-10 px-6 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-lg shadow-minimal hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
                         >
                             <span>🏢</span>
                             Register Association
@@ -138,14 +138,14 @@ export const AssociationsPage = () => {
 
             {/* Search Bar */}
             <div className="flex flex-col md:flex-row gap-6">
-                <div className="relative flex-1 group">
-                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground/40 group-focus-within:text-primary transition-colors">
+                <div className="relative flex-1 group max-w-4xl">
+                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground/30 group-focus-within:text-primary transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
                     </div>
                     <input
                         type="text"
                         placeholder="Search by association name, region, or ID..."
-                        className="w-full h-14 bg-card border border-border/50 rounded-2xl pl-12 pr-6 text-sm font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
+                        className="w-full h-14 bg-background-soft border border-border rounded-2xl pl-12 pr-6 text-[13px] font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
                         value={searchTerm}
                         onChange={(e) => {
                             setSearchTerm(e.target.value);
@@ -180,24 +180,29 @@ export const AssociationsPage = () => {
 
             <div className="card-minimal overflow-hidden">
                 {showFullLoader ? <SkeletonList rows={5} /> : (
-                <>
-                    <AssociationsList
-                        table={table}
-                        isLoading={isLoading}
-                        navigate={navigate}
-                        userRole={user?.role}
-                        onEdit={onEdit}
-                        onDelete={handleDelete}
-                    />
-                    <TablePagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        totalRecords={filteredAssociations.length}
-                        pageSize={pageSize}
-                        onPageChange={(page) => table.setPageIndex(page - 1)}
-                    />
-                </>
-            )}      </div>
+                    <>
+                        <div className="px-10 py-6 border-b border-border/50 bg-background-soft/50">
+                            <h2 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60 leading-none">Regional Association Registry</h2>
+                        </div>
+                        <AssociationsList
+                            table={table}
+                            isLoading={isLoading}
+                            navigate={navigate}
+                            userRole={user?.role}
+                            onEdit={onEdit}
+                            onDelete={handleDelete}
+                        />
+                        <div className="px-10 py-6 border-t border-border/50 bg-background-soft/50">
+                            <TablePagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                totalRecords={filteredAssociations.length}
+                                pageSize={pageSize}
+                                onPageChange={(page) => table.setPageIndex(page - 1)}
+                            />
+                        </div>
+                    </>
+                )}      </div>
 
             <GlassModal
                 isOpen={isCreateModalOpen || !!selectedAssoc}

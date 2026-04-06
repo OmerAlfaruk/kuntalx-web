@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { PageHeader, StatCard, Badge, GlassModal } from '../../../shared/components/UI';
+import { PageHeader, StatCard, Badge } from '../../../shared/components/UI';
 import { SkeletonList } from '../../../shared/components/Skeletons';
 import { apiClient } from '../../../lib/api-client';
 import { useToast } from '../../../lib/toast-context';
+import { motion } from 'framer-motion';
 
 type MembershipStatus = 'pending' | 'approved' | 'rejected' | 'cancelled';
 
@@ -22,7 +23,6 @@ const useAssocMemberships = () =>
     useQuery<MembershipRequest[]>({
         queryKey: ['assoc-memberships'],
         queryFn: async () => {
-            // Use the existing endpoint that returns pending membership requests
             const pendingData = await apiClient.get<any[]>('/associations/requests/pending');
             return pendingData.map((m: any) => ({
                 id: m.id,
@@ -84,95 +84,111 @@ export const AssocMembershipRequestsPage = () => {
 
     if (isLoading) return (
         <div className="space-y-10">
-            <div className="h-32 w-full bg-card rounded-xl animate-pulse" />
+            <div className="h-32 w-full bg-background-soft rounded-2xl animate-pulse border border-border" />
             <SkeletonList />
         </div>
     );
 
     return (
-        <div className="space-y-10 animate-in fade-in duration-500">
+        <div className="space-y-10 animate-in fade-in duration-700 pb-16">
             <PageHeader
-                title="Farmer Requests"
-                description="Review farmer membership join requests and contribution approvals for your association."
+                title="Membership Requests"
+                description="Review and validate new farmers joining your association."
             />
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6">
-                <StatCard title="Pending Requests" value={pendingCount.toString()} icon="📩" description="Awaiting review" />
-                <StatCard title="Approved Members" value={approvedCount.toString()} icon="✅" description="Active farmers" />
-                <StatCard title="Total Requests" value={memberships.length.toString()} icon="🌾" description="All time" />
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <StatCard title="Active Requests" value={pendingCount.toString()} icon="📩" description="Pending Verification" />
+                <StatCard title="Verified Farmers" value={approvedCount.toString()} icon="✅" description="Active network members" />
+                <StatCard title="Total Volume" value={memberships.length.toString()} icon="👥" description="All-time requests" />
             </div>
 
-            {/* Tabs */}
-            <div className="flex gap-8 border-b border-border px-4">
-                {([{ id: 'pending', label: 'Pending' }, { id: 'history', label: 'History' }] as const).map(tab => (
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="flex gap-8 border-b border-border/50 px-2 w-full md:w-auto">
                     <button
-                        key={tab.id}
-                        onClick={() => setFilter(tab.id)}
-                        className={`pb-4 text-[10px] font-bold uppercase tracking-widest transition-all relative ${filter === tab.id ? 'text-primary' : 'text-muted-foreground opacity-60 hover:opacity-100'}`}
+                        onClick={() => setFilter('pending')}
+                        className={`pb-3 text-[10px] font-bold uppercase tracking-widest transition-all relative ${filter === 'pending' ? 'text-primary' : 'text-muted-foreground/40 hover:text-foreground'}`}
                     >
-                        {tab.label}
-                        {filter === tab.id && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />}
+                        Pending Review
+                        {filter === 'pending' && <motion.div layoutId="requestTabs" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />}
                     </button>
-                ))}
-            </div>
-
-            {/* Search */}
-            <div className="relative">
-                <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground/40">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-                </div>
-                <input
-                    type="text"
-                    placeholder="Search by farmer name or phone..."
-                    className="w-full h-11 bg-card border border-border/50 rounded-xl pl-11 pr-4 text-sm font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                />
-            </div>
-
-            {/* List */}
-            <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
-                <div className="px-6 py-4 border-b border-border bg-muted/30">
-                    <h2 className="text-sm font-extrabold text-foreground uppercase tracking-tight italic">Request Registry</h2>
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase opacity-60 mt-0.5">Farmer Membership Applications</p>
+                    <button
+                        onClick={() => setFilter('history')}
+                        className={`pb-3 text-[10px] font-bold uppercase tracking-widest transition-all relative ${filter === 'history' ? 'text-primary' : 'text-muted-foreground/40 hover:text-foreground'}`}
+                    >
+                        History
+                        {filter === 'history' && <motion.div layoutId="requestTabs" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" />}
+                    </button>
                 </div>
 
-                {/* Desktop */}
+                <div className="relative flex-1 md:max-w-md group">
+                    <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-muted-foreground/30 group-focus-within:text-primary transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Search by name or phone..."
+                        className="w-full h-12 bg-background-soft border border-border rounded-xl pl-12 pr-6 text-[13px] font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-1 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
+                        value={search}
+                        onChange={e => setSearch(e.target.value)}
+                    />
+                </div>
+            </div>
+
+            <div className="card-minimal overflow-hidden">
+                <header className="px-8 py-5 border-b border-border/50 bg-background-soft/50 flex justify-between items-center">
+                    <div className="space-y-1">
+                        <h2 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest leading-none">Registration Queue</h2>
+                    </div>
+                    <Badge variant="outline" className="h-6 px-3 rounded-md text-[9px] font-bold uppercase tracking-widest shadow-none">{filtered.length} Request{filtered.length !== 1 && 's'}</Badge>
+                </header>
+
                 <div className="hidden md:block overflow-x-auto">
                     <table className="w-full text-left">
-                        <thead className="bg-muted/30 border-b border-border text-[10px] font-extrabold text-muted-foreground uppercase tracking-wider">
-                            <tr>
-                                <th className="px-6 py-4">Farmer</th>
-                                <th className="px-6 py-4">Phone</th>
-                                <th className="px-6 py-4">Status</th>
-                                <th className="px-6 py-4">Date</th>
-                                <th className="px-6 py-4">Actions</th>
+                        <thead>
+                            <tr className="border-b border-border/50 bg-background-soft/30">
+                                <th className="px-8 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Farmer</th>
+                                <th className="px-8 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Phone</th>
+                                <th className="px-8 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Status</th>
+                                <th className="px-8 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Date Submitted</th>
+                                <th className="px-8 py-4 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-border">
+                        <tbody className="divide-y divide-border/30">
                             {filtered.length === 0 && (
-                                <tr><td colSpan={5} className="px-6 py-16 text-center text-muted-foreground text-sm">No {filter === 'pending' ? 'pending ' : ''}requests found.</td></tr>
+                                <tr><td colSpan={5} className="px-8 py-20 text-center">
+                                    <div className="w-16 h-16 rounded-2xl bg-background border border-border flex items-center justify-center text-3xl opacity-30 mx-auto animate-pulse mb-6">📩</div>
+                                    <h4 className="text-[12px] font-bold uppercase tracking-widest text-muted-foreground">No Requests Found</h4>
+                                </td></tr>
                             )}
                             {filtered.map(m => (
-                                <tr key={m.id} className="hover:bg-muted/5 transition-colors">
-                                    <td className="px-6 py-4 font-bold text-sm text-foreground">{m.farmerName}</td>
-                                    <td className="px-6 py-4 text-sm text-muted-foreground font-mono">{m.farmerPhone}</td>
-                                    <td className="px-6 py-4">
-                                        <Badge variant={statusVariant(m.status)} className="text-[10px] font-extrabold uppercase">
+                                <tr key={m.id} className="hover:bg-background-soft/50 transition-colors group">
+                                    <td className="px-8 py-5">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm">
+                                                {m.farmerName[0].toUpperCase()}
+                                            </div>
+                                            <span className="text-[13px] font-bold text-foreground">{m.farmerName}</span>
+                                        </div>
+                                    </td>
+                                    <td className="px-8 py-5">
+                                        <code className="text-[11px] font-bold text-muted-foreground tracking-widest">{m.farmerPhone}</code>
+                                    </td>
+                                    <td className="px-8 py-5">
+                                        <Badge variant={statusVariant(m.status)} className="capitalize">
                                             {m.status}
                                         </Badge>
                                     </td>
-                                    <td className="px-6 py-4 text-[11px] text-muted-foreground">{new Date(m.createdAt).toLocaleDateString()}</td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-8 py-5">
+                                        <span className="text-[11px] font-bold text-muted-foreground tracking-widest">{new Date(m.createdAt).toLocaleDateString()}</span>
+                                    </td>
+                                    <td className="px-8 py-5 text-right">
                                         {m.status === 'pending' && (
-                                            <div className="flex gap-2">
-                                                <button
-                                                    onClick={() => { setSelected(m); setNotes(''); }}
-                                                    className="h-8 px-3 rounded-lg bg-primary/10 border border-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-wider hover:bg-primary/20 transition-all"
-                                                >
-                                                    Review →
-                                                </button>
-                                            </div>
+                                            <button
+                                                onClick={() => { setSelected(m); setNotes(''); }}
+                                                className="h-9 px-6 rounded-lg bg-background border border-border text-[10px] font-bold uppercase tracking-widest hover:bg-background-soft transition-all ml-auto shadow-minimal"
+                                            >
+                                                Review
+                                            </button>
                                         )}
                                     </td>
                                 </tr>
@@ -181,34 +197,47 @@ export const AssocMembershipRequestsPage = () => {
                     </table>
                 </div>
 
-                {/* Mobile Cards */}
-                <div className="md:hidden space-y-4 p-4">
+                <div className="md:hidden divide-y divide-border/50">
                     {filtered.length === 0 && (
-                        <div className="py-16 text-center text-muted-foreground text-sm">No requests found.</div>
+                        <div className="py-20 text-center opacity-40">
+                             <h4 className="text-[11px] font-bold text-foreground uppercase tracking-widest">No requests found</h4>
+                        </div>
                     )}
                     {filtered.map(m => (
-                        <div key={m.id} className="bg-card border border-border/60 rounded-xl p-4 space-y-3 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <p className="font-bold text-sm text-foreground">{m.farmerName}</p>
-                                <Badge variant={statusVariant(m.status)} className="text-[10px] font-extrabold uppercase">{m.status}</Badge>
+                        <div key={m.id} className="p-6 bg-background-soft/30 space-y-5">
+                            <div className="flex items-center gap-5 justify-between">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold text-sm shrink-0">
+                                        {m.farmerName[0].toUpperCase()}
+                                    </div>
+                                    <div className="space-y-0.5">
+                                        <p className="text-[13px] font-bold text-foreground leading-none">{m.farmerName}</p>
+                                        <p className="text-[10px] font-bold text-muted-foreground tracking-widest">{m.farmerPhone}</p>
+                                    </div>
+                                </div>
+                                <Badge variant={statusVariant(m.status)} className="capitalize shrink-0">{m.status}</Badge>
                             </div>
-                            <p className="text-[11px] font-mono text-muted-foreground">{m.farmerPhone}</p>
-                            <p className="text-[10px] text-muted-foreground/60">{new Date(m.createdAt).toLocaleDateString()}</p>
+                            
+                            <div className="py-4 border-y border-border/50 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">
+                                <p>Submitted</p>
+                                <p className="text-foreground">{new Date(m.createdAt).toLocaleDateString()}</p>
+                            </div>
+
                             {m.status === 'pending' && (
-                                <div className="flex gap-2 pt-1">
+                                <div className="flex gap-4" onClick={(e) => e.stopPropagation()}>
                                     <button
                                         onClick={() => { updateMembership({ id: m.id, status: 'rejected' }); }}
                                         disabled={isUpdating}
-                                        className="flex-1 h-9 rounded-lg border border-rose-500/20 text-rose-500 text-[10px] font-extrabold uppercase"
+                                        className="w-11 h-11 rounded-xl border border-border bg-background flex items-center justify-center text-rose-500 hover:bg-rose-500/10 transition-colors shadow-minimal"
                                     >
-                                        Reject
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
                                     </button>
                                     <button
                                         onClick={() => { setSelected(m); setNotes(''); }}
                                         disabled={isUpdating}
-                                        className="flex-[2] h-9 rounded-lg bg-primary text-white text-[10px] font-extrabold uppercase"
+                                        className="flex-1 h-11 rounded-xl bg-primary text-white text-[10px] font-bold uppercase tracking-widest shadow-minimal hover:bg-primary/90 transition-all flex items-center justify-center"
                                     >
-                                        Approve →
+                                        Review Detail
                                     </button>
                                 </div>
                             )}
@@ -217,61 +246,66 @@ export const AssocMembershipRequestsPage = () => {
                 </div>
             </div>
 
-            {/* Review Modal */}
-            <GlassModal
-                isOpen={!!selected}
-                onClose={() => setSelected(null)}
-                title="Review Membership Request"
-                footer={
-                    <div className="flex gap-4 w-full">
-                        <button
-                            onClick={() => { if (selected) updateMembership({ id: selected.id, status: 'rejected' }); setSelected(null); }}
-                            disabled={isUpdating}
-                            className="h-10 flex-1 rounded-lg border border-rose-500/20 text-rose-500 text-[10px] font-bold uppercase hover:bg-rose-500/5 transition-all disabled:opacity-50"
-                        >
-                            Reject
-                        </button>
-                        <button
-                            onClick={() => { if (selected) updateMembership({ id: selected.id, status: 'approved' }); setSelected(null); }}
-                            disabled={isUpdating}
-                            className="h-10 flex-[2] rounded-lg bg-primary text-white text-[10px] font-bold uppercase shadow-sm hover:bg-primary/90 transition-all disabled:opacity-50"
-                        >
-                            Approve & Sync →
-                        </button>
-                    </div>
-                }
-            >
-                {selected && (
-                    <div className="space-y-6 py-4">
-                        <div className="bg-muted/30 p-5 rounded-xl border border-border space-y-4">
-                            <h3 className="text-[10px] font-bold uppercase tracking-widest text-primary opacity-70">Farmer Details</h3>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Name</p>
-                                    <p className="font-bold text-foreground">{selected.farmerName}</p>
+            {selected && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-md p-4 animate-in fade-in duration-300">
+                    <div className="card-minimal w-full max-w-xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-500 flex flex-col max-h-[90vh]">
+                        <div className="px-8 py-6 border-b border-border/50 bg-background-soft shrink-0">
+                            <h2 className="text-[14px] font-bold text-foreground tracking-tight">Review Membership Request</h2>
+                            <p className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest mt-1">Accept or reject farmer</p>
+                        </div>
+
+                        <div className="p-8 space-y-8 overflow-y-auto custom-scrollbar">
+                            <div className="bg-background border border-border/50 p-6 rounded-2xl flex gap-6 items-center">
+                                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-xl text-primary font-bold shrink-0">
+                                    {selected.farmerName[0].toUpperCase()}
                                 </div>
-                                <div>
-                                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Phone</p>
-                                    <p className="font-bold text-foreground font-mono">{selected.farmerPhone}</p>
+                                <div className="space-y-1">
+                                    <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">Farmer Identifier</p>
+                                    <p className="text-[18px] font-bold text-foreground tracking-tight">{selected.farmerName}</p>
                                 </div>
                             </div>
-                            <div>
-                                <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Applied</p>
-                                <p className="font-bold text-foreground">{new Date(selected.createdAt).toLocaleDateString()}</p>
+
+                            <div className="grid grid-cols-2 gap-6 bg-background-soft p-6 rounded-2xl border border-border/50">
+                                <div className="space-y-1">
+                                    <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">Phone / Contact</p>
+                                    <p className="text-[13px] font-bold text-foreground tracking-widest">{selected.farmerPhone}</p>
+                                </div>
+                                <div className="space-y-1 text-right">
+                                    <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">Date Submitted</p>
+                                    <p className="text-[13px] font-bold text-foreground tracking-widest">{new Date(selected.createdAt).toLocaleDateString()}</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Administrative Notes (Optional)</label>
+                                <textarea
+                                    className="w-full h-28 bg-background-soft border border-border rounded-xl p-4 text-[13px] font-medium focus:border-primary/50 outline-none transition-all placeholder:text-muted-foreground/30 resize-none"
+                                    placeholder="Add reason for approval/rejection..."
+                                    value={notes}
+                                    onChange={e => setNotes(e.target.value)}
+                                />
                             </div>
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60">Admin Notes (optional)</label>
-                            <textarea
-                                className="w-full h-20 bg-card border border-border rounded-lg px-4 py-3 text-xs font-bold focus:border-primary/50 outline-none transition-all placeholder:opacity-30 resize-none"
-                                placeholder="e.g. verified identity, contribution data..."
-                                value={notes}
-                                onChange={e => setNotes(e.target.value)}
-                            />
+
+                        <div className="flex gap-4 p-8 bg-background-soft border-t border-border/50 shrink-0">
+                            <button
+                                onClick={() => { if (selected) updateMembership({ id: selected.id, status: 'rejected' }); setSelected(null); }}
+                                disabled={isUpdating}
+                                className="h-11 flex-1 rounded-xl border border-rose-500/20 bg-rose-500/5 text-rose-500 text-[10px] font-bold uppercase tracking-widest hover:bg-rose-500 hover:text-white transition-all shadow-minimal"
+                            >
+                                Reject
+                            </button>
+                            <button
+                                onClick={() => { if (selected) updateMembership({ id: selected.id, status: 'approved' }); setSelected(null); }}
+                                disabled={isUpdating}
+                                className="h-11 flex-[2] rounded-xl bg-primary text-white text-[10px] font-bold uppercase tracking-widest shadow-minimal hover:bg-primary/90 active:scale-95 transition-all"
+                            >
+                                Approve Request
+                            </button>
                         </div>
                     </div>
-                )}
-            </GlassModal>
+                </div>
+            )}
         </div>
     );
 };

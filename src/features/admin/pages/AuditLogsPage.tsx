@@ -52,7 +52,7 @@ export const AuditLogsPage = () => {
         return logs.slice((currentPage - 1) * pageSize, currentPage * pageSize);
     }, [logs, currentPage, pageSize]);
 
-    const handleResetTrace = useCallback(() => {
+    const handleReset = useCallback(() => {
         setFromDate('');
         setToDate('');
         setSearchTerm('');
@@ -61,19 +61,19 @@ export const AuditLogsPage = () => {
     // Only platform_admin should see this
     if (user && user.role !== 'platform_admin') {
         return (
-            <div className="flex flex-col items-center justify-center py-32 animate-in fade-in duration-500">
-                <div className="w-16 h-16 bg-background-soft border border-border rounded-xl flex items-center justify-center text-3xl mb-6">
+            <div className="flex flex-col items-center justify-center py-24 text-center">
+                <div className="w-20 h-20 rounded-full bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-4xl mb-8 shadow-minimal">
                     🚫
                 </div>
-                <h2 className="text-xl font-bold text-foreground mb-3 text-center">Access Restricted</h2>
-                <p className="text-sm text-muted-foreground mb-8 text-center max-w-sm">
-                    You do not have the required permissions to access the system audit logs.
+                <h2 className="text-2xl font-bold text-foreground mb-4 uppercase tracking-tight">Access Denied</h2>
+                <p className="text-sm text-muted-foreground/60 mb-10 max-w-sm font-medium leading-relaxed">
+                    Your account does not have sufficient clearance to view the audit log stream.
                 </p>
                 <button
                     onClick={() => navigate({ to: '/dashboard' })}
-                    className="h-10 px-6 bg-primary text-white rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-primary/90 transition-all shadow-minimal"
+                    className="h-12 px-10 bg-background-soft border border-border rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-background transition-all active:scale-95 shadow-minimal"
                 >
-                    Back to Dashboard
+                    Return to Dashboard
                 </button>
             </div>
         );
@@ -82,76 +82,84 @@ export const AuditLogsPage = () => {
     const showFullLoader = isLoading && logs.length === 0;
 
     return (
-        <div className="space-y-10 animate-in fade-in duration-500">
+        <div className="space-y-12 animate-in fade-in slide-in-from-bottom-2 duration-700 pb-12">
             <PageHeader
-                title="System Audit Logs"
-                description="Comprehensive record of administrative activities and system changes."
+                title="Audit Logs"
+                description="Comprehensive record of all administrative actions and system state transitions."
             />
 
+            {/* Filters */}
             <div className="space-y-6">
-                {/* Search Bar */}
                 <div className="relative group">
-                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground/40 group-focus-within:text-primary transition-colors">
+                    <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-muted-foreground/30 group-focus-within:text-primary transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
                     </div>
                     <input
                         type="text"
-                        placeholder="Search by Actor, Entity, or Action..."
-                        className="w-full h-14 bg-card border border-border/50 rounded-2xl pl-12 pr-6 text-sm font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
+                        placeholder="Search by action, actor, or entity..."
+                        className="w-full h-14 bg-card border border-border/50 rounded-2xl pl-14 pr-6 text-sm font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </div>
 
-                {/* Premium Filters Section */}
-                <div className="card-minimal p-4 sm:p-6 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 items-end">
-                    <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60 ml-1">Start Date</label>
+                <div className="card-minimal p-8 grid grid-cols-1 sm:grid-cols-3 gap-6 items-end">
+                    <div className="space-y-2.5">
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">From Date</label>
                         <input
                             type="date"
                             value={fromDate}
                             onChange={(e) => setFromDate(e.target.value)}
-                            className="w-full h-10 bg-background border border-border rounded-lg px-4 text-xs font-bold uppercase tracking-widest focus:border-primary/50 outline-none transition-all"
+                            className="w-full h-12 bg-background border border-border rounded-xl px-5 text-[11px] font-bold uppercase tracking-widest focus:border-primary outline-none transition-all"
                         />
                     </div>
-                    <div className="space-y-2">
-                        <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60 ml-1">End Date</label>
+                    <div className="space-y-2.5">
+                        <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">To Date</label>
                         <input
                             type="date"
                             value={toDate}
                             onChange={(e) => setToDate(e.target.value)}
-                            className="w-full h-10 bg-background border border-border rounded-lg px-4 text-xs font-bold uppercase tracking-widest focus:border-primary/50 outline-none transition-all"
+                            className="w-full h-12 bg-background border border-border rounded-xl px-5 text-[11px] font-bold uppercase tracking-widest focus:border-primary outline-none transition-all"
                         />
                     </div>
                     <button
-                        onClick={handleResetTrace}
-                        className="h-10 px-6 rounded-lg bg-background-soft border border-border text-muted-foreground text-[10px] font-bold uppercase tracking-widest hover:bg-muted/10 transition-all w-full md:w-auto"
+                        onClick={handleReset}
+                        className="h-12 px-6 rounded-xl bg-background-soft border border-rose-500/20 text-rose-500 text-[10px] font-bold uppercase tracking-widest hover:bg-rose-500/5 transition-all active:scale-95 w-full"
                     >
-                        Reset Filters
+                        Clear Filters
                     </button>
                 </div>
             </div>
 
-            <div className={`card-minimal overflow-hidden transition-all duration-300 ${isLoading ? 'opacity-50' : ''}`}>
-                <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-background-soft">
+            {/* Log Table */}
+            <div className={`card-minimal overflow-hidden transition-all duration-700 ${isLoading ? 'opacity-70' : ''}`}>
+                <div className="px-10 py-6 border-b border-border/50 bg-background-soft/50 flex justify-between items-center">
+                    <div className="space-y-1">
+                        <p className="text-[10px] font-bold text-muted-foreground/40 uppercase tracking-widest leading-none">Stream</p>
+                        <h3 className="font-bold text-lg text-foreground tracking-tight">Activity Log</h3>
+                    </div>
                     <div className="flex items-center gap-3">
-                        <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Activity Log</h3>
                         {isLoading && (
-                            <div className="flex items-center gap-2 px-2 py-0.5 bg-primary/5 rounded-full border border-primary/20">
-                                <span className="w-1 h-1 bg-primary rounded-full animate-pulse"></span>
-                                <span className="text-[8px] font-bold uppercase text-primary tracking-widest">Updating</span>
+                            <div className="flex items-center gap-3 px-3 py-1.5 bg-primary/5 rounded-full border border-primary/20">
+                                <span className="w-1.5 h-1.5 bg-primary rounded-full animate-ping" />
+                                <span className="text-[9px] font-bold uppercase text-primary tracking-widest">Syncing</span>
                             </div>
                         )}
+                        <span className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest">{logs.length} events</span>
                     </div>
                 </div>
 
-                {showFullLoader ? <SkeletonList rows={10} /> : (
-                    <>
+                {showFullLoader ? (
+                    <div className="p-8">
+                        <SkeletonList rows={10} />
+                    </div>
+                ) : (
+                    <div>
                         <AuditLogsList
                             logs={paginatedLogs}
                             getLogDescription={getLogDescription}
                         />
-                        <div className="border-t border-border">
+                        <div className="border-t border-border/50">
                             <TablePagination
                                 currentPage={currentPage}
                                 totalPages={totalPages}
@@ -160,7 +168,7 @@ export const AuditLogsPage = () => {
                                 onPageChange={setCurrentPage}
                             />
                         </div>
-                    </>
+                    </div>
                 )}
             </div>
         </div>

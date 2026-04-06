@@ -7,8 +7,8 @@ interface AggregationDetailHeroProps {
 
 export const AggregationDetailHero: React.FC<AggregationDetailHeroProps> = ({ aggregation }) => {
     return (
-        <div className="relative bg-card rounded-xl overflow-hidden border border-border/60 shadow-sm transition-all hover:border-primary/40 group">
-            <div className="h-80 md:h-[450px] bg-muted/30 relative overflow-hidden">
+        <div className="card-minimal overflow-hidden transition-all hover:border-primary/30 group">
+            <div className="h-80 md:h-96 bg-background-soft relative overflow-hidden">
                 {aggregation.imageUrl ? (
                     <img
                         src={aggregation.imageUrl}
@@ -21,18 +21,18 @@ export const AggregationDetailHero: React.FC<AggregationDetailHeroProps> = ({ ag
                     </div>
                 )}
 
-                {/* Elite Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90" />
+                {/* Elegant Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
 
-                <div className="absolute bottom-8 left-8 flex flex-wrap gap-3">
+                <div className="absolute bottom-8 left-10 flex flex-wrap gap-4">
                     {aggregation.cropTypeName && (
-                        <div className="px-5 py-2.5 rounded-lg bg-primary/20 backdrop-blur-md text-primary border border-primary/20 flex items-center gap-3 shadow-minimal">
+                        <div className="px-6 py-2.5 rounded-xl bg-primary text-white flex items-center gap-3 shadow-minimal">
                             <span className="text-lg">🌾</span>
                             <span className="text-[11px] font-bold uppercase tracking-widest">{aggregation.cropTypeName}</span>
                         </div>
                     )}
                     {aggregation.region && (
-                        <div className="px-5 py-2.5 rounded-lg bg-white/10 backdrop-blur-md text-white border border-white/20 flex items-center gap-3 shadow-minimal">
+                        <div className="px-6 py-2.5 rounded-xl bg-background-soft/80 backdrop-blur-md text-foreground border border-border flex items-center gap-3 shadow-minimal">
                             <span className="text-lg">📍</span>
                             <span className="text-[11px] font-bold uppercase tracking-widest">{aggregation.region}</span>
                         </div>
@@ -40,10 +40,10 @@ export const AggregationDetailHero: React.FC<AggregationDetailHeroProps> = ({ ag
                 </div>
             </div>
 
-            <div className="p-10 space-y-6 relative">
-                <div className="space-y-4">
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Collection Details</p>
-                    <p className="text-sm font-medium text-foreground/80 leading-relaxed max-w-3xl">
+            <div className="p-10 space-y-6">
+                <div className="space-y-3">
+                    <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Collection Description</p>
+                    <p className="text-[15px] font-medium text-foreground/80 leading-relaxed max-w-4xl">
                         {aggregation.description || 'This collection pool follows standardized quality verification. All volume metrics are recorded and verified through the KuntalX system to ensure transparent trade.'}
                     </p>
                 </div>

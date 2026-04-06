@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useReactTable, getCoreRowModel, getPaginationRowModel, createColumnHelper } from '@tanstack/react-table';
-import { StatCard, Badge, TablePagination } from '../../../shared/components/UI';
+import { PageHeader, StatCard, TablePagination } from '../../../shared/components/UI';
 import type { Aggregation } from '../types/aggregation';
 import {
     useMyAggregations
@@ -68,68 +68,72 @@ export const MyAggregationsPage = () => {
     ).length;
 
     return (
-        <div className="space-y-6 sm:space-y-10 animate-in fade-in duration-500">
-            {/* Command Header */}
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-                <div className="space-y-1.5">
-                    <div className="flex flex-wrap items-center gap-2">
-                        <Badge variant="outline" className="text-[10px] uppercase tracking-wider bg-primary/5 text-primary border-primary/20">{t('aggregations.operationalHub')}</Badge>
-                        <span className="text-[10px] text-muted-foreground uppercase tracking-wider opacity-50">{t('aggregations.hubSubtitle')}</span>
+        <div className="space-y-6 sm:space-y-10 animate-in fade-in duration-700">
+            <PageHeader
+                title={t('aggregations.hubTitle')}
+                description="Manage regional aggregation protocols and verifiable inventory state."
+                actions={
+                    <div className="flex flex-wrap gap-3 w-full sm:w-auto">
+                        {canCreate && (
+                            <ActionButton
+                                onClick={() => setIsCreateModalOpen(true)}
+                                className="w-full sm:w-auto"
+                                variant="primary"
+                            >
+                                <div className="flex items-center gap-2">
+                                    <span className="text-sm">⌬</span>
+                                    <span>{t('aggregations.initiateProtocol')}</span>
+                                </div>
+                            </ActionButton>
+                        )}
                     </div>
-                    <h1 className="text-2xl sm:text-4xl text-foreground tracking-tight leading-none">{t('aggregations.hubTitle')}</h1>
-                    <p className="text-xs sm:text-sm text-muted-foreground opacity-70 max-w-xl">
-                        {t('aggregations.hubDesc')}
-                    </p>
-                </div>
+                }
+            />
 
-                {canCreate && (
-                    <ActionButton
-                        onClick={() => setIsCreateModalOpen(true)}
-                        className="w-full sm:w-auto h-10 sm:h-12 px-6 sm:px-10 bg-primary text-white text-xs uppercase tracking-wider shadow-lg rounded-xl hover:translate-y-[-2px] active:scale-95 transition-all flex items-center justify-center gap-3 shrink-0"
-                    >
-                        {t('aggregations.initiateProtocol')}
-                    </ActionButton>
-                )}
-            </div>
-
-            {/* Quick Stats Grid */}
-            <div className={`grid grid-cols-1 ${isMini ? 'md:grid-cols-2' : 'md:grid-cols-3'} gap-6`}>
+            <div className={`grid grid-cols-1 ${isMini ? 'md:grid-cols-2' : 'md:grid-cols-3'} gap-4 sm:gap-8`}>
                 <StatCard
                     title="Active Inventory"
-                    value={`${totalVolume.toLocaleString()} q`}
-                    icon="📦"
+                    value={`${totalVolume.toLocaleString()} qt`}
+                    icon="秤"
                     description={isMini ? "Current listed stock" : "Consolidated volume"}
+                    delay={0.1}
                 />
                 {!isMini && (
                     <StatCard
-                        title="Active Collections"
+                        title="Active Status"
                         value={activeCount.toString()}
-                        icon="🔄"
-                        description="Open pools"
+                        icon="⌘"
+                        description="Collection pools"
+                        delay={0.2}
                     />
                 )}
                 <StatCard
-                    title={isMini ? "Completed Orders" : "Awaiting Payout"}
+                    title={isMini ? "Fulfilled" : "Awaiting Settlement"}
                     value={completedCount.toString()}
-                    icon="💰"
-                    description={isMini ? "Successful sales" : "Completed cycles"}
+                    icon="⊞"
+                    description={isMini ? "Successful sale cycles" : "Completed protocols"}
+                    delay={0.3}
                 />
             </div>
 
-            {/* Main Command Grid - Standardized Table */}
             <div className="card-minimal overflow-hidden">
+                <div className="px-8 py-5 border-b border-border/50 bg-background-soft/50">
+                    <h2 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60 leading-none">Aggregation Registry</h2>
+                </div>
                 <MyAggregationsList 
                     table={table}
                     isLoading={isLoading}
                     t={t}
                 />
-                <TablePagination
-                    currentPage={table.getState().pagination.pageIndex + 1}
-                    totalPages={table.getPageCount()}
-                    totalRecords={table.getFilteredRowModel().rows.length}
-                    pageSize={table.getState().pagination.pageSize}
-                    onPageChange={(page: number) => table.setPageIndex(page - 1)}
-                />
+                <div className="border-t border-border/50">
+                    <TablePagination
+                        currentPage={table.getState().pagination.pageIndex + 1}
+                        totalPages={table.getPageCount()}
+                        totalRecords={table.getFilteredRowModel().rows.length}
+                        pageSize={table.getState().pagination.pageSize}
+                        onPageChange={(page: number) => table.setPageIndex(page - 1)}
+                    />
+                </div>
             </div>
 
             {/* Modals */}

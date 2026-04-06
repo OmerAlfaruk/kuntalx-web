@@ -17,63 +17,63 @@ export const RegionalPerformanceTable: React.FC<RegionalPerformanceTableProps> =
     activity
 }) => {
     return (
-        <div className="bg-card rounded-lg overflow-hidden border border-border shadow-sm relative">
-            <div className="p-6 sm:p-8 border-b border-border flex items-center justify-between bg-muted/30">
-                <div>
-                    <h3 className="text-lg sm:text-xl font-extrabold text-foreground uppercase tracking-tight italic">Regional Performance Matrix</h3>
-                    <p className="text-xs font-bold text-muted-foreground mt-1 uppercase opacity-60">Detailed metrics for each registered association</p>
+        <div className="overflow-hidden card-minimal mt-8">
+            <div className="px-10 py-6 border-b border-border/50 bg-background-soft/50 flex items-center justify-between">
+                <div className="space-y-1">
+                    <p className="text-[10px] font-bold text-muted-foreground/40 uppercase tracking-widest leading-none">Telemetry</p>
+                    <h3 className="font-bold text-lg text-foreground tracking-tight">Regional Performance Pipeline</h3>
                 </div>
-                <Badge variant="outline" className="px-4 text-[10px] font-extrabold uppercase tracking-wider italic shrink-0">Total: {activity.length}</Badge>
+                <div className="flex items-center gap-3">
+                    <span className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest">{activity.length} Nodes</span>
+                </div>
             </div>
 
-            {/* Desktop Table */}
+            {/* Desktop View */}
             <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left border-collapse">
-                    <thead className="bg-muted/30 border-b border-border text-xs font-extrabold text-muted-foreground uppercase tracking-wider italic">
-                        <tr>
-                            <th className="px-6 py-4 pl-10">Association Name</th>
-                            <th className="px-6 py-4">Region</th>
-                            <th className="px-6 py-4 text-center">Protocol ID</th>
-                            <th className="px-6 py-4 text-center">Current Status</th>
-                            <th className="px-6 py-4 text-right pr-10">Cumulative Volume</th>
+                    <thead>
+                        <tr className="border-b border-border/30 bg-background-soft/30">
+                            <th className="px-10 py-5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Association Node</th>
+                            <th className="px-10 py-5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Region</th>
+                            <th className="px-10 py-5 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Node ID</th>
+                            <th className="px-10 py-5 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Status</th>
+                            <th className="px-10 py-5 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Volume (QT)</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-border/50">
+                    <tbody className="divide-y divide-border/30">
                         {activity.map((assoc, idx) => (
-                            <tr key={`${assoc.name}-${idx}`} className="group hover:bg-muted/5 transition-colors">
-                                <td className="px-6 py-4 pl-10">
-                                    <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 rounded-lg bg-muted border border-border/40 flex items-center justify-center text-primary font-extrabold shadow-sm group-hover:bg-primary group-hover:text-white transition-all text-sm italic">
-                                            {assoc.name[0]}
+                            <tr key={`${assoc.name}-${idx}`} className="hover:bg-background-soft/50 transition-all duration-300 group">
+                                <td className="px-10 py-7">
+                                    <div className="flex items-center gap-5">
+                                        <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold shadow-inner group-hover:bg-primary group-hover:text-white transition-all duration-300 text-lg shrink-0">
+                                            {assoc.name[0].toUpperCase()}
                                         </div>
-                                        <div>
-                                            <p className="font-extrabold text-sm text-foreground group-hover:text-primary transition-colors uppercase italic tracking-tight">{assoc.name}</p>
-                                            <p className="text-[10px] font-mono text-muted-foreground/40 mt-0.5 uppercase italic">HUB ID: {assoc.hubId.slice(0, 12)}</p>
+                                        <div className="space-y-1.5">
+                                            <p className="text-[13px] font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-tight leading-none">{assoc.name}</p>
+                                            <p className="text-[9px] font-mono font-bold text-muted-foreground/20 uppercase tracking-widest leading-none">ID: {assoc.hubId.slice(0, 12)}</p>
                                         </div>
                                     </div>
                                 </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex flex-col gap-1">
-                                        <p className="font-extrabold text-xs text-foreground uppercase tracking-wider italic">{assoc.region}</p>
-                                        <p className="text-[10px] font-extrabold text-muted-foreground/60 uppercase tracking-widest italic">FEDERATED_REGION</p>
-                                    </div>
+                                <td className="px-10 py-7">
+                                    <p className="text-[13px] font-bold text-foreground uppercase tracking-tight">{assoc.region}</p>
                                 </td>
-                                <td className="px-6 py-4 text-center">
-                                    <p className="font-mono text-[10px] text-muted-foreground uppercase opacity-60 font-extrabold italic tracking-widest">PROTOCOL: {assoc.hubId.split('-')[1] || '0xAF92'}</p>
+                                <td className="px-10 py-7 text-center">
+                                    <span className="text-[9px] font-mono font-bold text-primary/60 uppercase tracking-widest bg-primary/5 px-3 py-1.5 rounded-md border border-primary/10 select-all">SIG-{assoc.hubId.split('-')[1] || assoc.hubId.slice(0, 4)}</span>
                                 </td>
-                                <td className="px-6 py-4 text-center">
-                                    <div className="flex flex-col items-center">
-                                        <Badge variant={assoc.status === 'active' || assoc.status === 'Operational' ? 'success' : 'outline'} className="text-[10px] font-extrabold uppercase italic tracking-wider">
-                                            {assoc.status}
-                                        </Badge>
-                                    </div>
+                                <td className="px-10 py-7 text-center">
+                                    <Badge 
+                                        variant={assoc.status === 'active' || assoc.status === 'Operational' ? 'success' : 'outline'} 
+                                        className="h-6 px-4 rounded-full text-[9px] font-bold uppercase tracking-widest"
+                                    >
+                                        {assoc.status}
+                                    </Badge>
                                 </td>
-                                <td className="px-6 py-4 text-right pr-10">
-                                    <div className="flex flex-col items-end gap-2">
-                                        <p className="font-extrabold text-lg text-foreground tabular-nums italic tracking-tighter">{assoc.volume.toLocaleString()} <span className="text-[10px] font-bold text-muted-foreground uppercase opacity-40 italic">Kuntal</span></p>
-                                        <div className="w-24 h-1 bg-muted rounded-full overflow-hidden border border-border/5">
+                                <td className="px-10 py-7 text-right">
+                                    <div className="flex flex-col items-end gap-3">
+                                        <p className="text-[15px] font-bold text-foreground tabular-nums tracking-tight">{assoc.volume.toLocaleString()}</p>
+                                        <div className="w-32 h-1.5 bg-border/30 rounded-full overflow-hidden shadow-inner">
                                             <div
-                                                className="bg-primary h-full rounded-full opacity-60"
+                                                className="bg-primary h-full rounded-full transition-all duration-1000 opacity-80"
                                                 style={{ width: `${Math.min(100, (assoc.volume / 1000) * 100)}%` }}
                                             />
                                         </div>
@@ -85,34 +85,38 @@ export const RegionalPerformanceTable: React.FC<RegionalPerformanceTableProps> =
                 </table>
             </div>
 
-            {/* Mobile Card View */}
-            <div className="md:hidden space-y-3 p-4">
+            {/* Mobile View */}
+            <div className="md:hidden space-y-4 p-6 bg-background-soft/20">
                 {activity.map((assoc, idx) => (
-                    <div key={`${assoc.name}-${idx}`} className="bg-muted/5 border border-border/60 rounded-xl p-4 space-y-3">
-                        <div className="flex items-center gap-3">
-                            <div className="w-9 h-9 rounded-lg bg-muted border border-border/40 flex items-center justify-center text-primary font-extrabold italic shrink-0 text-sm">
-                                {assoc.name[0]}
+                    <div key={`${assoc.name}-${idx}`} className="p-7 space-y-6 border border-border/50 rounded-2xl bg-card hover:border-primary/20 transition-all group">
+                        <div className="flex items-center gap-5 justify-between">
+                            <div className="flex items-center gap-4">
+                                <div className="w-11 h-11 rounded-xl bg-primary/5 border border-primary/20 flex items-center justify-center text-primary font-bold text-lg group-hover:bg-primary group-hover:text-white transition-all shadow-minimal shrink-0">
+                                    {assoc.name[0].toUpperCase()}
+                                </div>
+                                <div className="space-y-1">
+                                    <p className="text-[13px] font-bold text-foreground uppercase tracking-tight group-hover:text-primary transition-colors truncate max-w-[120px]">{assoc.name}</p>
+                                    <p className="text-[9px] font-mono font-bold text-muted-foreground/30 uppercase tracking-[0.2em] truncate max-w-[100px]">ID: {assoc.hubId.slice(0, 10)}</p>
+                                </div>
                             </div>
-                            <div className="flex-1 min-w-0">
-                                <p className="font-extrabold text-sm text-foreground uppercase italic tracking-tight truncate">{assoc.name}</p>
-                                <p className="text-[10px] font-mono text-muted-foreground/40 uppercase italic truncate">HUB: {assoc.hubId.slice(0, 10)}</p>
-                            </div>
-                            <Badge variant={assoc.status === 'active' || assoc.status === 'Operational' ? 'success' : 'outline'} className="text-[9px] font-extrabold uppercase italic shrink-0">
+                            <Badge variant={assoc.status === 'active' || assoc.status === 'Operational' ? 'success' : 'outline'} className="h-5 px-3 rounded-full text-[9px] font-bold uppercase tracking-widest shrink-0">
                                 {assoc.status}
                             </Badge>
                         </div>
-                        <div className="grid grid-cols-2 gap-3 pt-2 border-t border-border/40">
-                            <div>
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground/40 mb-0.5 italic">Region</p>
-                                <p className="text-[10px] font-extrabold text-foreground uppercase italic truncate">{assoc.region}</p>
+                        
+                        <div className="grid grid-cols-2 gap-y-6 gap-x-4 py-5 border-y border-border/40 bg-background-soft/30 -mx-7 px-7">
+                            <div className="space-y-1.5">
+                                <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">Region</p>
+                                <p className="text-[11px] font-bold text-foreground uppercase tracking-tight truncate">{assoc.region}</p>
                             </div>
-                            <div className="text-right">
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground/40 mb-0.5 italic">Volume</p>
-                                <p className="text-[11px] font-extrabold text-primary italic">{assoc.volume.toLocaleString()} <span className="text-[9px] opacity-60">QT</span></p>
+                            <div className="space-y-1.5">
+                                <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">Volume</p>
+                                <p className="text-[11px] font-bold text-foreground tabular-nums tracking-tight">{assoc.volume.toLocaleString()} <span className="text-[9px] text-muted-foreground/40 uppercase ml-1">QT</span></p>
                             </div>
                         </div>
-                        <div className="w-full h-1 bg-muted rounded-full overflow-hidden">
-                            <div className="bg-primary h-full rounded-full opacity-60" style={{ width: `${Math.min(100, (assoc.volume / 1000) * 100)}%` }} />
+                        
+                        <div className="w-full h-1.5 bg-border/30 rounded-full overflow-hidden shadow-inner">
+                            <div className="bg-primary h-full rounded-full transition-all duration-1000 opacity-80" style={{ width: `${Math.min(100, (assoc.volume / 1000) * 100)}%` }} />
                         </div>
                     </div>
                 ))}

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useI18n } from '../../lib/i18n-context';
 
 const EthFlag = () => (
-    <svg viewBox="0 0 64 64" className="w-full h-full rounded-full border border-white/10 shadow-sm" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 64 64" className="w-full h-full rounded-full border border-border shadow-sm" xmlns="http://www.w3.org/2000/svg">
         <rect width="64" height="21.3" fill="#009A44" />
         <rect y="21.3" width="64" height="21.3" fill="#FED100" />
         <rect y="42.6" width="64" height="21.4" fill="#EF3340" />
@@ -12,7 +12,7 @@ const EthFlag = () => (
 );
 
 const GBFlag = () => (
-    <svg viewBox="0 0 64 64" className="w-full h-full rounded-full border border-white/10 shadow-sm" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 64 64" className="w-full h-full rounded-full border border-border shadow-sm" xmlns="http://www.w3.org/2000/svg">
         <rect width="64" height="64" fill="#012169" />
         <path d="M0 0l64 64M64 0L0 64" stroke="#fff" strokeWidth="6" />
         <path d="M0 0l64 64M64 0L0 64" stroke="#C8102E" strokeWidth="4" />
@@ -52,11 +52,11 @@ export function LanguageSwitcher({ variant = 'dropdown' }: { variant?: 'dropdown
                         key={lang.code}
                         onClick={() => changeLanguage(lang.code as any)}
                         className={`flex-1 flex items-center justify-center gap-2 px-2 py-2 rounded-lg transition-all duration-300 border ${language === lang.code
-                            ? 'bg-primary/10 text-primary border-primary/20 italic font-black'
-                            : 'hover:bg-primary/5 text-foreground/60 border-transparent hover:text-foreground'
+                            ? 'bg-background text-foreground border-border font-bold shadow-sm'
+                            : 'hover:bg-background-soft text-muted-foreground border-transparent hover:text-foreground'
                             }`}
                     >
-                        <div className="w-4 h-4 shrink-0 shadow-sm">{lang.flag}</div>
+                        <div className="w-4 h-4 shrink-0 shadow-minimal">{lang.flag}</div>
                         <span className="text-[10px] uppercase font-bold tracking-widest">{lang.code}</span>
                     </button>
                 ))}
@@ -68,17 +68,17 @@ export function LanguageSwitcher({ variant = 'dropdown' }: { variant?: 'dropdown
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="h-10 px-3 rounded-xl bg-muted/5 hover:bg-muted/10 border border-border/50 flex items-center gap-3 transition-all duration-300 active:scale-95 group"
+                className="h-10 px-3 rounded-xl bg-background hover:bg-background-soft border border-border flex items-center gap-3 transition-all duration-300 active:scale-95 group shadow-sm"
             >
-                <div className="w-5 h-5 group-hover:rotate-12 transition-transform duration-500 shadow-sm">{currentLang.flag}</div>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-foreground/60 hidden sm:block">
+                <div className="w-5 h-5 group-hover:rotate-12 transition-transform duration-500 shadow-minimal">{currentLang.flag}</div>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground hidden sm:block transition-colors">
                     {currentLang.code}
                 </span>
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 mt-3 w-48 rounded-3xl bg-card/90 backdrop-blur-2xl border border-border shadow-2xl overflow-hidden z-[100] animate-in fade-in zoom-in-95 duration-300">
-                    <div className="p-2 space-y-1">
+                <div className="absolute right-0 mt-3 w-48 card-minimal overflow-hidden z-[100] animate-in fade-in zoom-in-95 duration-300">
+                    <div className="p-2 space-y-1 bg-background">
                         {languages.map((lang) => (
                             <button
                                 key={lang.code}
@@ -87,16 +87,16 @@ export function LanguageSwitcher({ variant = 'dropdown' }: { variant?: 'dropdown
                                     setIsOpen(false);
                                 }}
                                 className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl transition-all duration-300 ${language === lang.code
-                                    ? 'bg-primary/10 text-primary'
-                                    : 'hover:bg-muted/50 text-foreground/70 grayscale-[0.3] hover:grayscale-0'
+                                    ? 'bg-primary/10 text-primary border border-primary/20'
+                                    : 'hover:bg-background-soft text-foreground/70 grayscale-[0.3] hover:grayscale-0 border border-transparent'
                                     }`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="w-5 h-5 shadow-sm">{lang.flag}</div>
+                                    <div className="w-5 h-5 shadow-minimal">{lang.flag}</div>
                                     <span className="text-[10px] font-bold uppercase tracking-widest">{lang.label}</span>
                                 </div>
                                 {language === lang.code && (
-                                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
                                 )}
                             </button>
                         ))}
@@ -106,4 +106,3 @@ export function LanguageSwitcher({ variant = 'dropdown' }: { variant?: 'dropdown
         </div>
     );
 }
-

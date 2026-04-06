@@ -92,18 +92,18 @@ export function Sidebar({ isMobileOpen }: SidebarProps) {
 
   return (
     <aside
-      className={`fixed left-0 top-16 bottom-0 bg-primary text-white border-r border-white/5 z-40 flex flex-col pt-8 transition-all duration-500 ease-in-out ${isCollapsed ? 'w-20' : 'w-72'
+      className={`fixed left-0 top-16 bottom-0 bg-background-soft/95 backdrop-blur-xl text-foreground border-r border-border/50 z-40 flex flex-col pt-8 transition-all duration-500 ease-in-out ${isCollapsed ? 'w-20' : 'w-72'
         } ${isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
     >
       <div className={`mb-12 px-6 flex items-center justify-between ${isCollapsed ? 'lg:px-0 flex-col gap-6' : ''}`}>
         {(!isCollapsed || isMobileOpen) && (
           <div className="space-y-1">
-            <p className="text-[10px] font-bold text-white uppercase tracking-[0.3em]">Network Navigation</p>
+            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.3em]">Network System</p>
           </div>
         )}
         <button
           onClick={toggleSidebar}
-          className={`hidden lg:flex p-2 rounded-lg hover:bg-white/5 text-white hover:text-white transition-all duration-300 ${isCollapsed ? 'mb-4' : ''}`}
+          className={`hidden lg:flex p-2 rounded-lg hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300 ${isCollapsed ? 'mb-4' : ''}`}
         >
           <span className="text-xs transition-transform duration-500" style={{ transform: isCollapsed ? 'rotate(180deg)' : 'rotate(0deg)' }}>
             〈
@@ -123,41 +123,44 @@ export function Sidebar({ isMobileOpen }: SidebarProps) {
                   window.dispatchEvent(new CustomEvent('mobile-sidebar-toggle', { detail: { isOpen: false } }));
                 }
               }}
-              className={`flex text-white items-center gap-4 px-4 py-3 rounded-lg transition-all duration-200 group relative  ${isActive
-                ? 'bg-white/10 text-white font-bold'
-                : 'hover:bg-white/5 text-white'
+              className={`flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group relative  ${isActive
+                ? 'bg-primary text-white shadow-lg shadow-primary/20 font-bold'
+                : 'text-muted-foreground hover:text-primary hover:bg-primary/5'
                 } ${isCollapsed && !isMobileOpen ? 'lg:justify-center lg:px-0' : ''}`}
               title={isCollapsed && !isMobileOpen ? item.label : ''}
             >
-              <span className={`text-lg transition-all ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
+              <span className={`text-xl transition-all ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
                 {item.icon}
               </span>
 
               {(!isCollapsed || isMobileOpen) && (
-                <span className={`text-[11px] uppercase tracking-[0.1em] truncate transition-all ${isActive ? '' : 'opacity-80 group-hover:opacity-100'}`}>
+                <span className={`text-[11px] font-bold uppercase tracking-[0.1em] truncate transition-all ${isActive ? '' : 'opacity-80 group-hover:opacity-100'}`}>
                   {item.label}
                 </span>
+              )}
+              {isActive && (
+                 <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-white rounded-r-full" />
               )}
             </Link>
           );
         })}
       </nav>
 
-      <div className={`mt-auto p-4 border-t border-white/10 ${(isCollapsed && !isMobileOpen) ? 'text-center' : ''}`}>
-        <div className={`flex items-center gap-4 p-3 rounded-xl transition-all ${(isCollapsed && !isMobileOpen) ? 'lg:justify-center' : 'hover:bg-white/5 group cursor-pointer'}`}>
-          <div className="w-10 h-10 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-white font-bold shrink-0 overflow-hidden ring-1 ring-white/10 group-hover:ring-white/30 transition-all">
+      <div className={`mt-auto p-4 border-t border-border/40 ${(isCollapsed && !isMobileOpen) ? 'text-center' : ''}`}>
+        <div className={`flex items-center gap-4 p-3 rounded-2xl transition-all ${(isCollapsed && !isMobileOpen) ? 'lg:justify-center' : 'hover:bg-primary/5 group cursor-pointer'}`}>
+          <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary font-bold shrink-0 overflow-hidden ring-1 ring-primary/10 group-hover:ring-primary/40 transition-all shadow-sm">
             {user?.profilePictureUrl ? (
               <img src={getMediaUrl(user.profilePictureUrl)} alt="" className="w-full h-full object-cover" />
             ) : (
-              user?.fullName?.[0] || 'U'
+              <span className="text-sm font-display">{user?.fullName?.[0] || 'U'}</span>
             )}
           </div>
           {(!isCollapsed || isMobileOpen) && (
             <div className="overflow-hidden text-left">
-              <p className="text-[11px] font-bold text-white uppercase tracking-wider truncate">{user?.fullName || 'User'}</p>
+              <p className="text-[11px] font-bold text-foreground uppercase tracking-wider truncate">{user?.fullName || 'User'}</p>
               <div className="flex items-center gap-2 mt-0.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <p className="text-[9px] text-white/40 font-bold uppercase tracking-[0.2em] truncate opacity-50">{user?.role.replace('_', ' ')}</p>
+                <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                <p className="text-[9px] text-muted-foreground font-bold uppercase tracking-[0.2em] truncate opacity-80">{user?.role.replace('_', ' ')}</p>
               </div>
             </div>
           )}

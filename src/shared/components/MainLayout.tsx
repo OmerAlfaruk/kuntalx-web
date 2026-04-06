@@ -57,7 +57,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         )}
         <main className={`flex-1 min-h-screen mt-16 transition-all duration-500 ease-in-out ${isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-72'
           } ml-0`}>
-          <div className="px-10 py-12 animate-in fade-in duration-1000">
+          <div className="container-spacious animate-in fade-in slide-in-from-bottom-4 duration-1000">
             {children || <Outlet />}
           </div>
         </main>

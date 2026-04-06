@@ -11,12 +11,12 @@ export function CalendarToggle({ variant = 'button' }: { variant?: 'button' | 'p
                         key={type}
                         onClick={() => setCalendarType(type)}
                         className={`flex-1 flex items-center justify-center gap-2 px-2 py-2 rounded-lg transition-all duration-300 border ${calendarType === type
-                                ? 'bg-primary/10 text-primary border-primary/20 italic font-black'
-                                : 'hover:bg-primary/5 text-foreground/60 border-transparent hover:text-foreground'
+                                ? 'bg-background text-foreground border-border font-bold shadow-sm'
+                                : 'hover:bg-background-soft text-muted-foreground border-transparent hover:text-foreground'
                             }`}
                     >
                         <span className="text-lg">{type === 'gregorian' ? '🌐' : '🇪🇹'}</span>
-                        <span className="text-[10px] uppercase tracking-tighter">{type === 'gregorian' ? 'GC' : 'EC'}</span>
+                        <span className="text-[10px] uppercase font-bold tracking-widest">{type === 'gregorian' ? 'GC' : 'EC'}</span>
                     </button>
                 ))}
             </div>
@@ -26,14 +26,13 @@ export function CalendarToggle({ variant = 'button' }: { variant?: 'button' | 'p
     return (
         <button
             onClick={() => setCalendarType(calendarType === 'gregorian' ? 'ethiopian' : 'gregorian')}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-white/10 text-primary-foreground/70 hover:text-white transition-all border border-white/5"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-background-soft text-muted-foreground hover:text-foreground transition-all border border-transparent hover:border-border/50"
             title="Switch Calendar"
         >
             <span className="text-lg">📅</span>
-            <span className="text-xs font-bold uppercase tracking-wider">
+            <span className="text-[10px] font-bold uppercase tracking-widest">
                 {calendarType === 'gregorian' ? 'GC' : 'EC'}
             </span>
         </button>
     );
 }
-

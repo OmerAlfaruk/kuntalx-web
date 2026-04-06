@@ -82,10 +82,9 @@ export const SettingsPage = () => {
         fullName: profileForm.fullName,
         email: profileForm.email || undefined,
       } as any);
-      // Success toast handled by auth-context
     } catch (error: any) {
       toast.error(
-        error.message || "Synchronization failed. Please try again.",
+        error.message || "Failed to save profile. Please try again.",
       );
     } finally {
       setIsSaving(false);
@@ -102,7 +101,6 @@ export const SettingsPage = () => {
           payoutPaymentDetails: financialForm.payoutDetails,
         },
       } as any);
-      // Success toast handled by auth-context
     } catch (error: any) {
       toast.error(
         error.message || "Failed to update financial settings.",
@@ -125,7 +123,6 @@ export const SettingsPage = () => {
     setIsSaving(true);
     try {
       await updatePin(securityForm.currentPin, securityForm.newPin);
-      // Success toast handled by auth-context
       setSecurityForm({ currentPin: "", newPin: "", confirmPin: "" });
     } catch (error: any) {
       toast.error(
@@ -153,28 +150,28 @@ export const SettingsPage = () => {
     title: string;
   }) => (
     <div className="mb-6 flex items-center gap-4">
-      <h2 className="text-sm font-bold text-foreground tracking-widest uppercase shrink-0">
+      <h2 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest shrink-0">
         {title}
       </h2>
       <div className="h-px flex-1 bg-border/50" />
     </div>
   );
 
-
   return (
-    <div className="space-y-20 animate-in fade-in duration-500">
+    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-2 duration-700">
       <PageHeader
         title="Settings"
-        description="Manage your account, preferences, and security."
+        description="Manage your account preferences, financial details, and platform security."
       />
-      <main className="w-full space-y-20 pb-20">
+      
+      <main className="w-full space-y-12 pb-20">
         {!user ? (
           <div className="space-y-12">
             <SkeletonDetail />
             <SkeletonDetail />
           </div>
         ) : (
-          <>
+          <div className="space-y-12">
             <AccountSection 
               user={user} 
               profileForm={profileForm} 
@@ -201,51 +198,51 @@ export const SettingsPage = () => {
             />
 
             <AssistanceSection />
-          </>
+          </div>
         )}
 
-        {/* ===== ABOUT SECTION ===== */}
-        <section className="space-y-8">
-          <SectionHeader title="System Information" />
+        {/* ===== SYSTEM STATS SECTION ===== */}
+        <section className="space-y-8 pt-6 border-t border-border/50">
+          <SectionHeader title="System Status" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="card-minimal p-6 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-background-soft flex items-center justify-center text-muted-foreground">
-                  <InformationCircleIcon className="w-5 h-5" />
+            <div className="card-minimal p-8 flex items-center justify-between group hover:border-primary/30 transition-all">
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shadow-minimal">
+                  <InformationCircleIcon className="w-6 h-6" />
                 </div>
-                <div>
-                  <h4 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-                    Version
+                <div className="space-y-1">
+                  <h4 className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">
+                    Version Info
                   </h4>
-                  <p className="text-sm font-bold text-foreground mt-0.5">
-                    v6.9.1
+                  <p className="text-[13px] font-bold text-foreground">
+                    KuntalX Core v2.4.0
                   </p>
                 </div>
               </div>
-              <Badge variant="outline" className="text-[8px] uppercase tracking-widest border-emerald-500/20 text-emerald-500 bg-emerald-500/5">
+              <Badge variant="success" className="text-[9px] uppercase tracking-widest rounded-full h-6 px-3">
                 Stable
               </Badge>
             </div>
 
             <button
               onClick={() => logout()}
-              className="group p-6 bg-rose-500/5 hover:bg-rose-500/10 border border-rose-500/10 rounded-xl transition-all flex items-center justify-between"
+              className="group p-8 card-minimal bg-rose-500/5 hover:bg-rose-500/10 border-rose-500/20 hover:border-rose-500/40 rounded-2xl transition-all flex items-center justify-between"
             >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-500 group-hover:scale-105 transition-transform">
-                  <ArrowRightOnRectangleIcon className="w-5 h-5" />
+              <div className="flex items-center gap-6">
+                <div className="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-500 group-hover:scale-105 transition-transform shadow-minimal">
+                  <ArrowRightOnRectangleIcon className="w-6 h-6" />
                 </div>
-                <div className="text-left">
+                <div className="text-left space-y-1">
                   <h4 className="text-[10px] font-bold text-rose-500/60 uppercase tracking-widest">
-                    Account
+                    Session
                   </h4>
-                  <p className="text-sm font-bold text-rose-500 uppercase mt-0.5">
-                    Logout
+                  <p className="text-[13px] font-bold text-rose-600">
+                    Sign Out
                   </p>
                 </div>
               </div>
               <ChevronRightIcon
-                className="w-4 h-4 text-rose-500/40 group-hover:translate-x-1 transition-transform"
+                className="w-5 h-5 text-rose-500/40 group-hover:translate-x-1 group-hover:text-rose-500 transition-all"
               />
             </button>
           </div>

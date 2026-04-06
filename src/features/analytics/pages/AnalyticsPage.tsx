@@ -39,9 +39,9 @@ export const AnalyticsPage = () => {
 
     const barChartData = useMemo(() => {
         if (!stats?.regionalActivity) return [];
-        return stats.regionalActivity.slice(0, 6).map((a: any) => ({ 
-            name: a.name.split(' ')[0], 
-            volume: a.volume || 0 
+        return stats.regionalActivity.slice(0, 6).map((a: any) => ({
+            name: a.name.split(' ')[0],
+            volume: a.volume || 0
         }));
     }, [stats?.regionalActivity]);
 
@@ -58,117 +58,120 @@ export const AnalyticsPage = () => {
         return { pieData, filteredPieData, total };
     }, [stats]);
 
-
-
     return (
-        <div className="space-y-8 sm:space-y-16 animate-in fade-in duration-500">
+        <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-16">
             <PageHeader
                 title="Platform Analytics"
-                description="Comprehensive insights into platform trade volume and regional activity."
+                description="Cross-sector analytical dashboard providing real-time insights on commodity trade flow and platform growth."
                 actions={
-                    <div className="flex flex-wrap items-center gap-3 px-4 py-2 bg-card border border-border rounded-lg shadow-minimal w-full sm:w-auto">
-                        <div className="flex items-center gap-2">
-                            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                            <span className="text-[10px] font-bold text-foreground uppercase tracking-widest">Live Sync</span>
+                    <div className="flex flex-wrap items-center gap-4 px-6 py-3 card-minimal w-full sm:w-auto">
+                        <div className="flex items-center gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                            <span className="text-[10px] font-bold text-primary uppercase tracking-widest">Live Sync</span>
                         </div>
-                        <div className="hidden sm:block w-px h-4 bg-border" />
-                        <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">
-                            {new Date().toLocaleTimeString()}
+                        <div className="hidden sm:block w-px h-6 bg-border/50" />
+                        <span className="text-[10px] font-mono font-bold text-muted-foreground/40 uppercase tracking-widest">
+                            Updated: {new Date().toLocaleTimeString()}
                         </span>
                     </div>
                 }
             />
 
             {showFullLoader ? <SkeletonCardsList count={4} /> : stats && (
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     <StatCard
-                        title="Regional Associations"
+                        title="Regional Nodes"
                         value={stats.totalAssociations}
-                        icon="🏢"
-                        description="Verified associations actively trading on the platform."
+                        icon="⌬"
+                        description="Verified regional hubs actively synchronizing trades."
                         trend={{ value: stats.totalAssociationsTrend || 0, isUp: (stats.totalAssociationsTrend || 0) >= 0 }}
                     />
                     <StatCard
-                        title="Active Farmers"
+                        title="Producer Entities"
                         value={stats.totalFarmers.toLocaleString()}
-                        icon="👨‍🌾"
-                        description="Individual producers contributing to the supply network."
+                        icon="𐃏"
+                        description="Authorized producers contributing to the logistical grid."
                         trend={{ value: stats.totalFarmersTrend || 0, isUp: (stats.totalFarmersTrend || 0) >= 0 }}
                     />
                     <StatCard
-                        title="Registered Buyers"
+                        title="Procurement Hubs"
                         value={stats.totalBuyers.toLocaleString()}
-                        icon="🏛️"
-                        description="Commercial entities procurement produce at scale."
+                        icon="🏢"
+                        description="Commercial entities authorized for large-scale procurement."
                         trend={{ value: stats.totalBuyersTrend || 0, isUp: (stats.totalBuyersTrend || 0) >= 0 }}
                     />
                     <StatCard
-                        title="Total volume (QT)"
+                        title="Trade Volume (QT)"
                         value={stats.totalSalesVolume.toLocaleString()}
                         icon="📊"
-                        description="Cumulative volume of produce recorded on the platform."
+                        description="Cumulative commodity volume synchronized via protocol."
                         trend={{ value: stats.totalSalesVolumeTrend || 0, isUp: (stats.totalSalesVolumeTrend || 0) >= 0 }}
                     />
                 </div>
             )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Trade Value Distribution (Bar Chart) */}
-                <div className="card-minimal p-8 flex flex-col group text-left">
-                    <div className="mb-8 flex justify-between items-start">
-                        <div>
-                            <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">Output Performance</h3>
-                            <p className="text-[10px] text-muted-foreground mt-1 font-bold uppercase tracking-widest opacity-60">Yield volume by region</p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                {/* Output Performance (Bar Chart) */}
+                <div className="card-minimal p-10 flex flex-col group relative overflow-hidden transition-colors hover:border-primary/20">
+                    <div className="mb-10 flex justify-between items-start relative z-10 w-full">
+                        <div className="space-y-1">
+                            <h3 className="text-[10px] font-bold uppercase tracking-widest text-primary">Regional Output</h3>
+                            <p className="text-[11px] font-bold text-muted-foreground/40 uppercase tracking-[0.1em]">Supply Volume Analysis</p>
                         </div>
-                        <Badge variant="outline" className="text-[9px] uppercase tracking-widest font-bold">30 Days</Badge>
+                        <Badge variant="outline" className="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-border/50 shrink-0">7D Trend</Badge>
                     </div>
 
-                    <div className="h-[300px] w-full">
+                    <div className="h-[320px] w-full relative z-10">
                         <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={barChartData}>
-                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
-                                    <XAxis
-                                        dataKey="name"
-                                        axisLine={false}
-                                        tickLine={false}
-                                        tick={{ fill: 'var(--muted-foreground)', fontSize: 9, fontWeight: 700 }}
-                                        dy={15}
-                                    />
-                                    <YAxis
-                                        axisLine={false}
-                                        tickLine={false}
-                                        tick={{ fill: 'var(--muted-foreground)', fontSize: 9, fontWeight: 700 }}
-                                    />
-                                    <RechartsTooltip
-                                        cursor={{ fill: 'var(--primary)', opacity: 0.05 }}
-                                        contentStyle={{
-                                            backgroundColor: 'var(--card)',
-                                            borderRadius: '8px',
-                                            border: '1px solid var(--border)',
-                                            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                                            padding: '12px',
-                                            fontSize: '10px',
-                                            fontWeight: 700
-                                        }}
-                                    />
-                                    <Bar dataKey="volume" fill="var(--color-primary)" radius={[2, 2, 0, 0]} barSize={24} />
-                                </BarChart>
+                            <BarChart data={barChartData}>
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" style={{ opacity: 0.5 }} />
+                                <XAxis
+                                    dataKey="name"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontWeight: 700 }}
+                                    dy={15}
+                                />
+                                <YAxis
+                                    axisLine={false}
+                                    tickLine={false}
+                                    tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontWeight: 700 }}
+                                />
+                                <RechartsTooltip
+                                    cursor={false}
+                                    contentStyle={{
+                                        backgroundColor: 'var(--background)',
+                                        borderRadius: '12px',
+                                        border: '1px solid var(--border)',
+                                        boxShadow: 'var(--shadow-minimal)',
+                                        padding: '12px',
+                                        fontSize: '11px',
+                                        fontWeight: 700,
+                                        textTransform: 'uppercase'
+                                    }}
+                                />
+                                <Bar dataKey="volume" fill="#05461d" radius={[4, 4, 0, 0]} barSize={32}>
+                                    {barChartData.map((_: any, index: number) => (
+                                        <Cell key={`cell-${index}`} fillOpacity={0.8} className="hover:fill-opacity-100 transition-all duration-300" />
+                                    ))}
+                                </Bar>
+                            </BarChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
 
-                {/* Member Base (Pie Chart) */}
-                <div className="card-minimal p-8 relative text-left">
-                    <div className="relative z-10 mb-8">
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">User Composition</h3>
-                        <p className="text-[10px] text-muted-foreground mt-1 font-bold uppercase tracking-widest opacity-60">Platform stakeholders distribution</p>
+                {/* User Composition (Pie Chart) */}
+                <div className="card-minimal p-10 relative overflow-hidden group transition-colors hover:border-primary/20">
+                    <div className="mb-10 relative z-10 space-y-1">
+                        <h3 className="text-[10px] font-bold uppercase tracking-widest text-primary">Platform Composition</h3>
+                        <p className="text-[11px] font-bold text-muted-foreground/40 uppercase tracking-[0.1em]">User Demographic Breakdown</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
-                        <div className="h-[250px] w-full relative">
-                            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Total</p>
-                                <p className="text-2xl font-bold text-foreground">{pieChartStats.total.toLocaleString()}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+                        <div className="h-[280px] w-full relative">
+                            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none space-y-1">
+                                <p className="text-[9px] font-bold text-muted-foreground/40 uppercase tracking-widest">Total Users</p>
+                                <p className="text-3xl font-bold text-foreground tabular-nums tracking-tight">{pieChartStats.total.toLocaleString()}</p>
                             </div>
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart>
@@ -176,43 +179,49 @@ export const AnalyticsPage = () => {
                                         data={pieChartStats.filteredPieData}
                                         cx="50%"
                                         cy="50%"
-                                        innerRadius={70}
-                                        outerRadius={85}
-                                        paddingAngle={(pieChartStats.filteredPieData?.length ?? 0) > 1 ? 5 : 0}
+                                        innerRadius={85}
+                                        outerRadius={105}
+                                        paddingAngle={2}
                                         dataKey="value"
                                         stroke="none"
                                     >
                                         {pieChartStats.filteredPieData?.map((entry: any, index: number) => (
-                                            <Cell key={`cell-${index}`} fill={entry.fill} />
+                                            <Cell
+                                                key={`cell-${index}`}
+                                                fill={entry.fill}
+                                                className="hover:opacity-80 transition-all duration-300 cursor-pointer"
+                                            />
                                         ))}
                                     </Pie>
                                     <RechartsTooltip
+                                        cursor={false}
                                         contentStyle={{
-                                            backgroundColor: 'var(--card)',
-                                            borderRadius: '8px',
+                                            backgroundColor: 'var(--background)',
+                                            borderRadius: '12px',
                                             border: '1px solid var(--border)',
-                                            padding: '8px 12px',
-                                            fontSize: '10px',
-                                            fontWeight: 700
+                                            padding: '12px 16px',
+                                            fontSize: '11px',
+                                            fontWeight: 700,
+                                            textTransform: 'uppercase'
                                         }}
                                     />
                                 </PieChart>
                             </ResponsiveContainer>
                         </div>
 
-                        <div className="space-y-6">
+                        <div className="space-y-8">
                             {pieChartStats.pieData.map((role: any) => (
-                                <div key={role.name} className="group/item">
-                                    <div className="flex justify-between items-end mb-2">
-                                        <div className="flex items-center gap-2">
-                                            <div className={`w-2 h-2 rounded-full ${role.bgClass}`} />
-                                            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{role.name}</span>
+                                <div key={role.name} className="group/item space-y-3">
+                                    <div className="flex justify-between items-end">
+                                        <div className="flex items-center gap-3">
+                                            <div className={`w-2.5 h-2.5 rounded-full ${role.bgClass}`} />
+                                            <span className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest">{role.name}</span>
                                         </div>
-                                        <span className="font-bold text-foreground text-xs">{role.value.toLocaleString()}</span>
+                                        <span className="font-bold text-foreground text-sm tabular-nums">{role.value.toLocaleString()}</span>
                                     </div>
-                                    <div className="h-1 w-full bg-muted rounded-full overflow-hidden">
+                                    <div className="h-1.5 w-full bg-border/30 rounded-full overflow-hidden">
                                         <div
-                                            className={`${role.bgClass} h-full rounded-full transition-all duration-1000`}
+                                            className={`${role.bgClass} h-full rounded-full transition-all duration-700`}
                                             style={{ width: `${pieChartStats.total > 0 ? (role.value / pieChartStats.total) * 100 : 0}%` }}
                                         />
                                     </div>
@@ -223,71 +232,73 @@ export const AnalyticsPage = () => {
                 </div>
             </div>
 
-            {/* Trade Volume Trend (Line Chart) - Full Width */}
-            <div className="card-minimal p-8 flex flex-col group text-left">
-                <div className="mb-8 flex justify-between items-start">
-                    <div>
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">Commodity Sales Performance</h3>
-                        <p className="text-[10px] text-muted-foreground mt-1 font-bold uppercase tracking-widest opacity-60">Comparative yield trends by crop category</p>
+            {/* Commodity Sales Performance (Line Chart) */}
+            <div className="card-minimal p-10 flex flex-col group relative overflow-hidden transition-colors hover:border-primary/20">
+                <div className="mb-10 flex justify-between items-start relative z-10 w-full">
+                    <div className="space-y-1">
+                        <h3 className="text-[10px] font-bold uppercase tracking-widest text-primary">Market Trends</h3>
+                        <p className="text-[11px] font-bold text-muted-foreground/40 uppercase tracking-[0.1em]">Commodity Price Index</p>
                     </div>
-                    <Badge variant="outline" className="text-[9px] uppercase tracking-widest font-bold">Seasonal View</Badge>
+                    <Badge variant="outline" className="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-border/50 shrink-0">Seasonal</Badge>
                 </div>
 
-                <div className="h-[350px] w-full">
+                <div className="h-[400px] w-full relative z-10">
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={cropTrendData}>
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" style={{ opacity: 0.5 }} />
                             <XAxis
                                 dataKey="name"
                                 axisLine={false}
                                 tickLine={false}
-                                tick={{ fill: 'var(--muted-foreground)', fontSize: 9, fontWeight: 700 }}
+                                tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontWeight: 700 }}
                                 dy={15}
                             />
                             <YAxis
                                 axisLine={false}
                                 tickLine={false}
-                                tick={{ fill: 'var(--muted-foreground)', fontSize: 9, fontWeight: 700 }}
+                                tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontWeight: 700 }}
                             />
                             <RechartsTooltip
+                                cursor={false}
                                 contentStyle={{
-                                    backgroundColor: 'var(--card)',
-                                    borderRadius: '8px',
+
+                                    borderRadius: '12px',
                                     border: '1px solid var(--border)',
-                                    boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                                    padding: '12px',
-                                    fontSize: '10px',
-                                    fontWeight: 700
+                                    boxShadow: 'var(--shadow-minimal)',
+                                    padding: '16px',
+                                    fontSize: '11px',
+                                    fontWeight: 700,
+                                    textTransform: 'uppercase'
                                 }}
                             />
-                            <Legend 
-                                verticalAlign="top" 
-                                align="right" 
+                            <Legend
+                                verticalAlign="top"
+                                align="right"
                                 iconType="circle"
-                                wrapperStyle={{ fontSize: '9px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', paddingTop: '0px', paddingBottom: '20px' }}
+                                wrapperStyle={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', paddingBottom: '20px', opacity: 0.7 }}
                             />
-                            <Line 
-                                type="monotone" 
-                                dataKey="Coffee" 
-                                stroke="var(--primary)" 
-                                strokeWidth={3} 
-                                dot={{ fill: 'var(--primary)', r: 4, strokeWidth: 2, stroke: 'var(--card)' }}
+                            <Line
+                                type="monotone"
+                                dataKey="Coffee"
+                                stroke="#05461d"
+                                strokeWidth={3}
+                                dot={{ fill: '#05461d', r: 4, strokeWidth: 2, stroke: 'var(--background)' }}
                                 activeDot={{ r: 6, strokeWidth: 0 }}
                             />
-                            <Line 
-                                type="monotone" 
-                                dataKey="Grains" 
-                                stroke="var(--secondary)" 
-                                strokeWidth={3} 
-                                dot={{ fill: 'var(--secondary)', r: 4, strokeWidth: 2, stroke: 'var(--card)' }}
+                            <Line
+                                type="monotone"
+                                dataKey="Grains"
+                                stroke="#B45309"
+                                strokeWidth={3}
+                                dot={{ fill: '#B45309', r: 4, strokeWidth: 2, stroke: 'var(--background)' }}
                                 activeDot={{ r: 6, strokeWidth: 0 }}
                             />
-                            <Line 
-                                type="monotone" 
-                                dataKey="Pulses" 
-                                stroke="var(--gold)" 
-                                strokeWidth={3} 
-                                dot={{ fill: 'var(--gold)', r: 4, strokeWidth: 2, stroke: 'var(--card)' }}
+                            <Line
+                                type="monotone"
+                                dataKey="Pulses"
+                                stroke="#D4AF37"
+                                strokeWidth={3}
+                                dot={{ fill: '#D4AF37', r: 4, strokeWidth: 2, stroke: 'var(--background)' }}
                                 activeDot={{ r: 6, strokeWidth: 0 }}
                             />
                         </LineChart>
@@ -295,42 +306,44 @@ export const AnalyticsPage = () => {
                 </div>
             </div>
 
-            {/* Monthly Income & Payouts Chart */}
-            <div className="card-minimal p-8 flex flex-col group text-left">
-                <div className="mb-8 flex justify-between items-start">
-                    <div>
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-foreground">Monthly Revenue Flow</h3>
-                        <p className="text-[10px] text-muted-foreground mt-1 font-bold uppercase tracking-widest opacity-60">Platform commission (fee) vs. farmer payouts — ETB thousands</p>
+            {/* Monthly Revenue Flow (Bar Chart) */}
+            <div className="card-minimal p-10 flex flex-col group relative overflow-hidden transition-colors hover:border-primary/20">
+                <div className="mb-10 flex justify-between items-start relative z-10 w-full">
+                    <div className="space-y-1">
+                        <h3 className="text-[10px] font-bold uppercase tracking-widest text-primary">Fiscal Flow Overview</h3>
+                        <p className="text-[11px] font-bold text-muted-foreground/40 uppercase tracking-[0.1em]">Platform Fees vs Payouts</p>
                     </div>
-                    <Badge variant="outline" className="text-[9px] uppercase tracking-widest font-bold">Annual View</Badge>
+                    <Badge variant="outline" className="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-border/50 shrink-0">Annual View</Badge>
                 </div>
-                <div className="h-[300px] w-full">
+
+                <div className="h-[350px] w-full relative z-10">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={incomeData} barCategoryGap="30%" barGap={4}>
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
+                        <BarChart data={incomeData} barCategoryGap="25%" barGap={8}>
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" style={{ opacity: 0.5 }} />
                             <XAxis
                                 dataKey="name"
                                 axisLine={false}
                                 tickLine={false}
-                                tick={{ fill: 'var(--muted-foreground)', fontSize: 9, fontWeight: 700 }}
+                                tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontWeight: 700 }}
                                 dy={15}
                             />
                             <YAxis
                                 axisLine={false}
                                 tickLine={false}
-                                tick={{ fill: 'var(--muted-foreground)', fontSize: 9, fontWeight: 700 }}
+                                tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontWeight: 700 }}
                                 tickFormatter={(v) => `${v}k`}
                             />
                             <RechartsTooltip
-                                cursor={{ fill: 'var(--primary)', opacity: 0.04 }}
+                                cursor={false}
                                 contentStyle={{
-                                    backgroundColor: 'var(--card)',
-                                    borderRadius: '10px',
+                                    backgroundColor: 'var(--background)',
+                                    borderRadius: '12px',
                                     border: '1px solid var(--border)',
-                                    boxShadow: '0 4px 16px rgba(0,0,0,0.08)',
-                                    padding: '10px 14px',
-                                    fontSize: '10px',
-                                    fontWeight: 700
+                                    boxShadow: 'var(--shadow-minimal)',
+                                    padding: '16px',
+                                    fontSize: '11px',
+                                    fontWeight: 700,
+                                    textTransform: 'uppercase'
                                 }}
                                 formatter={(value: any, name?: string) => [`ETB ${value}k`, name ?? '']}
                             />
@@ -338,46 +351,37 @@ export const AnalyticsPage = () => {
                                 verticalAlign="top"
                                 align="right"
                                 iconType="circle"
-                                wrapperStyle={{ fontSize: '9px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', paddingBottom: '20px' }}
+                                wrapperStyle={{ fontSize: '10px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', paddingBottom: '20px', opacity: 0.7 }}
                             />
-                            <Bar dataKey="Commission" fill="var(--color-primary)" radius={[3, 3, 0, 0]} barSize={16} />
-                            <Bar dataKey="Payouts" fill="var(--secondary)" radius={[3, 3, 0, 0]} barSize={16} opacity={0.7} />
+                            <Bar dataKey="Commission" fill="#05461d" radius={[4, 4, 0, 0]} barSize={20} />
+                            <Bar dataKey="Payouts" fill="#B45309" radius={[4, 4, 0, 0]} barSize={20} opacity={0.6} />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
-                {/* Summary Stats */}
-                <div className="mt-6 grid grid-cols-3 gap-6 pt-6 border-t border-border/40">
-                    <div>
-                        <p className="text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground opacity-60 mb-1">Annual Commission Income</p>
-                        <p className="text-lg font-extrabold text-primary">ETB {incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Commission, 0).toLocaleString()}k</p>
-                        <p className="text-[9px] font-bold text-muted-foreground/50 uppercase tracking-widest mt-0.5">Platform fee on orders</p>
+
+                {/* Fiscal Metrics Summary */}
+                <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-10 pt-10 border-t border-border/50 relative z-10">
+                    <div className="space-y-3">
+                        <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/50">Total Fees Collected</p>
+                        <p className="text-2xl font-bold text-primary tabular-nums">ETB {incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Commission, 0).toLocaleString()}k</p>
+                        <p className="text-[11px] font-medium text-muted-foreground/50 leading-relaxed">Aggregated platform fees.</p>
                     </div>
-                    <div>
-                        <p className="text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground opacity-60 mb-1">Total Farmer Payouts</p>
-                        <p className="text-lg font-extrabold text-foreground">ETB {incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Payouts, 0).toLocaleString()}k</p>
-                        <p className="text-[9px] font-bold text-muted-foreground/50 uppercase tracking-widest mt-0.5">Net amount to farmers</p>
+                    <div className="space-y-3">
+                        <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/50">Total Payouts Distributed</p>
+                        <p className="text-2xl font-bold text-foreground tabular-nums">ETB {incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Payouts, 0).toLocaleString()}k</p>
+                        <p className="text-[11px] font-medium text-muted-foreground/50 leading-relaxed">Net capital delta to producers.</p>
                     </div>
-                    <div>
-                        <p className="text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground opacity-60 mb-1">Avg Commission Rate</p>
-                        <p className="text-lg font-extrabold text-foreground">
-                            {incomeData.length > 0 && incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Commission, 0) + incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Payouts, 0) > 0 
+                    <div className="space-y-3">
+                        <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/50">System Conversion Efficiency</p>
+                        <p className="text-2xl font-bold text-foreground tabular-nums">
+                            {incomeData.length > 0 && incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Commission, 0) + incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Payouts, 0) > 0
                                 ? Math.round((incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Commission, 0) / (incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Commission, 0) + incomeData.reduce((s: number, d: MonthlyIncomePoint) => s + d.Payouts, 0))) * 1000) / 10
                                 : 0}%
                         </p>
-                        <p className="text-[9px] font-bold text-muted-foreground/50 uppercase tracking-widest mt-0.5">Of gross order value</p>
+                        <p className="text-[11px] font-medium text-muted-foreground/50 leading-relaxed">Yield percentage ratio.</p>
                     </div>
-                </div>
-            </div>
-
-            {/* Bottom Status Bar */}
-            <div className="pt-8 border-t border-border flex justify-between items-center text-muted-foreground/20 font-bold">
-                <p className="text-[10px] uppercase tracking-[0.2em]">Platform Oversight v2.4.0</p>
-                <div className="flex gap-4">
-                    <div className="w-1 h-1 rounded-full bg-border" />
-                    <div className="w-1 h-1 rounded-full bg-border" />
                 </div>
             </div>
         </div>
     );
 };
-

@@ -19,69 +19,80 @@ export const AggregationInventory: React.FC<Props> = ({
   return (
     <div className="card-minimal overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="w-full text-left">
-          <thead className="bg-muted/30 border-b border-border/60 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
-            <tr>
-              <th className="px-8 py-5">Origin Node / Producer</th>
-              <th className="px-8 py-5 text-center">Declared Vol.</th>
-              <th className="px-8 py-5 text-center">Verified Vol.</th>
-              <th className="px-8 py-5 text-center">Quality</th>
-              <th className="px-8 py-5 text-center">Status</th>
-              <th className="px-8 py-5 text-right">Commit Date</th>
-              {isAdmin && <th className="px-8 py-5 text-right">Operations</th>}
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="border-b border-border/50 bg-background-soft/50">
+              <th className="px-10 py-5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Origin Node / Producer</th>
+              <th className="px-10 py-5 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Declared Vol.</th>
+              <th className="px-10 py-5 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Verified Vol.</th>
+              <th className="px-10 py-5 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Quality</th>
+              <th className="px-10 py-5 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Status</th>
+              <th className="px-10 py-5 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Commit Date</th>
+              {isAdmin && <th className="px-10 py-5 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Operations</th>}
             </tr>
           </thead>
-          <tbody className="text-xs divide-y divide-border/40">
+          <tbody className="divide-y divide-border/30">
             {items.length === 0 ? (
               <tr>
-                <td colSpan={isAdmin ? 7 : 6} className="px-8 py-12 text-center text-muted-foreground opacity-50 font-bold uppercase tracking-widest">
-                  No active contribution records found
+                <td colSpan={isAdmin ? 7 : 6} className="px-10 py-16 text-center">
+                  <p className="text-[10px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">No active contribution records found in registry</p>
                 </td>
               </tr>
             ) : (
               items.map((item) => (
-                <tr key={item.id} className="hover:bg-muted/5 transition-colors group">
-                  <td className="px-8 py-6 text-left">
-                    <div className="space-y-1">
-                      <p className="font-bold text-foreground uppercase tracking-tight">{item.farmerName || 'Anonymous Producer'}</p>
-                      <p className="text-[10px] font-bold text-muted-foreground/30 uppercase tracking-widest">Node: {item.farmerId.substring(0, 12)}</p>
+                <tr key={item.id} className="hover:bg-background-soft/50 transition-all duration-300 group">
+                  <td className="px-10 py-7 text-left">
+                    <div className="space-y-1.5">
+                      <p className="text-[13px] font-bold text-foreground uppercase tracking-tight group-hover:text-primary transition-colors">{item.farmerName || 'Anonymous Producer'}</p>
+                      <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">Hash ID: {item.farmerId.substring(0, 12)}</p>
                     </div>
                   </td>
-                  <td className="px-8 py-6 text-center font-bold text-foreground tabular-nums">
-                    {item.quantityKuntal} <span className="opacity-40 text-[9px] uppercase">qt</span>
+                  <td className="px-10 py-7 text-center">
+                    <span className="text-[13px] font-bold text-foreground tabular-nums">
+                      {item.quantityKuntal} <span className="text-[10px] font-bold text-muted-foreground/20 uppercase ml-1">QT</span>
+                    </span>
                   </td>
-                  <td className="px-8 py-6 text-center font-bold text-primary tabular-nums">
-                    {item.verifiedQuantityKuntal !== undefined ? `${item.verifiedQuantityKuntal} qt` : '--'}
+                  <td className="px-10 py-7 text-center">
+                    <span className={`text-[13px] font-bold tabular-nums ${item.verifiedQuantityKuntal !== undefined ? 'text-primary' : 'text-muted-foreground/20'}`}>
+                      {item.verifiedQuantityKuntal !== undefined ? `${item.verifiedQuantityKuntal} QT` : 'PENDING'}
+                    </span>
                   </td>
-                  <td className="px-8 py-6 text-center">
+                  <td className="px-10 py-7 text-center">
                     {item.qualityGrade ? (
-                      <Badge variant="outline" className="text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 border-amber-500/30 text-amber-600 bg-amber-500/5">Grade {item.qualityGrade}</Badge>
+                      <Badge variant="outline" className="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-amber-500/20 text-amber-600 bg-amber-500/5">
+                        Grade {item.qualityGrade}
+                      </Badge>
                     ) : (
-                      <span className="text-muted-foreground/30 font-bold uppercase tracking-widest text-[9px]">Ungraded</span>
+                      <span className="text-muted-foreground/20 font-bold uppercase tracking-[0.2em] text-[9px]">Unverified</span>
                     )}
                   </td>
-                  <td className="px-8 py-6 text-center">
+                  <td className="px-10 py-7 text-center">
                     <Badge
                       variant={item.status === 'accepted' ? 'success' : item.status === 'rejected' ? 'error' : 'warning'}
-                      className="text-[9px] font-bold uppercase tracking-widest"
+                      className="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest"
                     >
                       {item.status}
                     </Badge>
                   </td>
-                  <td className="px-8 py-6 text-right font-bold text-muted-foreground/40 text-[10px] uppercase">
-                    <AdaptiveDate date={item.createdAt} />
+                  <td className="px-10 py-7 text-right">
+                    <span className="text-[10px] font-bold text-muted-foreground/40 uppercase tracking-widest">
+                      <AdaptiveDate date={item.createdAt} />
+                    </span>
                   </td>
                   {isAdmin && (
-                    <td className="px-8 py-6 text-right">
+                    <td className="px-10 py-7 text-right">
                       {item.status === 'pending' ? (
                         <button
                           onClick={() => onVerify?.(item)}
-                          className="h-8 px-4 rounded-md bg-emerald-600 text-white text-[9px] font-bold uppercase tracking-widest shadow-minimal hover:bg-emerald-500 transition-all"
+                          className="h-10 px-6 rounded-xl bg-emerald-600 text-white text-[9px] font-bold uppercase tracking-widest shadow-minimal hover:bg-emerald-500 transition-all active:scale-95"
                         >
-                          Verify Record
+                          Verify Node
                         </button>
                       ) : (
-                        <span className="text-[9px] font-bold text-muted-foreground/20 uppercase tracking-widest">Finalized</span>
+                        <div className="flex items-center justify-end gap-2 text-[9px] font-bold text-muted-foreground/20 uppercase tracking-widest">
+                          <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground/20" />
+                          <span>Finalized</span>
+                        </div>
                       )}
                     </td>
                   )}

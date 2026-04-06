@@ -13,60 +13,78 @@ export const QualityList: React.FC<QualityListProps> = memo(({
 }) => {
     if (inspections.length === 0) {
         return (
-            <div className="py-32 flex flex-col items-center justify-center text-center opacity-40">
-                <div className="text-6xl mb-6">🔬</div>
-                <h3 className="text-xl font-extrabold text-muted-foreground uppercase tracking-wider mb-2">No Inspections Found</h3>
-                <p className="text-xs font-extrabold uppercase tracking-wider text-muted-foreground/70 max-w-sm leading-relaxed">
-                    Laboratory surveillance has not yet logged any quality assessments for this cluster.
+            <div className="py-24 flex flex-col items-center justify-center text-center">
+                <div className="w-16 h-16 rounded-2xl bg-background-soft border border-border flex items-center justify-center text-3xl mb-6 opacity-40">
+                    🔬
+                </div>
+                <h3 className="text-[10px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em] mb-2">No Inspections Logged</h3>
+                <p className="text-[10px] font-bold text-muted-foreground/20 uppercase tracking-widest max-w-sm leading-relaxed">
+                    No quality assessments have been recorded for this distribution cluster.
                 </p>
             </div>
         );
     }
 
     return (
-        <div className="bg-card rounded-lg border border-border overflow-hidden shadow-sm">
+        <div className="overflow-hidden">
             {/* Desktop View */}
             <div className="hidden md:block overflow-x-auto">
-                <table className="w-full text-left">
-                    <thead className="bg-muted/30 border-b border-border text-xs font-extrabold text-muted-foreground uppercase tracking-wider italic">
-                        <tr>
-                            <th className="px-6 py-4">ID</th>
-                            <th className="px-6 py-4">Batch Ledger</th>
-                            <th className="px-6 py-4">Asset Class</th>
-                            <th className="px-6 py-4">Purity Matrix</th>
-                            <th className="px-6 py-4">Audit Result</th>
-                            <th className="px-6 py-4 text-right">Certificate</th>
+                <table className="w-full text-left border-collapse">
+                    <thead>
+                        <tr className="border-b border-border/50 bg-background-soft/50">
+                            <th className="px-10 py-5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Inspection ID</th>
+                            <th className="px-10 py-5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Batch Ref</th>
+                            <th className="px-10 py-5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Asset Class</th>
+                            <th className="px-10 py-5 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Purity</th>
+                            <th className="px-10 py-5 text-center text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Grade</th>
+                            <th className="px-10 py-5 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Actions</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-border/10">
+                    <tbody className="divide-y divide-border/30">
                         {inspections.map((check) => (
-                            <tr key={check.id} className="group hover:bg-muted/5 transition-all duration-300">
-                                <td className="px-6 py-4 font-extrabold text-primary font-mono text-xs italic tracking-wider uppercase">{check.id.slice(0, 8).toUpperCase()}</td>
-                                <td className="px-6 py-4 text-muted-foreground font-extrabold text-[10px] uppercase italic tracking-wider">{check.aggregationId.slice(0, 8).toUpperCase()}</td>
-                                <td className="px-6 py-4 font-extrabold text-foreground uppercase text-xs italic">Produce Cluster</td>
-                                <td className="px-6 py-4">
+                            <tr key={check.id} className="hover:bg-background-soft/50 transition-all duration-300 group">
+                                <td className="px-10 py-7">
+                                    <div className="space-y-1.5">
+                                        <p className="text-[13px] font-bold text-primary uppercase tracking-tight group-hover:text-primary/80 transition-colors">QC-{check.id.slice(0, 8).toUpperCase()}</p>
+                                        <p className="text-[9px] font-mono font-bold text-muted-foreground/20 uppercase tracking-[0.2em]">Sig: {check.id.toUpperCase().slice(0, 16)}</p>
+                                    </div>
+                                </td>
+                                <td className="px-10 py-7">
+                                    <Badge variant="outline" className="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border-border/50">
+                                        AGG-{check.aggregationId.slice(0, 8).toUpperCase()}
+                                    </Badge>
+                                </td>
+                                <td className="px-10 py-7">
                                     <div className="flex items-center gap-3">
-                                        <div className="flex-1 h-3 w-24 bg-muted/40 rounded-full overflow-hidden p-0.5">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-primary/40 group-hover:bg-primary transition-all" />
+                                        <span className="text-[13px] font-bold text-foreground uppercase tracking-tight">Produce Cluster</span>
+                                    </div>
+                                </td>
+                                <td className="px-10 py-7">
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex-1 h-1.5 w-28 bg-border/30 rounded-full overflow-hidden shadow-inner">
                                             <div
-                                                className={`h-full rounded-full transition-all duration-1000 ${check.purityPercentage > 90 ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.3)]' : 'bg-primary shadow-[0_0_10px_rgba(20,184,166,0.3)]'
-                                                    }`}
+                                                className={`h-full rounded-full transition-all duration-700 ${check.purityPercentage > 90 ? 'bg-primary' : 'bg-primary/50'}`}
                                                 style={{ width: `${check.purityPercentage}%` }}
                                             />
                                         </div>
-                                        <span className="font-extrabold text-[10px] text-foreground uppercase italic">{check.purityPercentage}%</span>
+                                        <span className="text-[13px] font-bold text-foreground tabular-nums">{check.purityPercentage}%</span>
                                     </div>
                                 </td>
-                                <td className="px-6 py-4">
-                                    <Badge variant={check.grade === 'A' || check.grade === 'B' ? 'success' : 'warning'} className="text-[10px] font-extrabold uppercase h-7 px-4 italic">
-                                        {check.grade}
+                                <td className="px-10 py-7 text-center">
+                                    <Badge
+                                        variant={check.grade === 'A' || check.grade === 'B' ? 'success' : 'warning'}
+                                        className="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest"
+                                    >
+                                        Grade {check.grade}
                                     </Badge>
                                 </td>
-                                <td className="px-6 py-4 text-right">
+                                <td className="px-10 py-7 text-right">
                                     <button
                                         onClick={() => onViewReport(check)}
-                                        className="h-9 px-4 sm:h-10 sm:px-6 rounded-xl bg-primary text-white text-[10px] uppercase font-extrabold tracking-wider hover:brightness-110 shadow-lg shadow-primary/20 transition-all italic whitespace-nowrap"
+                                        className="h-10 px-6 rounded-xl bg-background-soft border border-border text-primary text-[9px] font-bold uppercase tracking-widest hover:bg-primary hover:text-white hover:border-primary transition-all active:scale-95 shadow-minimal"
                                     >
-                                        View Report →
+                                        View Report
                                     </button>
                                 </td>
                             </tr>
@@ -76,45 +94,51 @@ export const QualityList: React.FC<QualityListProps> = memo(({
             </div>
 
             {/* Mobile Card View */}
-            <div className="md:hidden space-y-4 p-4 bg-muted/5">
+            <div className="md:hidden space-y-4 p-6">
                 {inspections.map((check) => (
                     <div
                         key={check.id}
                         onClick={() => onViewReport(check)}
-                        className="bg-card border border-border/60 rounded-xl p-4 shadow-sm space-y-4 active:scale-[0.98] transition-all"
+                        className="card-minimal p-7 space-y-6 group active:scale-[0.98] transition-all cursor-pointer hover:border-primary/30"
                     >
                         <div className="flex items-center justify-between">
-                            <span className="font-extrabold text-primary font-mono text-[10px] italic tracking-wider uppercase">QC: #{check.id.slice(0, 8).toUpperCase()}</span>
-                            <Badge variant={check.grade === 'A' || check.grade === 'B' ? 'success' : 'warning'} className="text-[10px] font-extrabold uppercase h-6 px-3 italic">
+                            <div className="space-y-1">
+                                <p className="text-[13px] font-bold text-primary uppercase tracking-tight">QC-{check.id.slice(0, 8).toUpperCase()}</p>
+                                <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">#{check.id.toUpperCase().slice(0, 12)}</p>
+                            </div>
+                            <Badge variant={check.grade === 'A' || check.grade === 'B' ? 'success' : 'warning'} className="px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest shrink-0">
                                 Grade {check.grade}
                             </Badge>
                         </div>
 
-                        <div className="space-y-3">
-                            <div>
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground/40 mb-1 italic">Batch Ledger Reference</p>
-                                <p className="text-[10px] text-foreground font-extrabold uppercase italic tracking-wider">AGG-#{check.aggregationId.slice(0, 8).toUpperCase()}</p>
+                        <div className="grid grid-cols-2 gap-6 py-5 border-y border-border/40 bg-background-soft/30 -mx-7 px-7">
+                            <div className="space-y-1.5">
+                                <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">Batch Ref</p>
+                                <p className="text-[11px] font-bold text-foreground uppercase tracking-tight">AGG-{check.aggregationId.slice(0, 8).toUpperCase()}</p>
                             </div>
-
-                            <div>
-                                <p className="text-[9px] font-extrabold uppercase tracking-widest text-muted-foreground/40 mb-1 italic">Purity Verification</p>
+                            <div className="space-y-2">
+                                <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">Purity Score</p>
                                 <div className="flex items-center gap-3">
-                                    <div className="flex-1 h-2 bg-muted/40 rounded-full overflow-hidden">
+                                    <div className="flex-1 h-1.5 bg-border/30 rounded-full overflow-hidden shadow-inner">
                                         <div
-                                            className={`h-full rounded-full ${check.purityPercentage > 90 ? 'bg-emerald-500' : 'bg-primary'}`}
+                                            className={`h-full rounded-full transition-all duration-700 ${check.purityPercentage > 90 ? 'bg-primary' : 'bg-primary/50'}`}
                                             style={{ width: `${check.purityPercentage}%` }}
                                         />
                                     </div>
-                                    <span className="font-extrabold text-[10px] text-foreground uppercase italic shrink-0">{check.purityPercentage}%</span>
+                                    <span className="text-[11px] font-bold text-foreground tabular-nums shrink-0">{check.purityPercentage}%</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between pt-2">
-                            <p className="text-[9px] font-extrabold text-muted-foreground/60 uppercase italic tracking-widest">Laboratory Status: Logged</p>
-                            <button className="h-9 px-4 rounded-lg bg-primary text-white text-[10px] font-extrabold uppercase tracking-wider italic">
-                                Full Report →
-                            </button>
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" />
+                                <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">Lab Status: Verified</p>
+                            </div>
+                            <div className="flex items-center gap-2 text-primary opacity-0 group-hover:opacity-100 transition-all">
+                                <span className="text-[10px] font-bold uppercase tracking-widest">View Report</span>
+                                <div className="w-6 h-6 rounded-full border border-primary/20 flex items-center justify-center text-xs group-hover:bg-primary group-hover:text-white transition-all">→</div>
+                            </div>
                         </div>
                     </div>
                 ))}

@@ -8,7 +8,7 @@ import {
     UpdateOrderStatusUseCase,
     PayOrderUseCase,
     InitiatePaymentUseCase,
-    VerifyPaymentUseCase,
+
     SimulateConfirmPaymentUseCase
 } from '../services';
 import type { CreateOrderDto } from '../types/dto/create-order.dto';
@@ -20,7 +20,7 @@ const createOrderUseCase = new CreateOrderUseCase(repository);
 const updateOrderStatusUseCase = new UpdateOrderStatusUseCase(repository);
 const payOrderUseCase = new PayOrderUseCase(repository);
 const initiatePaymentUseCase = new InitiatePaymentUseCase(repository);
-const verifyPaymentUseCase = new VerifyPaymentUseCase(repository);
+
 const simulateConfirmUseCase = new SimulateConfirmPaymentUseCase(repository);
 
 export const useMyOrders = (status?: string, fromDate?: string, toDate?: string, keyword?: string, skip?: number, limit?: number) => {

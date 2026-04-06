@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GlassModal, CustomSelect } from '../../../shared/components/UI';
+import { CustomSelect, KuntalLoader } from '../../../shared/components/UI';
 import { useCreateAggregation, useCropTypes } from '../hooks/use-aggregations';
 import { useAuth } from '../../../lib/auth-context';
 
@@ -58,108 +58,124 @@ export const CreateAggregationModal: React.FC<CreateAggregationModalProps> = ({ 
         label: c.name
     })) || [];
 
+    if (!isOpen) return null;
+
     return (
-        <GlassModal
-            isOpen={isOpen}
-            onClose={onClose}
-            title="Declare New Produce Pool"
-            footer={
-                <div className="flex gap-4 w-full justify-end">
-                    <button onClick={onClose} type="button" className="h-14 px-8 bg-card text-foreground rounded-xl font-bold uppercase tracking-[0.2em] hover:bg-secondary/10 transition-all border border-border">
-                        Cancel
-                    </button>
-                    <button
-                        onClick={handleSubmit}
-                        disabled={createMutation.isPending}
-                        className="h-14 px-8 bg-primary text-white rounded-xl font-bold uppercase tracking-[0.2em] shadow-minimal hover:bg-primary-soft hover:-translate-y-0.5 transition-all flex items-center justify-center gap-4 group"
-                    >
-                        {createMutation.isPending ? <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" /> : <><span>Create Pool</span> <span className="text-xl text-secondary group-hover:translate-x-1 transition-transform">→</span></>}
-                    </button>
-                </div>
-            }
-        >
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                <div className="space-y-3">
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1 block">Internal Title</label>
-                    <input
-                        type="text"
-                        className="w-full h-14 px-4 bg-background border border-border rounded-xl focus:bg-card focus:border-primary outline-none transition-all font-bold text-foreground"
-                        placeholder="e.g. Harvest 2024 Batch A"
-                        value={formData.title}
-                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                        required
-                    />
-                </div>
-                <div className="space-y-3">
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1 block">Crop Type</label>
-                    <CustomSelect
-                        value={formData.cropTypeId}
-                        onChange={(val) => setFormData({ ...formData, cropTypeId: val })}
-                        options={cropOptions}
-                        className="w-full h-14 bg-background border border-border rounded-xl focus:bg-card focus:border-primary outline-none transition-all font-bold text-foreground"
-                    />
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-md p-4 animate-in fade-in duration-300">
+            <div className="card-minimal w-full max-w-2xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-500 flex flex-col max-h-[90vh]">
+                <div className="px-8 py-6 border-b border-border/50 bg-background-soft shrink-0">
+                    <h2 className="text-[14px] font-bold text-foreground tracking-tight">Create Aggregation Pool</h2>
+                    <p className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest mt-1">Initialize a new produce collection</p>
                 </div>
 
-                <div className="space-y-3">
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1 block">Market Narrative (Description)</label>
-                    <textarea
-                        className="w-full min-h-[120px] p-4 bg-background border border-border rounded-xl focus:bg-card focus:border-primary outline-none transition-all font-medium text-foreground resize-none"
-                        placeholder="Detail the quality, origin, and specific traits of this pool..."
-                        value={formData.description}
-                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    />
-                </div>
+                <form onSubmit={handleSubmit} className="flex-1 overflow-hidden flex flex-col">
+                    <div className="p-8 space-y-6 overflow-y-auto custom-scrollbar flex-1">
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Title</label>
+                            <input
+                                type="text"
+                                className="w-full h-12 bg-background border border-border rounded-xl px-4 text-[13px] font-bold text-foreground focus:border-primary/50 outline-none transition-all placeholder:text-muted-foreground/30"
+                                placeholder="e.g. Harvest 2024 Batch A"
+                                value={formData.title}
+                                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                required
+                            />
+                        </div>
 
-                <div className="space-y-3">
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1 block">Target Volume (qt)</label>
-                    <input
-                        type="number"
-                        className="w-full h-14 px-4 bg-background border border-border rounded-xl focus:bg-card focus:border-primary outline-none transition-all font-bold text-foreground"
-                        value={formData.targetQuantityKuntal}
-                        onChange={(e) => setFormData({ ...formData, targetQuantityKuntal: Number(e.target.value) })}
-                        required
-                    />
-                </div>
-                <div className="space-y-3">
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1 block">Floor Price (ETB/qt)</label>
-                    <input
-                        type="number"
-                        className="w-full h-14 px-4 bg-background border border-border rounded-xl focus:bg-card focus:border-primary outline-none transition-all font-bold text-foreground"
-                        value={formData.pricePerKuntal}
-                        onChange={(e) => setFormData({ ...formData, pricePerKuntal: Number(e.target.value) })}
-                    />
-                </div>
-                <div className="space-y-3">
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1 block">Delivery Target</label>
-                    <input
-                        type="date"
-                        className="w-full h-14 px-4 bg-background border border-border rounded-xl focus:bg-card focus:border-primary outline-none transition-all font-bold text-foreground"
-                        value={formData.expectedDeliveryDate}
-                        onChange={(e) => setFormData({ ...formData, expectedDeliveryDate: e.target.value })}
-                    />
-                </div>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Crop Type</label>
+                            <CustomSelect
+                                value={formData.cropTypeId}
+                                onChange={(val) => setFormData({ ...formData, cropTypeId: val })}
+                                options={cropOptions}
+                                className="w-full h-12 bg-background border border-border rounded-xl px-4 text-[13px] font-bold text-foreground focus:border-primary/50 outline-none transition-all"
+                            />
+                        </div>
 
-                <div className="space-y-3">
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1 block">Region / Origin</label>
-                    <input
-                        type="text"
-                        className="w-full h-14 px-4 bg-background border border-border rounded-xl focus:bg-card focus:border-primary outline-none transition-all font-bold text-foreground"
-                        placeholder="e.g. Sidama"
-                        value={formData.region}
-                        onChange={(e) => setFormData({ ...formData, region: e.target.value })}
-                    />
-                </div>
-                <div className="space-y-3">
-                    <label className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1 block">Representational Image URL</label>
-                    <input
-                        type="url"
-                        className="w-full h-14 px-4 bg-background border border-border rounded-xl focus:bg-card focus:border-primary outline-none transition-all font-bold text-foreground"
-                        placeholder="https://..."
-                        value={formData.imageUrl}
-                        onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                    />
-                </div>
-            </form>
-        </GlassModal>
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Description</label>
+                            <textarea
+                                className="w-full min-h-[100px] p-4 bg-background border border-border rounded-xl text-[13px] font-medium text-foreground focus:border-primary/50 outline-none transition-all resize-none placeholder:text-muted-foreground/30"
+                                placeholder="Detail the quality, origin, and specific traits of this pool..."
+                                value={formData.description}
+                                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Target Volume (Quintals)</label>
+                                <input
+                                    type="number"
+                                    className="w-full h-12 bg-background border border-border rounded-xl px-4 text-[13px] font-bold text-foreground focus:border-primary/50 outline-none transition-all"
+                                    value={formData.targetQuantityKuntal}
+                                    onChange={(e) => setFormData({ ...formData, targetQuantityKuntal: Number(e.target.value) })}
+                                    required
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Floor Price (ETB/qt)</label>
+                                <input
+                                    type="number"
+                                    className="w-full h-12 bg-background border border-border rounded-xl px-4 text-[13px] font-bold text-foreground focus:border-primary/50 outline-none transition-all"
+                                    value={formData.pricePerKuntal}
+                                    onChange={(e) => setFormData({ ...formData, pricePerKuntal: Number(e.target.value) })}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Expected Delivery Date</label>
+                                <input
+                                    type="date"
+                                    className="w-full h-12 bg-background border border-border rounded-xl px-4 text-[13px] font-bold text-muted-foreground focus:border-primary/50 outline-none transition-all"
+                                    value={formData.expectedDeliveryDate}
+                                    onChange={(e) => setFormData({ ...formData, expectedDeliveryDate: e.target.value })}
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Region / Origin</label>
+                                <input
+                                    type="text"
+                                    className="w-full h-12 bg-background border border-border rounded-xl px-4 text-[13px] font-bold text-foreground focus:border-primary/50 outline-none transition-all placeholder:text-muted-foreground/30"
+                                    placeholder="e.g. Sidama"
+                                    value={formData.region}
+                                    onChange={(e) => setFormData({ ...formData, region: e.target.value })}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Cover Image URL</label>
+                            <input
+                                type="url"
+                                className="w-full h-12 bg-background border border-border rounded-xl px-4 text-[13px] font-bold text-foreground focus:border-primary/50 outline-none transition-all placeholder:text-muted-foreground/30"
+                                placeholder="https://..."
+                                value={formData.imageUrl}
+                                onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex gap-4 p-8 bg-background-soft border-t border-border/50 shrink-0">
+                        <button
+                            type="button"
+                            onClick={onClose}
+                            className="h-11 flex-1 rounded-xl border border-border text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:bg-background transition-all"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            disabled={createMutation.isPending}
+                            className="h-11 flex-[2] rounded-xl bg-primary text-white text-[10px] font-bold uppercase tracking-widest shadow-minimal hover:bg-primary/90 active:scale-95 transition-all flex items-center justify-center gap-2"
+                        >
+                            {createMutation.isPending ? <KuntalLoader variant="small" /> : 'Create Pool'}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     );
 };

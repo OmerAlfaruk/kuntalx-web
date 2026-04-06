@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from 'react';
 import { useReactTable, getCoreRowModel, getPaginationRowModel, createColumnHelper } from '@tanstack/react-table';
-import { StatCard, Badge, GlassModal } from '../../../shared/components/UI';
+import { StatCard, Badge } from '../../../shared/components/UI';
 import { useAuth } from '../../../lib/auth-context';
 import { useFarmers } from '../hooks/use-farmers';
 import { FarmersList } from '../components/FarmersList';
@@ -69,41 +69,45 @@ export const FarmersPage = () => {
     const pageSize = table.getState().pagination.pageSize;
 
     return (
-        <div className="space-y-12 animate-in fade-in duration-500">
+        <div className="space-y-12 animate-in fade-in duration-500 pb-20">
             {/* Header Area */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-border/50">
                 <div className="space-y-1">
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">Producer Registry</p>
-                    <h1 className="text-4xl font-bold text-foreground tracking-tight">Farmers</h1>
+                    <h1 className="text-[28px] font-bold text-foreground tracking-tight">Farmers</h1>
+                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Registry of federated producers and verified yield capacity</p>
                 </div>
                 <FarmerActionButtons onRegister={handleRegisterClick} userRole={user?.role || ''} />
             </div>
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
                 <StatCard
-                    title="Total Nodes"
+                    title="Total Farmers"
                     value={farmers.length}
                     icon="👥"
                     description="Federated producers"
+                    delay={0.1}
                 />
                 <StatCard
-                    title="Active Trace"
+                    title="Active"
                     value={activeCount}
                     icon="✅"
                     description="Verified status"
+                    delay={0.2}
                 />
                 <StatCard
                     title="Net Capacity"
                     value={`${totalYieldCapacity.toLocaleString()} qt`}
                     icon="🌾"
-                    description="Aggregate yield potential"
+                    description="Aggregate potential"
+                    delay={0.3}
                 />
                 <StatCard
                     title="Pending"
                     value={farmers.filter(f => f.status === 'pending').length}
                     icon="⏳"
                     description="Awaiting authentication"
+                    delay={0.4}
                 />
             </div>
 
@@ -123,107 +127,107 @@ export const FarmersPage = () => {
             </div>
 
             {/* Detail Identity Identity */}
-            <GlassModal
-                isOpen={!!selectedFarmer}
-                onClose={() => setSelectedFarmer(null)}
-                title="Farmer Identity"
-                maxWidth="max-w-3xl"
-                footer={
-                    <div className="flex gap-3 w-full justify-end">
-                        <button
-                            onClick={() => setSelectedFarmer(null)}
-                            className="px-6 py-2 rounded-lg hover:bg-background-soft text-[10px] font-bold uppercase tracking-widest border border-border transition-colors"
-                        >
-                            Dismiss
-                        </button>
-                        {selectedFarmer?.status === 'pending' && (
-                            <button className="px-6 py-2 rounded-lg bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-emerald-600 transition-colors flex items-center gap-2">
-                                Verify Credentials
-                            </button>
-                        )}
-                        {selectedFarmer?.status === 'active' && (
-                            <button className="px-6 py-2 rounded-lg bg-primary text-white text-[10px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors flex items-center gap-2">
-                                Universal Edit
-                            </button>
-                        )}
-                    </div>
-                }
-            >
-                {selectedFarmer && (
-                    <div className="space-y-12 py-4">
-                        <div className="flex gap-8 items-center border-b border-border/50 pb-8">
-                            <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center text-3xl text-primary font-bold">
-                                {(selectedFarmer.name && selectedFarmer.name[0]) || 'F'}
-                            </div>
-                            <div className="space-y-1">
-                                <p className="text-[9px] font-bold text-primary uppercase tracking-[0.2em]">NODE: {selectedFarmer.id.substring(0, 12)}</p>
-                                <h2 className="text-3xl font-bold text-foreground tracking-tight">{selectedFarmer.name}</h2>
-                                <div className="pt-1">
-                                    <Badge variant={selectedFarmer.status === 'active' ? 'success' : 'warning'} className="text-[10px] px-3 font-bold uppercase tracking-widest rounded-full">
-                                        {selectedFarmer.status}
-                                    </Badge>
-                                </div>
-                            </div>
+            {selectedFarmer && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-md p-4 animate-in fade-in duration-300">
+                    <div className="card-minimal w-full max-w-3xl overflow-hidden shadow-2xl animate-in zoom-in-95 duration-500 flex flex-col max-h-[90vh]">
+                        <div className="px-8 py-6 border-b border-border/50 bg-background-soft shrink-0">
+                            <h2 className="text-[14px] font-bold text-foreground tracking-tight">Farmer Detail</h2>
+                            <p className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest mt-1">Review producer credentials</p>
                         </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                            <div className="space-y-6">
-                                <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1">Identity Details</h3>
-                                <div className="space-y-6 bg-background-soft/50 rounded-2xl p-6 border border-border/50">
-                                    <div className="space-y-1">
-                                        <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Phone Number</p>
-                                        <p className="font-bold text-lg text-foreground">{selectedFarmer.phone}</p>
-                                    </div>
-                                    <div className="space-y-1">
-                                        <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Registration Date</p>
-                                        <p className="font-bold text-lg text-foreground">
-                                            {selectedFarmer.joinDate ? new Date(selectedFarmer.joinDate).toLocaleDateString() : 'Legacy Record'}
-                                        </p>
-                                    </div>
-                                    <div className="space-y-1">
-                                        <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Location</p>
-                                        <p className="font-bold text-lg text-foreground">{selectedFarmer.woreda}, {selectedFarmer.region}</p>
+                        
+                        <div className="p-8 space-y-12 overflow-y-auto custom-scrollbar">
+                            <div className="flex gap-6 items-center border-b border-border/50 pb-8">
+                                <div className="w-16 h-16 bg-primary/10 border border-primary/20 rounded-2xl flex items-center justify-center text-xl text-primary font-bold shrink-0 shadow-minimal">
+                                    {(selectedFarmer.name && selectedFarmer.name[0]) || 'F'}
+                                </div>
+                                <div className="space-y-1">
+                                    <p className="text-[10px] font-bold text-primary uppercase tracking-widest">#{selectedFarmer.id.substring(0, 12)}</p>
+                                    <h2 className="text-[20px] font-bold text-foreground tracking-tight">{selectedFarmer.name}</h2>
+                                    <div className="pt-1">
+                                        <Badge variant={selectedFarmer.status === 'active' ? 'success' : 'warning'}>
+                                            {selectedFarmer.status}
+                                        </Badge>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="space-y-6">
-                                <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] ml-1">Capacity Matrix</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-4">
-                                    <div className="bg-white dark:bg-card border border-border rounded-xl p-6 flex justify-between items-center group shadow-minimal">
+                                    <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">Identity Details</h3>
+                                    <div className="space-y-6 bg-background-soft rounded-2xl p-6 border border-border/50">
                                         <div className="space-y-1">
-                                            <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Farm Size</p>
-                                            <p className="font-bold text-2xl text-foreground">{selectedFarmer.farmSize} <span className="text-xs font-normal opacity-40 ml-1">HA</span></p>
+                                            <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">Phone Number</p>
+                                            <p className="font-bold text-[14px] text-foreground tracking-tight">{selectedFarmer.phone}</p>
                                         </div>
-                                        <div className="text-2xl text-muted-foreground/30">🗺️</div>
-                                    </div>
-                                    <div className="bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-xl p-6 flex justify-between items-center group shadow-minimal">
                                         <div className="space-y-1">
-                                            <p className="text-[9px] font-bold text-primary uppercase tracking-widest">Yield Capacity</p>
-                                            <p className="font-bold text-3xl text-primary">{selectedFarmer.capacity} <span className="text-xs font-normal opacity-40 ml-1">QT</span></p>
+                                            <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">Registration Date</p>
+                                            <p className="font-bold text-[14px] text-foreground tracking-tight">
+                                                {selectedFarmer.joinDate ? new Date(selectedFarmer.joinDate).toLocaleDateString() : 'Legacy Record'}
+                                            </p>
                                         </div>
-                                        <div className="text-2xl text-primary/30">🌾</div>
+                                        <div className="space-y-1">
+                                            <p className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest">Location</p>
+                                            <p className="font-bold text-[14px] text-foreground tracking-tight">{selectedFarmer.woreda}, {selectedFarmer.region}</p>
+                                        </div>
                                     </div>
+                                </div>
+
+                                <div className="space-y-4">
+                                    <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest ml-1">Capacity Matrix</h3>
+                                    <div className="space-y-3">
+                                        <div className="bg-background border border-border rounded-2xl p-6 flex justify-between items-center shadow-minimal">
+                                            <div className="space-y-1">
+                                                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Farm Size</p>
+                                                <p className="font-bold text-[18px] text-foreground tracking-tight">{selectedFarmer.farmSize} <span className="text-[11px] font-bold text-muted-foreground ml-1">HA</span></p>
+                                            </div>
+                                            <div className="text-2xl text-muted-foreground/30">🗺️</div>
+                                        </div>
+                                        <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 flex justify-between items-center shadow-minimal">
+                                            <div className="space-y-1">
+                                                <p className="text-[10px] font-bold text-primary uppercase tracking-widest">Yield Capacity</p>
+                                                <p className="font-bold text-[22px] text-primary tracking-tight">{selectedFarmer.capacity} <span className="text-[11px] font-bold text-primary/50 ml-1">QT</span></p>
+                                            </div>
+                                            <div className="text-2xl opacity-80">🌾</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-background-soft border border-border/50 p-6 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                <div className="space-y-1">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+                                        <p className="text-[10px] font-bold text-foreground uppercase tracking-widest">Compliance Verified</p>
+                                    </div>
+                                    <p className="text-[11px] font-medium text-muted-foreground">Authenticated for regional trade network protocols.</p>
+                                </div>
+                                <div className="w-10 h-10 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-center justify-center text-lg text-emerald-500 shrink-0">
+                                    🛡️
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-foreground text-background dark:bg-white dark:text-primary p-8 rounded-2xl flex items-center justify-between shadow-lg">
-                            <div className="space-y-1">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] opacity-60">Compliance Verified</p>
-                                </div>
-                                <p className="text-sm font-bold tracking-tight opacity-90 uppercase">Authenticated for regional trade network protocols.</p>
-                            </div>
-                            <div className="w-12 h-12 bg-background/10 rounded-xl flex items-center justify-center text-xl border border-background/20 opacity-60">
-                                🛡️
-                            </div>
+                        <div className="flex gap-4 p-8 bg-background-soft border-t border-border/50 shrink-0 justify-end">
+                            <button
+                                onClick={() => setSelectedFarmer(null)}
+                                className="h-11 px-8 rounded-xl border border-border text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:bg-background transition-all"
+                            >
+                                Close
+                            </button>
+                            {selectedFarmer?.status === 'pending' && (
+                                <button className="h-11 px-8 rounded-xl bg-emerald-500 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-emerald-600 active:scale-95 transition-all shadow-minimal">
+                                    Verify Farmer
+                                </button>
+                            )}
+                            {selectedFarmer?.status === 'active' && (
+                                <button className="h-11 px-8 rounded-xl bg-primary text-white text-[10px] font-bold uppercase tracking-widest hover:bg-primary/90 active:scale-95 transition-all shadow-minimal">
+                                    Edit Profile
+                                </button>
+                            )}
                         </div>
                     </div>
-                )}
-            </GlassModal>
+                </div>
+            )}
         </div>
     );
 };
-

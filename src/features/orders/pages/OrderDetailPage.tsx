@@ -75,12 +75,12 @@ export const OrderDetailPage = () => {
     if (!order) {
         return (
             <div className="flex flex-col items-center justify-center py-24 animate-fade-in text-center">
-                <div className="w-16 h-16 bg-background-soft rounded-full flex items-center justify-center text-2xl mb-6">📦</div>
-                <h2 className="text-xl font-bold mb-2">Order not found</h2>
-                <p className="text-sm text-muted-foreground mb-8">The requested order record could not be synced.</p>
+                <div className="w-20 h-20 bg-background-soft rounded-full border border-border flex items-center justify-center text-3xl mb-8 shadow-minimal">📦</div>
+                <h2 className="text-xl font-bold mb-3 uppercase tracking-tight">Order not found</h2>
+                <p className="text-sm text-muted-foreground mb-10 font-medium">The requested order record could not be synced from the registry.</p>
                 <button
                     onClick={() => navigate({ to: '/orders' })}
-                    className="h-10 px-6 border border-border rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-background-soft transition-all"
+                    className="h-12 px-10 border border-border rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-background-soft transition-all active:scale-95 shadow-minimal"
                 >
                     Back to Orders
                 </button>
@@ -108,34 +108,32 @@ export const OrderDetailPage = () => {
         <>
         <div className="space-y-12 animate-in fade-in duration-500 pb-12 print:hidden">
             {/* Header Area */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div className="flex items-center gap-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-border/50 pb-12">
+                <div className="flex items-center gap-8">
                     <button
                         onClick={() => navigate({ to: '..' })}
-                        className="w-10 h-10 rounded-lg flex items-center justify-center bg-card border border-border shadow-minimal hover:bg-background-soft transition-all"
+                        className="w-12 h-12 rounded-xl flex items-center justify-center bg-background-soft border border-border shadow-minimal hover:bg-primary hover:text-white transition-all group active:scale-95 shrink-0"
                     >
-                        ←
+                        <span className="group-hover:-translate-x-1 transition-transform text-lg">←</span>
                     </button>
-                    <div className="space-y-1.5 text-left">
-                        <div className="flex items-center gap-4">
-                            <h1 className="text-3xl font-bold tracking-tight text-foreground">Order Overview</h1>
-                            <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-primary/10 text-primary border border-primary/20">
-                                {currentStatus.replace('_', ' ')}
-                            </span>
+                    <div className="space-y-2 text-left">
+                        <div className="space-y-1">
+                            <p className="text-[10px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Order Registry</p>
+                            <h1 className="text-3xl font-bold tracking-tight text-foreground uppercase">Order Overview</h1>
                         </div>
-                        <p className="text-xs text-muted-foreground/60 font-medium">
-                            Order ID: {order.id.slice(0, 16).toUpperCase()} • Reference: <span className="text-primary font-bold tracking-widest">{order.referenceCode || 'PENDING'}</span> • Submitted {new Date(order.createdAt).toLocaleDateString()}
+                        <p className="text-[11px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">
+                            ID: {order.id.slice(0, 16).toUpperCase()} · Ref: <span className="text-primary">{order.referenceCode || 'PENDING'}</span> · {new Date(order.createdAt).toLocaleDateString()}
                         </p>
                     </div>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-3 no-print">
                     {user?.role === 'buyer' && (currentStatus === 'pending' || currentStatus === 'accepted') && (
-                        <div className="flex flex-wrap gap-2 sm:gap-3 w-full sm:w-auto">
+                        <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                             <button
                                 onClick={() => handleStatusUpdate('cancelled' as OrderStatus)}
                                 disabled={isUpdating}
-                                className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest bg-card border border-rose-200 text-rose-500 rounded-lg hover:bg-rose-50 transition-all"
+                                className="h-11 px-6 text-[10px] font-bold uppercase tracking-widest bg-background-soft border border-rose-500/20 text-rose-500 rounded-xl hover:bg-rose-500/5 transition-all active:scale-95"
                             >
                                 Cancel Order
                             </button>
@@ -143,7 +141,7 @@ export const OrderDetailPage = () => {
                             {currentStatus === 'accepted' && (!order.paymentStatus || (order.paymentStatus !== 'paid' && order.paymentStatus !== 'released')) && (
                                 <button
                                     onClick={() => setIsPaymentModalOpen(true)}
-                                    className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest bg-primary text-white rounded-lg shadow-minimal hover:bg-primary/90 transition-all"
+                                    className="h-11 px-6 text-[10px] font-bold uppercase tracking-widest bg-primary text-white rounded-xl shadow-minimal hover:bg-primary/90 transition-all active:scale-95"
                                 >
                                     Fulfill Payment
                                 </button>
@@ -152,21 +150,20 @@ export const OrderDetailPage = () => {
                     )}
 
                     {user?.role === 'association_admin' && (
-                        <div className="flex flex-wrap gap-2 sm:gap-3 w-full sm:w-auto">
+                        <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                             {currentStatus === 'pending' && (
                                 <>
-                                    {/* Admin can accept/reject regardless of payment — payment is required for ACCEPTED → IN_PROGRESS */}
                                     <button
                                         onClick={() => handleStatusUpdate('accepted')}
                                         disabled={isUpdating}
-                                        className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest bg-emerald-500 text-white rounded-lg shadow-minimal hover:bg-emerald-600 transition-all"
+                                        className="h-11 px-6 text-[10px] font-bold uppercase tracking-widest bg-emerald-500 text-white rounded-xl shadow-minimal hover:bg-emerald-600 transition-all active:scale-95 disabled:opacity-50"
                                     >
                                         Accept Order
                                     </button>
                                     <button
                                         onClick={() => handleStatusUpdate('rejected')}
                                         disabled={isUpdating}
-                                        className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest bg-card border border-rose-200 text-rose-500 rounded-lg hover:bg-rose-50 transition-all"
+                                        className="h-11 px-6 text-[10px] font-bold uppercase tracking-widest bg-background-soft border border-rose-500/20 text-rose-500 rounded-xl hover:bg-rose-500/5 transition-all active:scale-95 disabled:opacity-50"
                                     >
                                         Reject
                                     </button>
@@ -179,13 +176,13 @@ export const OrderDetailPage = () => {
                                         <button
                                             onClick={() => handleStatusUpdate('in_progress')}
                                             disabled={isUpdating}
-                                            className="h-10 px-8 text-[10px] font-bold uppercase tracking-widest bg-primary text-white rounded-lg shadow-minimal hover:bg-primary/90 transition-all"
+                                            className="h-11 px-8 text-[10px] font-bold uppercase tracking-widest bg-primary text-white rounded-xl shadow-minimal hover:bg-primary/90 transition-all active:scale-95 disabled:opacity-50"
                                         >
                                             Start Processing
                                         </button>
                                     ) : (
-                                        <div className="h-10 px-4 bg-orange-500/10 border border-orange-500/20 rounded-lg flex items-center gap-2 text-orange-600">
-                                            <span className="text-sm">⚠️</span>
+                                        <div className="h-11 px-5 bg-orange-500/5 border border-orange-500/20 rounded-xl flex items-center gap-3 text-orange-600">
+                                            <span className="text-base">⚠️</span>
                                             <span className="text-[10px] font-bold uppercase tracking-widest">Awaiting Buyer Payment</span>
                                         </div>
                                     )}
@@ -195,7 +192,7 @@ export const OrderDetailPage = () => {
                             {currentStatus === 'in_progress' && (
                                 <button
                                     onClick={() => setIsShipmentModalOpen(true)}
-                                    className="h-10 px-8 text-[10px] font-bold uppercase tracking-widest bg-indigo-500 text-white rounded-lg shadow-minimal hover:bg-indigo-600 transition-all"
+                                    className="h-11 px-8 text-[10px] font-bold uppercase tracking-widest bg-indigo-500 text-white rounded-xl shadow-minimal hover:bg-indigo-600 transition-all active:scale-95"
                                 >
                                     Dispatch Shipment
                                 </button>
@@ -205,7 +202,7 @@ export const OrderDetailPage = () => {
                                 <button
                                     onClick={() => handleStatusUpdate('delivered')}
                                     disabled={isUpdating}
-                                    className="h-10 px-8 text-[10px] font-bold uppercase tracking-widest bg-teal-500 text-white rounded-lg shadow-minimal hover:bg-teal-600 transition-all"
+                                    className="h-11 px-8 text-[10px] font-bold uppercase tracking-widest bg-teal-500 text-white rounded-xl shadow-minimal hover:bg-teal-600 transition-all active:scale-95 disabled:opacity-50"
                                 >
                                     Confirm Delivery
                                 </button>
@@ -215,25 +212,24 @@ export const OrderDetailPage = () => {
                                 <div className="flex gap-3">
                                     <button
                                         onClick={() => navigate({ to: `/payout-distribution/${order.id}` as any })}
-                                        className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest bg-amber-500 text-white rounded-lg shadow-minimal hover:bg-amber-600 transition-all"
+                                        className="h-11 px-6 text-[10px] font-bold uppercase tracking-widest bg-amber-500 text-white rounded-xl shadow-minimal hover:bg-amber-600 transition-all active:scale-95"
                                     >
                                         Distribute Payouts
                                     </button>
                                     <button
                                         onClick={() => handleStatusUpdate('fulfilled')}
                                         disabled={isUpdating}
-                                        className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest bg-card border border-emerald-500/20 text-emerald-600 rounded-lg hover:bg-emerald-50 transition-all"
+                                        className="h-11 px-6 text-[10px] font-bold uppercase tracking-widest bg-background-soft border border-emerald-500/20 text-emerald-600 rounded-xl hover:bg-emerald-500/5 transition-all active:scale-95 disabled:opacity-50"
                                     >
                                         Archive
                                     </button>
                                 </div>
                             )}
 
-                            {/* Payout distribution only available after order is fulfilled */}
                             {currentStatus === 'fulfilled' && order.paymentStatus?.toLowerCase() === 'paid' && (
                                 <button
                                     onClick={() => navigate({ to: `/payout-distribution/${order.id}` as any })}
-                                    className="h-10 px-6 text-[10px] font-bold uppercase tracking-widest bg-amber-500 text-white rounded-lg shadow-minimal hover:bg-amber-600 transition-all"
+                                    className="h-11 px-6 text-[10px] font-bold uppercase tracking-widest bg-amber-500 text-white rounded-xl shadow-minimal hover:bg-amber-600 transition-all active:scale-95"
                                 >
                                     View Payout Distribution
                                 </button>
@@ -247,29 +243,32 @@ export const OrderDetailPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                 <div className="lg:col-span-8 space-y-10">
                     {/* Metrics */}
-                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div className="card-minimal p-6 space-y-2 text-left">
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Total Value</p>
-                            <p className="text-xl font-bold tracking-tight">ETB {(order.totalPrice || 0).toLocaleString()}</p>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div className="card-minimal p-10 space-y-4 text-left hover:border-primary/30 transition-colors">
+                            <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Settlement Value</p>
+                            <p className="text-3xl font-bold tracking-tight text-foreground tabular-nums">ETB {(order.totalPrice || 0).toLocaleString()}</p>
                         </div>
-                        <div className="card-minimal p-6 space-y-2 text-left">
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Volume</p>
-                            <p className="text-xl font-bold tracking-tight">{order.requestedQuantityKuntal.toLocaleString()} QT</p>
+                        <div className="card-minimal p-10 space-y-4 text-left hover:border-primary/30 transition-colors">
+                            <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Contracted Volume</p>
+                            <p className="text-3xl font-bold tracking-tight text-foreground tabular-nums">{order.requestedQuantityKuntal.toLocaleString()} <span className="text-[11px] font-bold text-muted-foreground/20">QT</span></p>
                         </div>
-                        <div className="card-minimal p-6 space-y-2 text-left">
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Unit Price</p>
-                            <p className="text-xl font-bold tracking-tight">ETB {(order.pricePerKuntal || 0).toLocaleString()}</p>
+                        <div className="card-minimal p-10 space-y-4 text-left hover:border-primary/30 transition-colors">
+                            <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Price Per Unit</p>
+                            <p className="text-3xl font-bold tracking-tight text-foreground tabular-nums">ETB {(order.pricePerKuntal || 0).toLocaleString()}</p>
                         </div>
-                        <div className="card-minimal p-6 space-y-2 text-left">
-                            <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Pool ID</p>
-                            <p className="text-sm font-mono font-bold text-primary truncate">#{order.aggregationId?.slice(0, 8).toUpperCase()}</p>
+                        <div className="card-minimal p-10 space-y-4 text-left hover:border-primary/30 transition-colors">
+                            <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Collection Pool</p>
+                            <p className="text-[13px] font-mono font-bold text-primary truncate tracking-widest uppercase">#{order.aggregationId?.slice(0, 8).toUpperCase()}</p>
                         </div>
                     </div>
 
                     {/* Transaction Core — visible to all roles */}
-                    <div className="card-minimal p-8 space-y-8 text-left">
-                        <div className="flex items-center gap-3 pb-6 border-b border-border/50">
-                            <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Transaction Details</h3>
+                    <div className="card-minimal p-10 space-y-10 text-left">
+                        <div className="flex items-center justify-between pb-8 border-b border-border/50">
+                            <div className="space-y-1">
+                                <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60">Transaction Record</h3>
+                                <p className="font-bold text-lg text-foreground tracking-tight">Counterparty Details</p>
+                            </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Buyer sees: who they're buying from (seller) */}
@@ -336,12 +335,15 @@ export const OrderDetailPage = () => {
                     </div>
 
                     {/* Specifications */}
-                    <div className="card-minimal p-8 space-y-8 text-left">
-                        <div className="flex items-center gap-3 pb-6 border-b border-border/50">
-                            <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Requirements</h3>
+                    <div className="card-minimal p-10 space-y-10 text-left">
+                        <div className="flex items-center justify-between pb-8 border-b border-border/50">
+                            <div className="space-y-1">
+                                <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60">Quality Protocol</h3>
+                                <p className="font-bold text-lg text-foreground tracking-tight">Requirements</p>
+                            </div>
                         </div>
-                        <div className="bg-background-soft/50 p-6 rounded-xl border border-border/50">
-                            <p className="text-sm font-medium leading-relaxed text-muted-foreground/80 lowercase first-letter:uppercase">
+                        <div className="bg-background-soft p-8 rounded-2xl border border-border/50 shadow-inner">
+                            <p className="text-[15px] font-medium leading-relaxed text-foreground/70">
                                 {order.qualityRequirements || 'Standard platform quality protocols apply. No additional criteria identified.'}
                             </p>
                         </div>
@@ -350,21 +352,24 @@ export const OrderDetailPage = () => {
 
                 {/* Sidebar */}
                 <div className="lg:col-span-4 space-y-10">
-                    <div className="card-minimal p-8 space-y-10 text-left">
-                        <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">Timeline</h3>
+                    <div className="card-minimal p-10 space-y-10 text-left">
+                        <div className="space-y-1 pb-8 border-b border-border/50">
+                            <h3 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60">Flow Registry</h3>
+                            <p className="font-bold text-lg text-foreground tracking-tight">Order Timeline</p>
+                        </div>
                         <div className="space-y-8 relative">
-                            <div className="absolute left-[7px] top-6 bottom-4 w-px bg-border/40"></div>
+                            <div className="absolute left-[7px] top-2 bottom-0 w-px bg-border/30"></div>
                             {steps.map((step, idx) => {
                                 const isDone = currentStatus === step.status || currentStepIndex > steps.findIndex(s => s.status === step.status);
                                 const isCurrent = currentStepIndex === steps.findIndex(s => s.status === step.status);
 
                                 return (
-                                    <div key={idx} className={`relative flex gap-6 pb-2 last:pb-0 ${!isDone && !isCurrent ? 'opacity-30' : ''}`}>
-                                        <div className={`w-4 h-4 rounded-full border-2 bg-background relative z-10 mt-0.5 transition-all ${isCurrent ? 'border-primary' : isDone ? 'border-primary bg-primary' : 'border-border'}`}></div>
+                                    <div key={idx} className={`relative flex gap-6 pb-2 last:pb-0 ${!isDone && !isCurrent ? 'opacity-20' : ''}`}>
+                                        <div className={`w-4 h-4 rounded-full border-2 bg-background relative z-10 mt-0.5 shrink-0 transition-all duration-300 ${isCurrent ? 'border-primary shadow-[0_0_8px_rgba(var(--primary),0.3)]' : isDone ? 'border-primary bg-primary' : 'border-border'}`}></div>
                                         <div className="space-y-1">
-                                            <p className={`text-[10px] font-bold uppercase tracking-widest ${isCurrent || isDone ? 'text-foreground' : 'text-muted-foreground'}`}>{step.label}</p>
-                                            <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/40">
-                                                {isDone ? 'Finished' : isCurrent ? 'Active' : 'Pending'}
+                                            <p className={`text-[13px] font-bold uppercase tracking-tight ${isCurrent ? 'text-primary' : isDone ? 'text-foreground' : 'text-muted-foreground'}`}>{step.label}</p>
+                                            <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-muted-foreground/20 leading-none">
+                                                {isDone ? '✓ Completed' : isCurrent ? '● Active' : '○ Queued'}
                                             </p>
                                         </div>
                                     </div>
@@ -373,11 +378,13 @@ export const OrderDetailPage = () => {
                         </div>
                     </div>
 
-                    <div className="card-minimal p-6 text-left">
-                        <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-2 opacity-60">System Log</p>
-                        <p className="text-[9px] font-mono text-muted-foreground/40 break-all leading-tight uppercase font-bold">
-                            ORD_{order.id.replace(/-/g, '').toUpperCase()}
-                        </p>
+                    <div className="card-minimal p-8 text-left space-y-4">
+                        <p className="text-[9px] font-bold text-muted-foreground/30 uppercase tracking-widest leading-none">Security Hash</p>
+                        <div className="p-4 bg-background-soft rounded-xl border border-border/50 shadow-inner">
+                            <p className="text-[9px] font-mono text-primary/40 break-all leading-tight uppercase font-bold tracking-widest">
+                                ORD_{order.id.replace(/-/g, '').toUpperCase()}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -386,9 +393,12 @@ export const OrderDetailPage = () => {
             {isPaymentModalOpen && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-md p-4 animate-in fade-in duration-300">
                     <div className="bg-card w-full max-w-lg rounded-2xl border border-border shadow-2xl p-10 space-y-8 animate-in zoom-in-95 duration-300">
-                        <div className="flex justify-between items-center">
-                            <h2 className="text-xl font-bold tracking-tight">Payment Channel</h2>
-                            <button onClick={() => setIsPaymentModalOpen(false)} className="text-muted-foreground hover:text-foreground">✕</button>
+                        <div className="flex justify-between items-center pb-6 border-b border-border/50">
+                            <div className="space-y-1">
+                                <p className="text-[10px] font-bold text-muted-foreground/40 uppercase tracking-widest leading-none">Settlement</p>
+                                <h2 className="text-xl font-bold tracking-tight uppercase">Payment Channel</h2>
+                            </div>
+                            <button onClick={() => setIsPaymentModalOpen(false)} className="w-9 h-9 rounded-xl border border-border bg-background-soft flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background transition-all active:scale-95">✕</button>
                         </div>
 
                         <div className="space-y-3">
@@ -614,11 +624,11 @@ export const OrderDetailPage = () => {
             )}
 
             {/* Footer Status */}
-            <div className="pt-10 border-t border-border/40 flex justify-between items-center text-[10px] font-bold text-muted-foreground/40 uppercase tracking-widest">
-                <p>KuntalX System</p>
-                <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    Verified
+            <div className="pt-12 border-t border-border/30 flex justify-between items-center text-[9px] font-bold text-muted-foreground/20 uppercase tracking-widest leading-none">
+                <p>© 2026 KuntalX Ethiopia · Order Registry</p>
+                <div className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/40 shadow-[0_0_6px_rgba(16,185,129,0.3)]" />
+                    <span>Secure Settlement Active</span>
                 </div>
             </div>
         </div>

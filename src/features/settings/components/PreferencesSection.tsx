@@ -19,34 +19,34 @@ const SettingsItem = ({
     subtitle?: string;
     children?: React.ReactNode;
 }) => (
-    <div className="group/item flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-6 border-b border-border/50 last:border-0 hover:bg-background-soft transition-all duration-300 px-4 -mx-4 sm:px-0 sm:mx-0 text-left">
-        <div className="flex items-center gap-4 flex-1">
-            <div className="w-9 h-9 rounded-lg bg-background-soft border border-border/50 flex items-center justify-center text-primary shrink-0 group-hover/item:border-primary/30 transition-all">
-                <Icon className="w-4 h-4" />
+    <div className="group/item flex flex-col sm:flex-row sm:items-center justify-between gap-6 py-8 border-b border-border/50 last:border-0 hover:bg-background-soft/30 transition-all duration-300 px-6 -mx-6 sm:px-0 sm:mx-0 text-left rounded-xl">
+        <div className="flex items-center gap-6 flex-1">
+            <div className="w-11 h-11 rounded-xl bg-primary/5 border border-primary/20 flex items-center justify-center text-primary shrink-0 group-hover/item:bg-primary group-hover/item:text-white transition-all shadow-minimal">
+                <Icon className="w-5 h-5" />
             </div>
-            <div className="space-y-0.5 min-w-0">
-                <h4 className="text-[10px] font-bold text-foreground uppercase tracking-widest">
+            <div className="space-y-1 min-w-0">
+                <h4 className="text-[11px] font-bold text-foreground uppercase tracking-widest">
                     {title}
                 </h4>
                 {subtitle && (
-                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest opacity-40">
+                    <p className="text-[10px] text-muted-foreground/60 font-bold uppercase tracking-widest leading-none mt-1">
                         {subtitle}
                     </p>
                 )}
             </div>
         </div>
-        <div className="flex items-center gap-3 w-full sm:w-auto sm:justify-end">
+        <div className="flex items-center gap-4 w-full sm:w-auto sm:justify-end">
             {children}
         </div>
     </div>
 );
 
 const SectionHeader = ({ title }: { title: string }) => (
-    <div className="mb-6 flex items-center gap-4">
-        <h2 className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] shrink-0 text-left">
+    <div className="mb-8 flex items-center gap-4">
+        <h2 className="text-[10px] font-bold text-primary uppercase tracking-widest shrink-0 text-left">
             {title}
         </h2>
-        <div className="h-px flex-1 bg-border/40" />
+        <div className="h-px flex-1 bg-border/50" />
     </div>
 );
 
@@ -63,28 +63,31 @@ export const PreferencesSection: React.FC<PreferencesSectionProps> = memo(({
     ];
 
     return (
-        <section className="space-y-8">
-            <SectionHeader title="Appearance" />
-            <div className="card-minimal p-4 sm:p-8">
+        <section className="space-y-6">
+            <SectionHeader title="Preferences" />
+            <div className="card-minimal p-4 sm:p-10 relative overflow-hidden transition-all hover:border-primary/20">
                 <div className="divide-y divide-border/50">
-                    <SettingsItem icon={theme === "dark" ? MoonIcon : SunIcon} title="Theme Mode" subtitle={theme === "dark" ? "Dark Theme" : "Light Theme"}>
-                        <button
-                            onClick={onThemeToggle}
-                            className={`w-10 h-5 rounded-full transition-all relative ${theme === "dark" ? "bg-primary" : "bg-muted-foreground/20"}`}
-                        >
-                            <div className={`absolute top-1 w-3 h-3 rounded-full bg-white transition-all ${theme === "dark" ? "left-6" : "left-1"}`} />
-                        </button>
+                    <SettingsItem icon={theme === "dark" ? MoonIcon : SunIcon} title="Appearance" subtitle={theme === "dark" ? "Dark Mode" : "Light Mode"}>
+                        <div className="flex items-center gap-4">
+                            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{theme === 'dark' ? 'Dark' : 'Light'}</span>
+                            <button
+                                onClick={onThemeToggle}
+                                className={`w-14 h-7 rounded-full transition-all relative border border-border shadow-inner p-1 ${theme === "dark" ? "bg-primary/20 border-primary/20" : "bg-card"}`}
+                            >
+                                <div className={`w-5 h-5 rounded-full shadow-minimal transition-all duration-300 transform ${theme === "dark" ? "translate-x-7 bg-primary" : "translate-x-0 bg-muted-foreground/30"}`} />
+                            </button>
+                        </div>
                     </SettingsItem>
 
-                    <SettingsItem icon={GlobeAltIcon} title="Language Selection" subtitle="App Translation">
-                        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+                    <SettingsItem icon={GlobeAltIcon} title="Language" subtitle="Select Language">
+                        <div className="flex flex-wrap gap-3 w-full sm:w-auto">
                             {languages.map(({ code, label }) => (
                                 <button
                                     key={code}
                                     onClick={() => onLanguageChange(code)}
-                                    className={`flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all border ${language === code
-                                            ? "bg-primary text-white border-primary"
-                                            : "bg-background-soft border-border text-muted-foreground hover:bg-muted/10"
+                                    className={`flex-1 sm:flex-none h-11 px-6 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all ${language === code
+                                            ? "bg-primary text-white shadow-minimal"
+                                            : "bg-background-soft border border-border text-muted-foreground hover:bg-background hover:text-foreground active:scale-95"
                                         }`}
                                 >
                                     {label}

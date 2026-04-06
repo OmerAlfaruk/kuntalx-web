@@ -32,18 +32,18 @@ export const StatCard: React.FC<StatCardProps> = ({
 }) => {
     return (
         <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay }}
-            className={`card-minimal p-6 ${className}`}
+            transition={{ duration: 0.4, delay }}
+            className={`card-minimal p-6 hover:shadow-card transition-all duration-300 group ${className}`}
         >
-            <div className="flex justify-between items-start mb-4">
-                <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-primary text-xl border border-primary shadow-[0_0_15px_rgba(var(--primary),0.3)]">
+            <div className="flex justify-between items-start mb-6">
+                <div className="w-11 h-11 bg-background-soft rounded-lg flex items-center justify-center text-primary text-xl border border-border shadow-minimal group-hover:bg-primary/10 transition-colors">
                     {icon}
                 </div>
                 {trend && (
-                    <div className={`px-2 py-0.5 rounded-full text-[10px] font-bold border transition-colors ${trend.isUp
-                        ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+                    <div className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-colors ${trend.isUp
+                        ? 'bg-primary/10 text-primary border-primary/20'
                         : 'bg-rose-500/10 text-rose-500 border-rose-500/20'
                         }`}>
                         {trend.isUp ? '↑' : '↓'} {Math.abs(trend.value)}%
@@ -52,10 +52,10 @@ export const StatCard: React.FC<StatCardProps> = ({
             </div>
 
             <div className="space-y-1">
-                <h3 className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-[0.2em]">{title}</h3>
-                <p className="text-2xl font-bold text-foreground tracking-tight">{value}</p>
+                <h3 className="text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest font-display">{title}</h3>
+                <p className="text-3xl font-display font-bold text-foreground tracking-tight">{value}</p>
                 {description && (
-                    <p className="text-xs text-muted-foreground/40 mt-2 line-clamp-2 leading-relaxed">
+                    <p className="text-[11px] font-medium text-muted-foreground/40 mt-3 line-clamp-2 leading-relaxed border-t border-border/50 pt-3">
                         {description}
                     </p>
                 )}
@@ -76,7 +76,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({ children, className = "", 
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className={`card-minimal p-6 border border-primary/20 bg-background/40 backdrop-blur-xl ${className}`} 
+            className={`glass-card p-6 border border-white/5 bg-background/60 shadow-premium ${className}`} 
             {...(props as any)}
         >
             {children}
@@ -93,18 +93,18 @@ interface PageHeaderProps {
 
 export const PageHeader: React.FC<PageHeaderProps> = ({ title, description, actions }) => {
     return (
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-border/50 mb-10">
-            <div className="space-y-1 min-w-0">
-                <h1 className="text-3xl font-bold text-foreground tracking-tight leading-tight">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-8 border-b border-border/50 mb-10 relative">
+            <div className="space-y-1.5 min-w-0">
+                <h1 className="text-3xl font-bold text-foreground tracking-tight">
                     {title}
                 </h1>
                 {description && (
-                    <p className="text-sm text-muted-foreground/60 max-w-2xl leading-relaxed">
+                    <p className="text-[11px] font-medium text-muted-foreground/60 max-w-2xl leading-relaxed uppercase tracking-widest">
                         {description}
                     </p>
                 )}
             </div>
-            {actions && <div className="flex flex-wrap items-center gap-3 w-full md:w-auto md:justify-end">{actions}</div>}
+            {actions && <div className="flex flex-wrap items-center gap-4 w-full md:w-auto md:justify-end animate-in fade-in duration-500">{actions}</div>}
         </div>
     );
 };
@@ -116,16 +116,16 @@ export const Badge: React.FC<{
 }> = ({ children, variant = 'primary', className = "" }) => {
     const variants = {
         primary: 'bg-primary/10 text-primary border-primary/20',
-        secondary: 'bg-secondary/10 text-secondary border-secondary/20',
-        success: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
-        warning: 'bg-amber-500/10 text-amber-500 border-amber-500/20',
+        secondary: 'bg-indigo-500/10 text-indigo-500 border-indigo-500/20',
+        success: 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20',
+        warning: 'bg-amber-500/10 text-amber-600 border-amber-500/20',
         error: 'bg-rose-500/10 text-rose-500 border-rose-500/20',
         gold: 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20',
-        outline: 'bg-muted/10 text-muted-foreground border-border'
+        outline: 'bg-muted/10 text-muted-foreground border-border/40'
     };
 
     return (
-        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold border transition-colors uppercase tracking-wider ${variants[variant]} ${className}`}>
+        <span className={`inline-flex items-center px-3 py-1 rounded-lg text-[9px] font-bold border transition-colors uppercase tracking-widest ${variants[variant]} ${className}`}>
             {children}
         </span>
     );

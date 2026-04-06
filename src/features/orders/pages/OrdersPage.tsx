@@ -60,7 +60,7 @@ export const OrdersPage = () => {
         columnHelper.accessor('id', {
             header: () => "Order ID",
             cell: info => (
-                <span className="font-bold text-primary block text-[11px] font-mono">
+                <span className="font-bold text-primary block text-[11px] tracking-widest uppercase">
                     #{info.getValue().substring(0, 8)}
                 </span>
             ),
@@ -69,7 +69,7 @@ export const OrdersPage = () => {
             id: 'association',
             header: () => "Association",
             cell: info => (
-                <span className="text-sm font-bold text-foreground">
+                <span className="text-[13px] font-bold text-foreground">
                     {info.getValue() || 'Regional Hub'}
                 </span>
             ),
@@ -78,7 +78,7 @@ export const OrdersPage = () => {
             id: 'aggregation',
             header: () => "Aggregation",
             cell: info => (
-                <span className="text-sm font-bold text-foreground opacity-80">
+                <span className="text-[13px] font-bold text-foreground opacity-80">
                     {info.getValue() || t('orders.unknownProduce')}
                 </span>
             ),
@@ -86,7 +86,7 @@ export const OrdersPage = () => {
         columnHelper.accessor('buyerName', {
             header: () => "Buyer",
             cell: info => (
-                <span className="text-sm font-bold text-foreground">
+                <span className="text-[13px] font-bold text-foreground">
                     {info.getValue() || (user?.role === 'buyer' ? user.fullName : 'Verified Partner')}
                 </span>
             ),
@@ -95,7 +95,7 @@ export const OrdersPage = () => {
             id: 'cropType',
             header: () => "Crop Type",
             cell: info => (
-                <Badge variant="outline" className="text-[11px] font-bold px-3 py-1 rounded-full border-primary/20 text-primary">
+                <Badge variant="outline" className="text-[10px] font-bold">
                     {info.getValue()}
                 </Badge>
             ),
@@ -111,14 +111,14 @@ export const OrdersPage = () => {
         columnHelper.accessor('totalPrice', {
             header: () => "Valuation",
             cell: info => (
-                <span className="font-bold text-sm text-foreground">ETB {info.getValue().toLocaleString()}</span>
+                <span className="font-bold text-xs text-foreground">ETB {info.getValue().toLocaleString()}</span>
             ),
         }),
         columnHelper.accessor('status', {
             id: 'status',
             header: () => "Status",
             cell: info => (
-                <Badge variant={getStatusVariant(info.getValue())} className="text-[11px] font-bold px-3 py-1 rounded-full capitalize">
+                <Badge variant={getStatusVariant(info.getValue())}>
                     {info.getValue().replace('_', ' ')}
                 </Badge>
             ),
@@ -131,7 +131,7 @@ export const OrdersPage = () => {
                 const isPendingBuyer = user?.role === 'buyer' && status === 'pending';
 
                 return (
-                    <div className="flex justify-end gap-3">
+                    <div className="flex justify-end gap-2">
                         {isPendingBuyer && (
                             <button
                                 onClick={(e) => {
@@ -140,16 +140,16 @@ export const OrdersPage = () => {
                                         updateStatus({ id: info.row.original.id, status: 'cancelled' });
                                     }
                                 }}
-                                className="px-3 py-1.5 rounded-lg hover:bg-rose-500/10 text-rose-500 text-xs font-bold border border-rose-500/20 transition-all"
+                                className="h-8 px-3 rounded-lg hover:bg-rose-500/10 text-rose-500 text-[10px] font-bold border border-rose-500/20 transition-all"
                             >
                                 Cancel
                             </button>
                         )}
                         <button
                             onClick={() => navigate({ to: '/orders/$id', params: { id: info.row.original.id } } as any)}
-                            className="px-4 py-1.5 rounded-lg bg-primary text-white text-xs font-bold hover:bg-primary/90 transition-all"
+                            className="h-8 px-4 rounded-lg bg-primary text-white text-[10px] font-bold hover:bg-primary/90 transition-all"
                         >
-                            View Detail
+                            Detail
                         </button>
                     </div>
                 );
@@ -190,21 +190,19 @@ export const OrdersPage = () => {
     };
 
     return (
-        <div className="space-y-8 sm:space-y-16 animate-in fade-in duration-500 pb-12">
+        <div className="space-y-10 animate-in fade-in duration-700">
             <PageHeader
-                title={t('orders.pageTitle')}
-                description={user?.role === 'buyer'
-                    ? t('orders.pageDescBuyer')
-                    : t('orders.pageDescAdmin')}
+                title="Orders"
+                description="Real-time procurement flow and verifiable settlement signals."
                 actions={
-                    <div className="flex flex-wrap bg-muted/30 p-1 rounded-lg border border-border gap-1">
+                    <div className="flex flex-wrap bg-background-soft/50 p-1 rounded-lg border border-border/50 gap-1">
                         {['all', 'pending', 'accepted', 'in_transit', 'delivered'].map((s) => (
                             <button
                                 key={s}
                                 onClick={() => setStatusFilter(s)}
-                                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors capitalize ${statusFilter === s
-                                    ? 'bg-primary shadow-sm text-white border-transparent'
-                                    : 'text-muted-foreground hover:text-foreground'
+                                className={`px-4 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-widest transition-all ${statusFilter === s
+                                    ? 'bg-primary text-white shadow-minimal'
+                                    : 'text-muted-foreground/60 hover:text-foreground hover:bg-background-soft'
                                     }`}
                             >
                                 {statusLabels[s] ?? s}
@@ -214,16 +212,15 @@ export const OrdersPage = () => {
                 }
             />
 
-            {/* Local Search Component */}
             <div className="flex flex-col md:flex-row gap-6">
                 <div className="relative flex-1 group">
-                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground/40 group-focus-within:text-primary transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                    <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none text-muted-foreground/30 group-focus-within:text-primary transition-colors">
+                        <span className="text-sm">🔍</span>
                     </div>
                     <input
                         type="text"
-                        placeholder={t('orders.searchPlaceholder') || "Search by Order ID, Produce, or Buyer..."}
-                        className="w-full h-14 bg-card border border-border/50 rounded-2xl pl-12 pr-6 text-sm font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
+                        placeholder="Search orders by ID or producer..."
+                        className="w-full h-14 bg-card border border-border/50 rounded-2xl pl-14 pr-6 text-sm font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -263,11 +260,11 @@ export const OrdersPage = () => {
 // --- Sub-components to isolate re-renders ---
 
 const StatCardsSection = memo(({ stats }: { stats: any }) => (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        <StatCard title="Total Volume" value={stats.total} icon="📑" description="Orders in network" />
-        <StatCard title="Active Review" value={stats.pending} icon="⏳" description="Awaiting response" />
-        <StatCard title="Logistics" value={stats.inTransit} icon="🚛" description="In-transit assets" />
-        <StatCard title="Gross Value" value={`ETB ${(stats.totalValue / 1000).toFixed(1)}k`} icon="💰" description="Aggregate valuation" />
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 mb-12">
+        <StatCard title="Total Orders" value={stats.total} icon="📑" description="Orders in registry" delay={0.1} />
+        <StatCard title="Pending" value={stats.pending} icon="⏳" description="Awaiting response" delay={0.2} />
+        <StatCard title="In Transit" value={stats.inTransit} icon="🚛" description="Moving assets" delay={0.3} />
+        <StatCard title="Gross Value" value={`ETB ${(stats.totalValue / 1000).toFixed(1)}k`} icon="⊞" description="Aggregate value" delay={0.4} />
     </div>
 ));
 
@@ -283,7 +280,7 @@ const TemporalFiltersSection = memo(({ fromDate: parentFromDate, toDate: parentT
     }, [parentFromDate, parentToDate]);
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 p-10 bg-background-soft/50 border border-border/50 rounded-2xl">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 p-8 card-minimal">
             <div className="space-y-1.5">
                 <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60 ml-1">Archive Start</label>
                 <input
@@ -293,7 +290,7 @@ const TemporalFiltersSection = memo(({ fromDate: parentFromDate, toDate: parentT
                         setLocalFrom(e.target.value);
                         setFromDate(e.target.value);
                     }}
-                    className="w-full h-11 bg-background border border-border rounded-lg px-4 text-sm font-bold focus:border-primary outline-none transition-all"
+                    className="w-full h-11 bg-background border border-border rounded-lg px-4 text-sm font-bold focus:border-primary outline-none transition-all uppercase"
                 />
             </div>
             <div className="space-y-1.5">
@@ -305,7 +302,7 @@ const TemporalFiltersSection = memo(({ fromDate: parentFromDate, toDate: parentT
                         setLocalTo(e.target.value);
                         setToDate(e.target.value);
                     }}
-                    className="w-full h-11 bg-background border border-border rounded-lg px-4 text-sm font-bold focus:border-primary outline-none transition-all"
+                    className="w-full h-11 bg-background border border-border rounded-lg px-4 text-sm font-bold focus:border-primary outline-none transition-all uppercase"
                 />
             </div>
             <div className="flex items-end">
@@ -316,9 +313,9 @@ const TemporalFiltersSection = memo(({ fromDate: parentFromDate, toDate: parentT
                         setFromDate('');
                         setToDate('');
                     }}
-                    className="w-full h-11 border border-border text-foreground text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-background transition-all"
+                    className="w-full h-11 bg-background-soft border border-border text-foreground text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-primary hover:text-white transition-all active:scale-95"
                 >
-                    Clear History Filter
+                    Clear Filter
                 </button>
             </div>
         </div>

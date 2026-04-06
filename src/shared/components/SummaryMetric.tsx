@@ -21,43 +21,51 @@ export const SummaryMetric: React.FC<SummaryMetricProps> = ({
     variant = 'primary'
 }) => {
     const variants = {
-        primary: 'bg-primary/10 border-primary/20 text-primary',
-        secondary: 'bg-secondary/10 border-secondary/20 text-secondary',
-        emerald: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500',
-        gold: 'bg-gold/10 border-gold/20 text-gold',
+        primary: 'text-primary',
+        secondary: 'text-secondary',
+        emerald: 'text-emerald-500',
+        gold: 'text-gold',
+    };
+
+    const variantBgs = {
+        primary: 'bg-primary/10 border-primary/20',
+        secondary: 'bg-secondary/10 border-secondary/20',
+        emerald: 'bg-emerald-500/10 border-emerald-500/20',
+        gold: 'bg-gold/10 border-gold/20',
     };
 
     return (
-        <div className={`glass p-8 rounded-[40px] border shadow-xl group hover:scale-[1.02] transition-all duration-500 ${variants[variant]}`}>
-            <div className="flex items-start justify-between mb-6">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg border border-white/10 ${variants[variant].split(' ')[0]} bg-white/20`}>
+        <div className={`card-command p-8 group transition-all duration-500`}>
+            <div className="flex items-start justify-between mb-8">
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-lg border border-white/10 ${variantBgs[variant]} backdrop-blur-sm group-hover:scale-110 transition-transform duration-500`}>
                     {icon}
                 </div>
                 {trend && (
-                    <div className={`flex items-center gap-1 text-xs font-black uppercase tracking-wider italic pt-2`}>
-                        {trend.direction === 'up' ? '↗' : '↘'} {trend.value}
+                    <div className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest ${variants[variant]} pt-2`}>
+                        <span className="opacity-70">{trend.direction === 'up' ? '↗' : '↘'}</span> 
+                        {trend.value}
                     </div>
                 )}
             </div>
 
-            <div>
-                <p className="text-xs font-black uppercase tracking-wide mb-2 italic opacity-60">
+            <div className="flex-1">
+                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em] mb-3">
                     {label}
                 </p>
                 <div className="flex items-baseline gap-2">
-                    <h3 className="text-4xl font-black italic tracking-tighter leading-none text-foreground">
+                    <h3 className="text-4xl font-display font-bold tracking-tight text-foreground">
                         {value}
                     </h3>
                     {subValue && (
-                        <span className="text-xs font-black opacity-40 uppercase tracking-wider italic whitespace-nowrap">
+                        <span className="text-xs font-bold text-muted-foreground/60 uppercase tracking-widest">
                             {subValue}
                         </span>
                     )}
                 </div>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                <p className="text-xs font-black uppercase tracking-wider italic opacity-40">Cryptographic Protocol Verified</p>
+            <div className="mt-8 pt-6 border-t border-border/30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-muted-foreground/40">Verified On Chain Protocol</p>
             </div>
         </div>
     );

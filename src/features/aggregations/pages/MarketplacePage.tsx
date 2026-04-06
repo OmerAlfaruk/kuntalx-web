@@ -57,78 +57,85 @@ export const MarketplacePage = () => {
     const { pageIndex, pageSize } = table.getState().pagination;
 
     return (
-        <div className="space-y-10 animate-fade-in">
+        <div className="space-y-10 animate-in fade-in duration-700">
             <PageHeader
-                title={t('nav.marketplace') || "Marketplace"}
-                description="Browse active aggregation protocols across the national network."
+                title={t('nav.marketplace') || "Market Terminal"}
+                description="Real-time multi-regional aggregation tracking and procurement signals."
                 actions={
-                    <div className="relative w-full sm:w-80">
+                    <div className="relative w-full sm:w-96 group">
+                        <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground/30 group-focus-within:text-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                        </div>
                         <input
                             type="text"
-                            placeholder="Search Marketplace..."
+                            placeholder="Search active protocols..."
                             value={keyword}
                             onChange={(e) => {
                                 setKeyword(e.target.value);
                                 table.setPageIndex(0);
                             }}
-                            className="w-full h-11 pl-12 pr-4 bg-muted/20 border border-border/50 rounded-xl text-xs font-bold uppercase tracking-wider text-foreground focus:ring-2 focus:ring-primary/20 transition-all outline-none italic"
+                            className="w-full h-11 pl-12 pr-4 bg-background-soft border border-border rounded-lg text-[13px] font-bold text-foreground placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
                         />
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 opacity-40">🔍</span>
                     </div>
                 }
             />
 
-            {/* Market Intelligence Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <StatCard
-                    title="Active Pools"
+                    title="Active Protocols"
                     value={aggregations.length}
-                    icon="🌊"
-                    description="Total open aggregation sessions."
+                    icon="⌘"
+                    description="Open sessions across active sectors."
+                    delay={0.1}
                 />
                 <StatCard
-                    title="Market Status"
-                    value="Bullish"
+                    title="Market Index"
+                    value="Optimal"
                     icon="📈"
                     description="Aggregate network activity index."
+                    delay={0.2}
                 />
                 <StatCard
-                    title="Verified Hubs"
+                    title="Certified Hubs"
                     value="24"
                     icon="🏛️"
-                    description="Certified collection centers active."
+                    description="Federated collection centers."
+                    delay={0.3}
                 />
             </div>
 
-            {/* Main Command Center: Grid for Buyers, Table for Admins */}
             {isLoading && !aggregations.length ? (
                 <SkeletonCardsList count={12} />
             ) : isBuyer ? (
-                <div className="space-y-10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <div className="space-y-12">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
                         {table.getRowModel().rows.map(row => (
                             <MarketplaceCard key={row.original.id} aggregation={row.original} />
                         ))}
                     </div>
                     {aggregations.length === 0 && (
-                        <div className="py-20 text-center space-y-4 bg-muted/5 rounded-[3rem] border border-dashed border-border/40">
+                        <div className="py-24 text-center space-y-6 card-minimal">
                             <div className="text-6xl grayscale opacity-20">📡</div>
-                            <h3 className="text-xl font-black text-foreground uppercase italic">{t('aggregations.noProtocols') || "No Protocols Found"}</h3>
-                            <p className="text-sm text-muted-foreground font-medium italic">Broadcast signal established, but no active market aggregations detected.</p>
+                            <div className="space-y-2">
+                                <h3 className="text-lg font-bold text-foreground uppercase tracking-widest">{t('aggregations.noProtocols') || "No Protocols Found"}</h3>
+                                <p className="text-[10px] text-muted-foreground/40 font-bold uppercase tracking-widest max-w-sm mx-auto">No compatible market aggregations detected in this sector.</p>
+                            </div>
                         </div>
                     )}
-                    <TablePagination
-                        currentPage={pageIndex + 1}
-                        totalPages={table.getPageCount()}
-                        totalRecords={table.getFilteredRowModel().rows.length}
-                        pageSize={pageSize}
-                        onPageChange={(page: number) => table.setPageIndex(page - 1)}
-                    />
+                    <div className="px-10 py-6 border-t border-border/50 bg-background-soft/50 rounded-2xl">
+                        <TablePagination
+                            currentPage={pageIndex + 1}
+                            totalPages={table.getPageCount()}
+                            totalRecords={table.getFilteredRowModel().rows.length}
+                            pageSize={pageSize}
+                            onPageChange={(page: number) => table.setPageIndex(page - 1)}
+                        />
+                    </div>
                 </div>
             ) : (
                 <div className="card-minimal overflow-hidden">
-                    <div className="p-8 border-b border-border bg-muted/10">
-                        <h3 className="text-xl font-extrabold uppercase italic tracking-tight text-foreground">Open Market Protocols</h3>
+                    <div className="px-10 py-6 border-b border-border/50 bg-background-soft/50">
+                        <h2 className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-60 leading-none">Open Market Protocols</h2>
                     </div>
                     {isLoading ? <SkeletonList rows={pageSize} /> : (
                         <>
@@ -137,13 +144,15 @@ export const MarketplacePage = () => {
                                 isLoading={isLoading}
                                 t={t}
                             />
-                            <TablePagination
-                                currentPage={pageIndex + 1}
-                                totalPages={table.getPageCount()}
-                                totalRecords={table.getFilteredRowModel().rows.length}
-                                pageSize={pageSize}
-                                onPageChange={(page: number) => table.setPageIndex(page - 1)}
-                            />
+                            <div className="px-10 py-6 border-t border-border/50 bg-background-soft/50">
+                                <TablePagination
+                                    currentPage={pageIndex + 1}
+                                    totalPages={table.getPageCount()}
+                                    totalRecords={table.getFilteredRowModel().rows.length}
+                                    pageSize={pageSize}
+                                    onPageChange={(page: number) => table.setPageIndex(page - 1)}
+                                />
+                            </div>
                         </>
                     )}
                 </div>

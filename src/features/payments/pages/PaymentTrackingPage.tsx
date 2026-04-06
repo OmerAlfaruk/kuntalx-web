@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useReactTable, getCoreRowModel, getPaginationRowModel } from '@tanstack/react-table';
-import { PageHeader, StatCard, Badge, GlassModal, TablePagination } from '../../../shared/components/UI';
+import { PageHeader, StatCard, Badge, TablePagination } from '../../../shared/components/UI';
 import { SkeletonList } from '../../../shared/components/Skeletons';
 import { apiClient } from '../../../lib/api-client';
 import { useToast } from '../../../lib/toast-context';
@@ -56,16 +56,16 @@ const useUpdatePaymentStatus = () => {
     const toast = useToast();
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: async ({ orderId, status, paymentMethod, transactionRef, paidAt }: { 
-            orderId: string, 
-            status: PaymentStatus, 
+        mutationFn: async ({ orderId, status, paymentMethod, transactionRef, paidAt }: {
+            orderId: string,
+            status: PaymentStatus,
             paymentMethod?: string,
             transactionRef?: string,
-            paidAt?: string 
+            paidAt?: string
         }) => {
             const payment = await apiClient.get<any>(`/payments/order/${orderId}`);
-            return apiClient.put(`/payments/${payment.id}`, { 
-                status, 
+            return apiClient.put(`/payments/${payment.id}`, {
+                status,
                 payment_method: paymentMethod,
                 transaction_reference: transactionRef,
                 paid_at: paidAt
@@ -135,38 +135,38 @@ export const PaymentTrackingPage = () => {
     );
 
     return (
-        <div className="space-y-10 animate-in fade-in duration-500">
+        <div className="space-y-10 animate-in fade-in duration-500 pb-20">
             <PageHeader
                 title="Payment Tracking"
-                description="Monitor buyer payment status across all orders linked to your association."
+                description="Monitor buyer settlement status across all orders linked to your association."
             />
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
                 <StatCard title="Total Received" value={`ETB ${totalPaid.toLocaleString()}`} icon="💰" description="Across paid orders" />
                 <StatCard title="Awaiting Payment" value={pendingCount.toString()} icon="⏳" description="Pending clearance" />
                 <StatCard title="Confirmed Paid" value={paidCount.toString()} icon="✅" description="Buyer settled" />
             </div>
 
             {/* Filters */}
-            <div className="flex flex-col sm:flex-row gap-4">
-                <div className="relative flex-1">
-                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground/40">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+            <div className="flex flex-col sm:flex-row gap-6">
+                <div className="relative flex-1 group max-w-4xl">
+                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-muted-foreground/30 group-focus-within:text-primary transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
                     </div>
                     <input
                         type="text"
                         placeholder="Search by buyer or order ref..."
-                        className="w-full h-11 bg-card border border-border/50 rounded-xl pl-11 pr-4 text-sm font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                        className="w-full h-14 bg-background border border-border rounded-xl pl-12 pr-6 text-[13px] font-bold placeholder:text-muted-foreground/30 focus:outline-none focus:ring-1 focus:ring-primary/20 focus:border-primary transition-all shadow-minimal"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
                     />
                 </div>
-                <div className="flex gap-1 bg-card border border-border/50 rounded-xl p-1 h-11">
+                <div className="flex gap-1 bg-background-soft border border-border rounded-xl p-1 h-14">
                     {(['all', 'pending', 'paid', 'released'] as const).map(f => (
                         <button
                             key={f}
                             onClick={() => setFilter(f)}
-                            className={`px-3 sm:px-4 rounded-lg text-[10px] font-extrabold uppercase tracking-wider transition-all ${filter === f ? 'bg-primary text-white' : 'text-muted-foreground hover:text-foreground'}`}
+                            className={`px-6 rounded-lg text-[10px] font-bold uppercase tracking-widest transition-all ${filter === f ? 'bg-primary text-white shadow-minimal' : 'text-muted-foreground hover:text-foreground'}`}
                         >
                             {f}
                         </button>
@@ -175,63 +175,62 @@ export const PaymentTrackingPage = () => {
             </div>
 
             {/* Table */}
-            <div className="bg-card rounded-xl border border-border shadow-sm overflow-hidden">
-                <div className="px-6 py-4 border-b border-border bg-muted/30">
-                    <h2 className="text-sm font-extrabold text-foreground uppercase tracking-tight italic">Payment Registry</h2>
-                    <p className="text-[10px] font-bold text-muted-foreground uppercase opacity-60 mt-0.5">Buyer Settlement Status</p>
+            <div className="card-minimal overflow-hidden">
+                <div className="px-10 py-6 border-b border-border/50 bg-background-soft/50">
+                    <h2 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest leading-none">Payment Registry</h2>
                 </div>
 
                 {/* Desktop */}
-                <div className="hidden md:block overflow-x-auto">
-                    <table className="w-full text-left">
-                        <thead className="bg-muted/30 border-b border-border text-[10px] font-extrabold text-muted-foreground uppercase tracking-wider">
-                            <tr>
-                                <th className="px-6 py-4">Order Ref</th>
-                                <th className="px-6 py-4">Buyer</th>
-                                <th className="px-6 py-4">Amount</th>
-                                <th className="px-6 py-4">Method</th>
-                                <th className="px-6 py-4">Payment Status</th>
-                                <th className="px-6 py-4">Paid At</th>
-                                <th className="px-6 py-4">Actions</th>
+                <div className="hidden md:block overflow-x-auto custom-scrollbar">
+                    <table className="w-full text-left border-collapse">
+                        <thead>
+                            <tr className="border-b border-border/50 bg-background-soft/50">
+                                <th className="px-10 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Order Ref</th>
+                                <th className="px-10 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Buyer</th>
+                                <th className="px-10 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Amount</th>
+                                <th className="px-10 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Method</th>
+                                <th className="px-10 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Payment Status</th>
+                                <th className="px-10 py-4 text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Paid At</th>
+                                <th className="px-10 py-4 text-right text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-border">
+                        <tbody className="divide-y divide-border/30">
                             {filtered.length === 0 && (
-                                <tr><td colSpan={7} className="px-6 py-16 text-center text-muted-foreground text-sm">No payment records found.</td></tr>
+                                <tr><td colSpan={7} className="px-10 py-24 text-center text-muted-foreground/40 text-[10px] font-bold uppercase tracking-widest">No payment records found.</td></tr>
                             )}
                             {paginatedRows.map(row => {
                                 const p = row.original;
                                 return (
-                                    <tr key={p.orderId} className="hover:bg-muted/5 transition-colors">
-                                        <td className="px-6 py-4 font-mono text-[11px] font-bold text-primary">#{p.orderRef}</td>
-                                        <td className="px-6 py-4 text-sm font-bold text-foreground">{p.buyerName}</td>
-                                        <td className="px-6 py-4 text-sm font-extrabold text-foreground">ETB {p.amount.toLocaleString()}</td>
-                                        <td className="px-6 py-4 text-[11px] font-bold text-muted-foreground capitalize">{p.paymentMethod?.replace('_', ' ') || '—'}</td>
-                                        <td className="px-6 py-4">
-                                            <Badge variant={statusVariant(p.paymentStatus)} className="text-[10px] font-extrabold uppercase">
+                                    <tr key={p.orderId} className="hover:bg-background-soft/50 transition-colors group">
+                                        <td className="px-10 py-5 font-bold text-[13px] text-primary tracking-widest">#{p.orderRef}</td>
+                                        <td className="px-10 py-5 text-[13px] font-bold text-foreground">{p.buyerName}</td>
+                                        <td className="px-10 py-5 text-[13px] font-bold text-foreground tabular-nums">ETB {p.amount.toLocaleString()}</td>
+                                        <td className="px-10 py-5 text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest leading-none">{p.paymentMethod?.replace('_', ' ') || '—'}</td>
+                                        <td className="px-10 py-5">
+                                            <Badge variant={statusVariant(p.paymentStatus)}>
                                                 {p.paymentStatus || 'unpaid'}
                                             </Badge>
                                         </td>
-                                        <td className="px-6 py-4 text-[11px] text-muted-foreground">
+                                        <td className="px-10 py-5 text-[11px] font-bold text-muted-foreground/40 uppercase tracking-widest leading-none">
                                             {p.paidAt ? new Date(p.paidAt).toLocaleDateString() : '—'}
                                         </td>
-                                        <td className="px-6 py-4">
+                                        <td className="px-10 py-5 text-right">
                                             {p.paymentStatus === 'paid' ? (
-                                                <div className="h-8 px-3 rounded-lg bg-primary/5 border border-primary/10 text-primary text-[10px] font-bold flex items-center justify-center">
-                                                    Locked in Escrow (123)
+                                                <div className="h-8 px-4 rounded-lg bg-emerald-500/5 border border-emerald-500/10 text-emerald-600 text-[9px] font-bold uppercase tracking-widest flex items-center justify-center">
+                                                    Locked in Escrow
                                                 </div>
                                             ) : p.paymentStatus !== 'released' && (
                                                 <button
-                                                    onClick={() => { 
-                                                        setSelectedPayment(p); 
-                                                        setUpdateStatusVal(p.paymentStatus || 'pending'); 
+                                                    onClick={() => {
+                                                        setSelectedPayment(p);
+                                                        setUpdateStatusVal(p.paymentStatus || 'pending');
                                                         setUpdateMethodVal(p.paymentMethod || '');
-                                                        setTransactionRef(p.transactionRef || ''); 
+                                                        setTransactionRef(p.transactionRef || '');
                                                         setUpdatePaidAtVal(p.paidAt ? p.paidAt.split('T')[0] : '');
                                                     }}
-                                                    className="h-8 px-3 rounded-lg border border-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-wider hover:bg-primary/5 transition-all"
+                                                    className="h-8 px-4 rounded-lg bg-background border border-border text-foreground text-[10px] font-bold uppercase tracking-widest hover:bg-background-soft transition-all active:scale-95 shadow-minimal"
                                                 >
-                                                    Update →
+                                                    Update Status
                                                 </button>
                                             )}
                                         </td>
@@ -243,171 +242,176 @@ export const PaymentTrackingPage = () => {
                 </div>
 
                 {/* Mobile Cards */}
-                <div className="md:hidden space-y-4 p-4 bg-muted/5">
+                <div className="md:hidden p-4 space-y-4">
                     {filtered.length === 0 && (
-                        <div className="py-16 text-center text-muted-foreground text-sm">No payment records found.</div>
+                        <div className="py-16 text-center text-muted-foreground/40 text-[10px] font-bold uppercase tracking-widest">No payment records found.</div>
                     )}
                     {paginatedRows.map(row => {
                         const p = row.original;
                         return (
-                            <div key={p.orderId} className="bg-card border border-border/60 rounded-xl p-4 space-y-3 shadow-sm">
+                            <div key={p.orderId} className="card-minimal p-6 space-y-6">
                                 <div className="flex items-center justify-between">
-                                    <span className="font-mono text-[10px] font-bold text-primary">#{p.orderRef}</span>
-                                    <Badge variant={statusVariant(p.paymentStatus)} className="text-[10px] font-extrabold uppercase">
+                                    <span className="font-bold text-[13px] text-primary tracking-widest leading-none">#{p.orderRef}</span>
+                                    <Badge variant={statusVariant(p.paymentStatus)}>
                                         {p.paymentStatus || 'unpaid'}
                                     </Badge>
                                 </div>
-                                <div>
-                                    <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/50">Buyer</p>
-                                    <p className="font-bold text-sm text-foreground">{p.buyerName}</p>
+                                <div className="space-y-1">
+                                    <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/40 leading-none">Buyer Account</p>
+                                    <p className="font-bold text-[13px] text-foreground leading-none mt-1">{p.buyerName}</p>
                                 </div>
-                                <div className="grid grid-cols-2 gap-3 py-2 border-y border-border/40">
-                                    <div>
-                                        <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/50">Amount</p>
-                                        <p className="font-extrabold text-sm">ETB {p.amount.toLocaleString()}</p>
+                                <div className="grid grid-cols-2 gap-6 py-6 border-y border-border/30">
+                                    <div className="space-y-1">
+                                        <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/40 leading-none">Final Amount</p>
+                                        <p className="font-bold text-[13px] text-foreground tabular-nums leading-none mt-1">ETB {p.amount.toLocaleString()}</p>
                                     </div>
-                                    <div>
-                                        <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/50">Method</p>
-                                        <p className="text-sm font-bold capitalize">{p.paymentMethod?.replace('_', ' ') || '—'}</p>
+                                    <div className="space-y-1">
+                                        <p className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground/40 leading-none">Channel</p>
+                                        <p className="text-[11px] font-bold text-foreground uppercase tracking-widest leading-none mt-1">{p.paymentMethod?.replace('_', ' ') || '—'}</p>
                                     </div>
                                 </div>
                                 {p.paymentStatus === 'paid' ? (
-                                    <div className="w-full py-2 px-3 rounded-lg bg-primary/5 border border-primary/10 text-primary text-[9px] font-bold text-center">
-                                        Funds Held in Escrow (Account 123)
+                                    <div className="w-full py-3 px-4 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-emerald-600 text-[9px] font-bold text-center uppercase tracking-widest">
+                                        Held in Escrow
                                     </div>
                                 ) : p.paymentStatus !== 'released' && (
-                                        <button
-                                            onClick={() => { 
-                                                setSelectedPayment(p); 
-                                                setUpdateStatusVal(p.paymentStatus || 'pending'); 
-                                                setUpdateMethodVal(p.paymentMethod || '');
-                                                setTransactionRef(p.transactionRef || ''); 
-                                                setUpdatePaidAtVal(p.paidAt ? p.paidAt.split('T')[0] : '');
-                                            }}
-                                            className="w-full h-9 rounded-lg border border-primary/20 text-primary text-[10px] font-extrabold uppercase tracking-wider"
-                                        >
-                                            Update Status →
-                                        </button>
+                                    <button
+                                        onClick={() => {
+                                            setSelectedPayment(p);
+                                            setUpdateStatusVal(p.paymentStatus || 'pending');
+                                            setUpdateMethodVal(p.paymentMethod || '');
+                                            setTransactionRef(p.transactionRef || '');
+                                            setUpdatePaidAtVal(p.paidAt ? p.paidAt.split('T')[0] : '');
+                                        }}
+                                        className="w-full h-11 rounded-xl bg-background border border-border text-foreground text-[10px] font-bold uppercase tracking-widest hover:bg-background-soft transition-all active:scale-95 shadow-minimal"
+                                    >
+                                        Update Settlement Status
+                                    </button>
                                 )}
                             </div>
                         );
                     })}
                 </div>
-                <TablePagination
-                    currentPage={pageIndex + 1}
-                    totalPages={Math.ceil(filtered.length / pageSize) || 1}
-                    totalRecords={filtered.length}
-                    pageSize={pageSize}
-                    onPageChange={(page) => table.setPageIndex(page - 1)}
-                />
+                <div className="px-10 py-6 border-t border-border/50 bg-background-soft/50">
+                    <TablePagination
+                        currentPage={pageIndex + 1}
+                        totalPages={Math.ceil(filtered.length / pageSize) || 1}
+                        totalRecords={filtered.length}
+                        pageSize={pageSize}
+                        onPageChange={(page) => table.setPageIndex(page - 1)}
+                    />
+                </div>
             </div>
 
-            {/* Update Status Modal */}
-            <GlassModal
-                isOpen={!!selectedPayment}
-                onClose={() => setSelectedPayment(null)}
-                title="Update Payment Status"
-                footer={
-                    <div className="flex gap-4 w-full">
-                        <button
-                            onClick={() => setSelectedPayment(null)}
-                            disabled={isUpdating}
-                            className="h-10 flex-1 rounded-lg border border-border text-[10px] font-bold uppercase text-muted-foreground hover:bg-muted/10 transition-all"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            onClick={() => {
-                                if (selectedPayment) {
-                                    updatePaymentStatus({ 
-                                        orderId: selectedPayment.orderId, 
-                                        status: updateStatusVal, 
-                                        paymentMethod: updateMethodVal || undefined,
-                                        transactionRef: transactionRef || undefined,
-                                        paidAt: updatePaidAtVal ? new Date(updatePaidAtVal).toISOString() : undefined
-                                    });
-                                    setSelectedPayment(null);
-                                }
-                            }}
-                            disabled={isUpdating}
-                            className="h-10 flex-[2] rounded-lg bg-primary text-white text-[10px] font-bold uppercase shadow-sm hover:bg-primary/90 transition-all"
-                        >
-                            Save Status →
-                        </button>
-                    </div>
-                }
-            >
-                {selectedPayment && (
-                    <div className="space-y-6 py-4">
-                        <div className="bg-muted/30 p-5 rounded-xl border border-border space-y-4">
-                            <h3 className="text-[10px] font-bold uppercase tracking-widest text-primary opacity-70">Payment Details</h3>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Order Ref</p>
-                                    <p className="font-mono text-sm font-bold text-foreground">#{selectedPayment.orderRef}</p>
-                                </div>
-                                <div>
-                                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Amount</p>
-                                    <p className="font-extrabold text-foreground">ETB {selectedPayment.amount.toLocaleString()}</p>
-                                </div>
-                            </div>
+            {selectedPayment && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-md p-4 animate-in fade-in duration-300">
+                    <div className="card-minimal w-full max-w-lg overflow-hidden shadow-2xl animate-in zoom-in-95 duration-500 flex flex-col max-h-[90vh]">
+                        <div className="px-8 py-6 border-b border-border/50 bg-background-soft shrink-0">
+                            <h2 className="text-[14px] font-bold text-foreground tracking-tight">Update Settlement Status</h2>
+                            <p className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest mt-1">Manage payment validation state</p>
                         </div>
                         
-                        <div className="space-y-4">
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">New Status</label>
-                                <select
-                                    value={updateStatusVal}
-                                    onChange={(e) => setUpdateStatusVal(e.target.value as PaymentStatus)}
-                                    className="w-full h-11 bg-card border border-border rounded-xl px-4 text-sm font-bold focus:border-primary/50 outline-none transition-all uppercase appearance-none"
-                                >
-                                    <option value="pending">PENDING</option>
-                                    <option value="paid">PAID</option>
-                                    <option value="failed">FAILED</option>
-                                    <option value="released">RELEASED</option>
-                                    <option value="refunded">REFUNDED</option>
-                                </select>
+                        <div className="p-8 space-y-8 overflow-y-auto custom-scrollbar">
+                            <div className="bg-background-soft p-5 rounded-2xl border border-border/50 flex gap-4 items-center">
+                                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                    💰
+                                </div>
+                                <div>
+                                    <p className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Order Ref #{selectedPayment.orderRef}</p>
+                                    <p className="font-bold text-[14px] text-foreground tracking-tight">ETB {selectedPayment.amount.toLocaleString()}</p>
+                                </div>
                             </div>
 
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Payment Method</label>
-                                <select
-                                    value={updateMethodVal}
-                                    onChange={(e) => setUpdateMethodVal(e.target.value)}
-                                    className="w-full h-11 bg-card border border-border rounded-xl px-4 text-sm font-bold focus:border-primary/50 outline-none transition-all uppercase appearance-none"
-                                >
-                                    <option value="">NOT SELECTED</option>
-                                    <option value="telebirr">TELEBIRR</option>
-                                    <option value="bank_transfer">BANK TRANSFER</option>
-                                    <option value="chapa">CHAPA</option>
-                                    <option value="cash_on_delivery">CASH ON DELIVERY</option>
-                                </select>
-                            </div>
+                            <div className="space-y-6">
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">New Status</label>
+                                    <div className="relative group/select">
+                                        <select
+                                            value={updateStatusVal}
+                                            onChange={(e) => setUpdateStatusVal(e.target.value as PaymentStatus)}
+                                            className="w-full h-11 bg-background border border-border rounded-xl px-4 text-sm font-bold focus:border-primary/50 outline-none transition-all uppercase appearance-none cursor-pointer"
+                                        >
+                                            <option value="pending">PENDING</option>
+                                            <option value="paid">PAID</option>
+                                            <option value="failed">FAILED</option>
+                                            <option value="released">RELEASED</option>
+                                            <option value="refunded">REFUNDED</option>
+                                        </select>
+                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground">⌵</div>
+                                    </div>
+                                </div>
 
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Paid At Date</label>
-                                <input
-                                    type="date"
-                                    value={updatePaidAtVal}
-                                    onChange={(e) => setUpdatePaidAtVal(e.target.value)}
-                                    className="w-full h-11 bg-card border border-border rounded-xl px-4 text-sm font-bold focus:border-primary/50 outline-none transition-all"
-                                />
-                            </div>
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Payment Method</label>
+                                    <div className="relative group/select">
+                                        <select
+                                            value={updateMethodVal}
+                                            onChange={(e) => setUpdateMethodVal(e.target.value)}
+                                            className="w-full h-11 bg-background border border-border rounded-xl px-4 text-sm font-bold focus:border-primary/50 outline-none transition-all uppercase appearance-none cursor-pointer"
+                                        >
+                                            <option value="">NOT SELECTED</option>
+                                            <option value="telebirr">TELEBIRR</option>
+                                            <option value="bank_transfer">BANK TRANSFER</option>
+                                            <option value="chapa">CHAPA</option>
+                                            <option value="cash_on_delivery">CASH ON DELIVERY</option>
+                                        </select>
+                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-muted-foreground">⌵</div>
+                                    </div>
+                                </div>
 
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Transaction Ref (Optional)</label>
-                                <input
-                                    type="text"
-                                    value={transactionRef}
-                                    onChange={(e) => setTransactionRef(e.target.value)}
-                                    placeholder="Bank receipt #, Telebirr id..."
-                                    className="w-full h-11 bg-card border border-border rounded-xl px-4 text-sm font-bold focus:border-primary/50 outline-none transition-all"
-                                />
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Paid At Date</label>
+                                    <input
+                                        type="date"
+                                        value={updatePaidAtVal}
+                                        onChange={(e) => setUpdatePaidAtVal(e.target.value)}
+                                        className="w-full h-11 bg-background border border-border rounded-xl px-4 text-sm font-bold text-muted-foreground focus:border-primary/50 outline-none transition-all"
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 ml-1">Transaction Ref (Optional)</label>
+                                    <input
+                                        type="text"
+                                        value={transactionRef}
+                                        onChange={(e) => setTransactionRef(e.target.value)}
+                                        placeholder="Bank receipt #, Telebirr id..."
+                                        className="w-full h-11 bg-background border border-border rounded-xl px-4 text-sm font-bold text-foreground placeholder:text-muted-foreground/30 focus:border-primary/50 outline-none transition-all"
+                                    />
+                                </div>
                             </div>
                         </div>
+
+                        <div className="flex gap-4 p-8 bg-background-soft border-t border-border/50 shrink-0">
+                            <button
+                                onClick={() => setSelectedPayment(null)}
+                                disabled={isUpdating}
+                                className="h-11 flex-1 rounded-xl border border-border text-[10px] font-bold uppercase tracking-widest text-muted-foreground hover:bg-background transition-all"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={() => {
+                                    if (selectedPayment) {
+                                        updatePaymentStatus({
+                                            orderId: selectedPayment.orderId,
+                                            status: updateStatusVal,
+                                            paymentMethod: updateMethodVal || undefined,
+                                            transactionRef: transactionRef || undefined,
+                                            paidAt: updatePaidAtVal ? new Date(updatePaidAtVal).toISOString() : undefined
+                                        });
+                                        setSelectedPayment(null);
+                                    }
+                                }}
+                                disabled={isUpdating}
+                                className="h-11 flex-[2] rounded-xl bg-primary text-white text-[10px] font-bold uppercase tracking-widest shadow-minimal hover:bg-primary/90 active:scale-95 transition-all flex items-center justify-center gap-2"
+                            >
+                                {isUpdating ? <div className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin" /> : "Commit Status Update"}
+                            </button>
+                        </div>
                     </div>
-                )}
-            </GlassModal>
+                </div>
+            )}
         </div>
     );
 };

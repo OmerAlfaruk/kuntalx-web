@@ -72,10 +72,10 @@ export const AggregationDetailPage = () => {
     }, [verifyingItem, aggregation, verifyItem, verifyForm]);
 
     if (isLoading) return (
-        <div className="space-y-10">
-            <div className="h-64 w-full card-minimal animate-pulse" />
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                {[1, 2, 3, 4].map(i => <div key={i} className="h-32 card-minimal animate-pulse" />)}
+        <div className="space-y-12 animate-in fade-in duration-500">
+            <div className="h-64 w-full card-minimal animate-pulse bg-background-soft/50" />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                {[1, 2, 3, 4].map(i => <div key={i} className="h-32 card-minimal animate-pulse bg-background-soft/50" />)}
             </div>
             <SkeletonDetail />
         </div>
@@ -83,19 +83,21 @@ export const AggregationDetailPage = () => {
 
     if (!aggregation) {
         return (
-            <div className="flex flex-col items-center justify-center min-h-[500px] text-center p-10 card-minimal">
-                <div className="text-6xl mb-8 opacity-20">{isForbidden ? '🔐' : '📂'}</div>
+            <div className="flex flex-col items-center justify-center min-h-[500px] text-center p-12 card-minimal">
+                <div className="w-20 h-20 bg-background-soft rounded-full flex items-center justify-center text-3xl mb-8 shadow-minimal">
+                    {isForbidden ? '🔐' : '📂'}
+                </div>
                 <h2 className="text-2xl font-bold text-foreground mb-4 uppercase tracking-tight">
                     {isForbidden ? 'Access Restricted' : 'Collection Pool Not Found'}
                 </h2>
-                <p className="text-muted-foreground mb-10 font-medium max-w-md mx-auto">
+                <p className="text-muted-foreground mb-10 font-medium max-w-md mx-auto text-sm">
                     {isForbidden
                         ? 'You do not have the required permissions to view this collection detail.'
                         : 'The collection pool you are looking for does not exist or has been removed.'}
                 </p>
                 <button
                     onClick={() => navigate({ to: '/aggregations' })}
-                    className="h-12 px-10 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-lg shadow-minimal hover:bg-primary/90 transition-all"
+                    className="h-12 px-10 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-xl shadow-minimal hover:bg-primary/90 transition-all active:scale-95"
                 >
                     Return to Directory
                 </button>
@@ -122,14 +124,14 @@ export const AggregationDetailPage = () => {
 
                     {((isAssociationAdmin || isPlatformAdmin) && !isOwner) && (
                         <section className="space-y-10 animate-in fade-in slide-in-from-bottom-6 duration-700">
-                            <div className="flex items-center justify-between border-b border-border/60 pb-8">
+                            <div className="flex items-center justify-between border-b border-border/50 pb-8">
                                 <div className="space-y-1">
-                                    <h3 className="text-lg font-bold text-foreground uppercase tracking-tight">Fulfillment History</h3>
-                                    <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-40">Producer contribution list</p>
+                                    <h3 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest opacity-60">Fulfillment Registry</h3>
+                                    <p className="font-bold text-lg text-foreground tracking-tight">Producer Contributions</p>
                                 </div>
-                                <div className="hidden sm:flex items-center gap-3 bg-background-soft px-4 py-2 rounded-lg border border-border">
-                                    <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></span>
-                                    <span className="text-[10px] font-bold text-foreground uppercase tracking-widest">Live Updates</span>
+                                <div className="hidden sm:flex items-center gap-3 bg-background-soft px-5 py-2 rounded-xl border border-border shadow-minimal">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)] animate-pulse"></span>
+                                    <span className="text-[9px] font-bold text-foreground uppercase tracking-widest">Real-time Feed</span>
                                 </div>
                             </div>
 
@@ -149,10 +151,13 @@ export const AggregationDetailPage = () => {
             </div>
 
             {/* Footer */}
-            <div className="pt-20 border-t border-border/40 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-bold text-muted-foreground/30 uppercase tracking-[0.2em]">
-                <p>© 2026 KuntalX Ethiopia. Secure Trade Hub.</p>
-                <div className="flex items-center gap-4">
-                    <span className="tracking-widest">Trade verification active</span>
+            <div className="pt-16 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-8 text-[9px] font-bold text-muted-foreground/20 uppercase tracking-widest leading-none">
+                <p>© 2026 KuntalX Ethiopia. Secure Trade Hub Node.</p>
+                <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/40" />
+                        <span>Trade verification active</span>
+                    </div>
                 </div>
             </div>
 
